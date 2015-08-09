@@ -1,0 +1,6 @@
+
+sensorbox/build/*
+!sensorbox/build/.gitkeep
+
+node_modules
+pinode/node_modules/*

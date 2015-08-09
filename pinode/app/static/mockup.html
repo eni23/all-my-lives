@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <title>aml-pinode</title>
+
+    <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">aml-pinode</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Nodename</a></li>
+            <li><a href="#">10.10.10.20</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+
+
+      <button class="btn btn-success" type="submit">Enabled</button>
+      <button class="btn btn-primary" type="submit">Test entering</button>
+      <button class="btn btn-primary" type="submit">Test exiting</button>
+
+
+
+
+      <h3>Enter Room Sketch</h3>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          New Item <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">LIFX</a></li>
+          <li><a href="#">Audio</a></li>
+          <li><a href="#">Video</a></li>
+          <li><a href="#">DMX</a></li>
+          <li><a href="#">Delay</a></li>
+          <li><a href="#">Script</a></li>
+        </ul>
+      </div>
+
+
+      <div class="dragarea-enter">
+        <ul class="list-group drag-ul-enter">
+
+
+
+        <!-- elem lifx !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">LIFX <input type="text" class="item-desc" value=""> </h4>
+              <div class="form-group">
+                <label>Lamp</label>
+                <select class="form-control item-inline-form-bottom">
+                  <option>All lamps</option>
+                  <option>Lampe 1 oben</option>
+                  <option>Lampe 2 seite</option>
+                </select>
+                <form class="form-inline item-inline-form-bottom">
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit">choose Color</button>
+                  </div>
+                  <div class="form-group">
+                    <label>Duration (ms)</label>
+                    <input type="number" class="form-control">
+                  </div>
+                </form>
+                <label class="item-inline-form">
+                  <input type="checkbox">
+                  blocking
+                </label>
+              </div>
+          </li>
+
+        <!-- elem dxm !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">DXM <input type="text" class="item-desc" value=""> </h4>
+            <form class="form-inline item-inline-form-bottom">
+              <div class="form-group">
+                <label>Channel</label>
+                <input type="number" class="form-control" min="0" max="254">
+              </div>
+              <div class="form-group">
+                <label>Final Channel Value</label>
+                <input type="number" class="form-control" min="0" max="254">
+              </div>
+              <div class="form-group">
+                <label>Duration (ms)</label>
+                <input type="number" class="form-control">
+              </div>
+            </form>
+            <label class="item-inline-form">
+              <input type="checkbox">
+              blocking
+            </label>
+          </li>
+
+
+        <!-- elem audio !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">Audio <input type="text" class="item-desc" value=""> </h4>
+              <div class="form-group">
+                <label>File</label>
+                <select class="form-control item-inline-form-bottom">
+                  <option>never_gonna_give_you_up.mp3 (2:55:13)</option>
+                  <option>liebeskummer_lohnt_nicht.flac (3:23:89)</option>
+                  <option>friday.mp3 (4:33:11)</option>
+                </select>
+                <label class="item-inline-form">
+                  <input type="checkbox">
+                  blocking
+                </label>
+              </div>
+          </li>
+
+        <!-- elem video !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">Video <input type="text" class="item-desc" value=""> </h4>
+              <div class="form-group">
+                <label>File</label>
+                <select class="form-control item-inline-form-bottom">
+                  <option>clip_001.avi (2:55:13)</option>
+                  <option>clip_002.avi (1:23:89)</option>
+                  <option>clip_003.avi (4:33:11)</option>
+                </select>
+                <label class="item-inline-form">
+                  <input type="checkbox">
+                  blocking
+                </label>
+              </div>
+          </li>
+
+        <!-- elem delay !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">Delay <input type="text" class="item-desc" value=""></h4>
+              <div class="form-group">
+                <label>Duration (ms)</label>
+                <input type="number" class="form-control item-inline-form-bottom">
+              </div>
+          </li>
+
+        <!-- elem script !-->
+          <li class="list-group-item">
+            <h4 class="list-group-item-heading">Script <input type="text" class="item-desc" value=""></h4>
+              <div class="form-group">
+                <label>Path or Command</label>
+                <input type="text" class="form-control item-inline-form-bottom">
+                <label class="item-inline-form">
+                  <input type="checkbox">
+                  blocking
+                </label>
+              </div>
+          </li>
+
+
+      </ul>
+
+
+
+      <h3>Exit Room Sketch</h3>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          New Item <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">LIFX</a></li>
+          <li><a href="#">Audio</a></li>
+          <li><a href="#">Video</a></li>
+          <li><a href="#">DMX</a></li>
+          <li><a href="#">Delay</a></li>
+          <li><a href="#">Script</a></li>
+        </ul>
+      </div>
+
+
+
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/lib/jquery-1.11.3.min.js"></script>
+    <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.2.1/Sortable.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        var list=$(".drag-ul-enter").get(0)
+        var sortable = Sortable.create(list)
+      })
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <title>aml-pinode</title>
+
+    <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-slider.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-popover-x/bootstrap-popover-x.css" rel="stylesheet" >
+    <link href="/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">aml-pinode</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Nodename</a></li>
+            <li><a href="#">10.10.10.20</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+
+
+
+    <!--   <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">H</span>
+        <input class="bar range-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">S</span>
+        <input class="bar range-s" type="range" value="0" min="0" max="1" step="0.01"/>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">L</span>
+        <input class="bar range-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">W</span>
+        <input class="bar range-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon2">T</span>
+        <input class="bar range-t" type="range" value="0"  type="range" value="0" min="0" max="1" step="0.01" />
+      </div>
+-->
+
+<button class="btn btn-primary test-trigger" type="submit">choose Color</button>
+
+
+
+<div class="row">
+  <div class="col-md-2 bar-title">Hue</div>
+  <div class="col-md-10">
+    <input class="bar range-h" type="text" data-slider-min="0" data-slider-max="360" data-slider-step="0.25" data-slider-value="0"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 bar-title">Saturation</div>
+  <div class="col-md-10">
+    <input class="bar range-s" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.005" data-slider-value="0"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 bar-title">Lightness</div>
+  <div class="col-md-10">
+    <input class="bar range-l" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.005" data-slider-value="0"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 bar-title">White Color</div>
+  <div class="col-md-10">
+    <input class="bar range-w" type="text" data-slider-min="0" data-slider-max="0.1" data-slider-step="0.0005" data-slider-value="0"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 bar-title">Fade Time</div>
+  <div class="col-md-10">
+    <input class="bar range-t" type="text" data-slider-min="0" data-slider-max="0.5" data-slider-step="0.005" data-slider-value="0"/>
+  </div>
+</div>
+
+
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/lib/jquery-1.11.3.min.js"></script>
+    <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap-popover-x/bootstrap-popover-x.js"></script>
+    <script src="/lib/sortable-1.2.1.min.js"></script>
+    <script src="/lib/bootstrap-slider.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $('input.bar').on('slide',function(){
+          var h = $('input.range-h').val(),
+              s = $('input.range-s').val(),
+              l = $('input.range-l').val(),
+              w = $('input.range-w').val(),
+              t = $('input.range-t').val();
+              console.log(s);
+              $.ajax('/lifx/set', {
+                data: {
+                        "h":h,
+                        "s":s,
+                        "l":l,
+                        "w":w,
+                        "t":t
+                      }
+              });
+        });
+
+        $('input.bar').slider();
+
+
+      });
+
+    </script>
+  </body>
+</html>

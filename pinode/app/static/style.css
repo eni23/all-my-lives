@@ -1,0 +1,54 @@
+body {
+  padding-top: 70px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+
+.top-nodeinfo {
+  color: white !important;
+  top: 50px;
+}
+
+.dragarea-enter {
+  margin-top: 10px;
+}
+
+.list-group {
+}
+
+.lifx-inline-form {
+  margin-top: 10px;
+}
+.item-inline-form-bottom {
+  margin-bottom: 10px;
+}
+.list-group > li {
+    border:1px solid;
+  border-color: #ccc ! important;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+
+  background: rgb(254, 254, 254)
+}
+/*.list-group > li:hover {
+  background: rgb(237, 237, 237)
+}*/
+
+.bar {
+  width: 800px;
+}
+.bar-title {
+  font-weight: bold;
+}
+
+
+input.item-desc {
+  border:none;
+  color: gray;
+}
+input.item-desc:focus {
+  border:none;
+  outline: 0;
+}
