@@ -19,7 +19,7 @@
 // gpio port of for person detection sensor (pir)
 #define GPIO_PIR 2
 // gpio port for door sensor (reed)
-#define GPIO_REED 14
+#define GPIO_REED 4
 // delay in main loop ticks for events
 #define TRIGGER_DELAY 2500
 // serial port baudrate
@@ -139,7 +139,7 @@ void loop() {
       //delay(1000);
       debug( "door open" );
       delay(10);
-      //triggerurl();
+      triggerurl();
       door_status = DOOR_STATUS_OPEN;
     }
   }
@@ -148,7 +148,7 @@ void loop() {
       //delay(1000);
       debug( "door closed" );
       delay(10);
-      //triggerurl();
+      triggerurl();
       door_status = DOOR_STATUS_CLOSED;
     }
   }
@@ -163,7 +163,7 @@ void loop() {
     if ( pir_status == PIR_STATUS_NONE ) {
       debug( "pir moving" );
       delay(10);
-      //triggerurl();
+      triggerurl();
       pir_status = PIR_STATUS_MOVING;
     }
   }
@@ -171,7 +171,7 @@ void loop() {
     if ( pir_status == PIR_STATUS_MOVING ) {
       debug( "pir moving end" );
       delay(10);
-      //triggerurl();
+      triggerurl();
       pir_status = PIR_STATUS_NONE;
     }
   }

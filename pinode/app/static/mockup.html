@@ -10,7 +10,10 @@
     <title>aml-pinode</title>
 
     <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-slider.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-popover-x/bootstrap-popover-x.css" rel="stylesheet" >
     <link href="/style.css" rel="stylesheet">
+
 
   </head>
 
@@ -79,7 +82,7 @@
                 </select>
                 <form class="form-inline item-inline-form-bottom">
                   <div class="form-group">
-                    <button class="btn btn-primary" type="submit">choose Color</button>
+                    <button type="button" class="btn btn-primary" data-toggle="popover-x" data-target="#popover-color" data-placement="top">choose Color</button>
                   </div>
                   <div class="form-group">
                     <label>Duration (ms)</label>
@@ -198,12 +201,54 @@
 
     </div><!-- /.container -->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/lib/jquery-1.11.3.min.js"></script>
-    <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <script src="/lib/sortable-1.2.1.min.js"></script>
+    <div id="popover-color" class="popover popover-default popover-color">
+      <div class="arrow"></div>
+      <h3 class="popover-title">
+        <span class="close" data-dismiss="popover-x">&times;</span>
+        <b>Select color  </b>
+      </h3>
+      <div class="popover-content">
+        <div class="row">
+          <div class="col-md-2 bar-title">Hue</div>
+          <div class="col-md-10">
+            <input class="bar range-h" type="text" data-slider-min="0" data-slider-max="360" data-slider-step="0.25" data-slider-value="0"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 bar-title">Saturation</div>
+          <div class="col-md-10">
+            <input class="bar range-s" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.005" data-slider-value="0"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 bar-title">Lightness</div>
+          <div class="col-md-10">
+            <input class="bar range-l" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.005" data-slider-value="0"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 bar-title">White Color</div>
+          <div class="col-md-10">
+            <input class="bar range-w" type="text" data-slider-min="0" data-slider-max="0.1" data-slider-step="0.0005" data-slider-value="0"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 bar-title">Fade Time</div>
+          <div class="col-md-10">
+            <input class="bar range-t" type="text" data-slider-min="0" data-slider-max="0.5" data-slider-step="0.005" data-slider-value="0"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+        <script src="/lib/jquery-1.11.3.min.js"></script>
+        <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <script src="/lib/bootstrap-popover-x/bootstrap-popover-x.js"></script>
+        <script src="/lib/sortable-1.2.1.min.js"></script>
+        <script src="/lib/bootstrap-slider.min.js"></script>
+
+
     <script src="/lib/ejs.min.js"></script>
 
     <!-- templates for ejs !-->
@@ -285,10 +330,30 @@
           ],
           blocking: false
         }
-        var item_lifx = $("#item-tpl-lifx").html()
-        var html = ejs.render(item_lifx, data);
+        //var item_lifx = $("#item-tpl-lifx").html()
+        //var html = ejs.render(item_lifx, data);
 
-        console.log(html);
+                $('input.bar').on('slide',function(){
+          var h = $('input.range-h').val(),
+              s = $('input.range-s').val(),
+              l = $('input.range-l').val(),
+              w = $('input.range-w').val(),
+              t = $('input.range-t').val();
+              console.log(s);
+              $.ajax('/lifx/set', {
+                data: {
+                        "h":h,
+                        "s":s,
+                        "l":l,
+                        "w":w,
+                        "t":t
+                      }
+              });
+        });
+
+        $('input.bar').slider();
+
+        //console.log(html);
 
       })
 
