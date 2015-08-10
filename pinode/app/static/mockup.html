@@ -203,12 +203,93 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/lib/jquery-1.11.3.min.js"></script>
     <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.2.1/Sortable.min.js"></script>
+    <script src="/lib/sortable-1.2.1.min.js"></script>
+    <script src="/lib/ejs.min.js"></script>
+
+    <!-- templates for ejs !-->
+    <script id="item-tpl-lifx" type="text/template">
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">LIFX <input type="text" class="item-desc" value=""> </h4>
+        <div class="form-group">
+          <label>Lamp</label>
+          <select class="form-control item-inline-form-bottom">
+            <% for(var i=0; i<lamps.length; i++) { %>
+              <option value="<%= lamps[i].name %>" <%= lamps[i].selected %>><%= lamps[i].name %></option>
+            <% } %>
+          </select>
+          <form class="form-inline item-inline-form-bottom">
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit">choose Color</button>
+            </div>
+            <div class="form-group">
+              <label>Duration (ms)</label>
+              <input type="number" class="form-control">
+            </div>
+          </form>
+          <label class="item-inline-form">
+            <input type="checkbox" <%= blocking %> >
+            blocking
+          </label>
+        </div>
+      </li>
+    </script>
+
+    <script id="item-tpl-dmx" type="text/template">
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">DXM <input type="text" class="item-desc" value=""> </h4>
+        <form class="form-inline item-inline-form-bottom">
+          <div class="form-group">
+            <label>Channel</label>
+            <input type="number" class="form-control" min="0" max="254">
+          </div>
+          <div class="form-group">
+            <label>Final Channel Value</label>
+            <input type="number" class="form-control" min="0" max="254">
+          </div>
+          <div class="form-group">
+            <label>Duration (ms)</label>
+            <input type="number" class="form-control">
+          </div>
+        </form>
+        <label class="item-inline-form">
+          <input type="checkbox">
+          blocking
+        </label>
+      </li>
+    </script>
+
+    <script id="item-tpl-audio" type="text/template">
+    </script>
+
+    <script id="item-tpl-video" type="text/template">
+    </script>
+
+    <script id="item-tpl-script" type="text/template">
+    </script>
+
+
+
+
+
 
     <script>
       $(document).ready(function(){
         var list=$(".drag-ul-enter").get(0)
         var sortable = Sortable.create(list)
+
+        data = {
+          lamps: [
+            { "name": "test", "id":"aaj8iu48h" },
+            { "name": "test2", "id":"dsg" },
+            { "name": "bar", "id":"sdgfsd" }
+          ],
+          blocking: false
+        }
+        var item_lifx = $("#item-tpl-lifx").html()
+        var html = ejs.render(item_lifx, data);
+
+        console.log(html);
+
       })
 
     </script>
