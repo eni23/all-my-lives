@@ -8,9 +8,10 @@ var bodyParser = require('body-parser');
 
 
 var routes = require('./route.index');
-var lifx = require('./route.lifx');
+var rlifx = require('./route.lifx');
 var config = require('./route.config');
 var sketch = require('./route.sketch');
+var files = require('./route.files');
 
 var app = express();
 
@@ -27,9 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(path.dirname(__dirname), 'static')));
 
 app.use('/', routes);
-app.use('/lifx', lifx);
+app.use('/lifx', rlifx);
 app.use('/config', config);
 app.use('/sketch', sketch);
+app.use('/files', files);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

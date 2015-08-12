@@ -2,6 +2,17 @@
   "enter": [
     {
       "type": "lifx",
+      "name": "lifx911",
+      "bulb": "",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "0",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
       "name": "nulll2ojsdfsgd",
       "bulb": "",
       "h": "320",
@@ -9,17 +20,6 @@
       "l": "1",
       "w": "0.023",
       "t": "0.1",
-      "blocking": false
-    },
-    {
-      "type": "lifx",
-      "name": "lifx911",
-      "bulb": "d073d501596e",
-      "h": "0",
-      "s": "0",
-      "l": "0",
-      "w": "0",
-      "t": "0",
       "blocking": false
     },
     {
