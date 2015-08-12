@@ -3,8 +3,23 @@ var router = express.Router();
 var path = require('path');
 var fs = require('fs');
 
+var enabled = true;
+
 router.get('/', function(req, res, next) {
   res.send("config")
+});
+
+
+router.get('/enable', function(req, res, next) {
+  enabled=true;
+  res.send("ok");
+});
+router.get('/disable', function(req, res, next) {
+  enabled=false;
+  res.send("ok");
+});
+router.get('/status', function(req, res, next) {
+  res.json({enabled:enabled});
 });
 
 

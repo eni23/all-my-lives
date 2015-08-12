@@ -45,8 +45,10 @@
 
 
 
-      <button class="btn btn-success" type="submit">Enabled</button>
-      <button class="btn btn-success ttt" type="submit">ttt</button>
+      <button class="btn btn-success btn-onoff" type="button">Enabled</button>
+      <button class="btn btn-primary btn-save" type="button">
+        Save <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+      </button>
 
       <div class="tabarea">
 
@@ -128,25 +130,25 @@
             <div class="row">
               <div class="col-md-2 bar-title">Hue</div>
               <div class="col-md-10">
-                <input class="bar range-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
+                <input class="bar range-h modal-lifx-color-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-2 bar-title">Saturation</div>
               <div class="col-md-10">
-                <input class="bar range-s" type="range" value="0" min="0" max="1" step="0.01"/>
+                <input class="bar range-s modal-lifx-color-s" type="range" value="0" min="0" max="1" step="0.01"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2 bar-title">Lightness</div>
               <div class="col-md-10">
-                <input class="bar range-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
+                <input class="bar range-l modal-lifx-color-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
               </div>
             </div>
             <div class="row item-inline-form-bottom">
               <div class="col-md-2 bar-title">White</div>
               <div class="col-md-10">
-                <input class="bar range-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
+                <input class="bar range-w modal-lifx-color-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
               </div>
             </div>
             <div class="row">
@@ -291,7 +293,7 @@
           <label>Sink</label>
           <select class="form-control item-inline-form-bottom audio-sink">
             <% for(var i=0; i<sinks.length; i++) { %>
-              <option value="<%= sinks[i].name %>" <%= sinks[i].selected %>><%= sinks[i].name %></option>
+              <option value="<%= sinks[i].id %>" <%= sinks[i].selected %>><%= sinks[i].name %></option>
             <% } %>
           </select>
           <label class="item-inline-form">

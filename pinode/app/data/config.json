@@ -4,11 +4,11 @@
   "audiosinks": [
     {
       "name": "internal",
-      "sink": "00hf873I-INT"
+      "id": "00hf873I-INT"
     },
     {
       "name": "external",
-      "sink": "8guidfu-EXT"
+      "id": "8guidfu-EXT"
     }
   ],
   "lifxbulbs": [
@@ -22,11 +22,11 @@
     },
     {
       "name": "lamp-02",
-      "id": "ff75zvg"
+      "id": "d073d5007e55"
     },
     {
       "name": "fuuu",
-      "id": "ff75zvg"
+      "id": "dfgdwera"
     }
   ]
 }

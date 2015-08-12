@@ -1,83 +1,73 @@
 {
   "enter": [
-
     {
-      "name": "item001",
       "type": "lifx",
+      "name": "nulll2ojsdfsgd",
+      "bulb": "",
+      "h": "320",
+      "s": "0.543",
+      "l": "1",
+      "w": "0.023",
+      "t": "0.1",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "lifx911",
       "bulb": "d073d501596e",
-      "h": 320,
-      "s": 0.543,
-      "l": 1,
-      "w": 0.023,
-      "t": 0.1,
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "0",
       "blocking": false
     },
-
     {
-      "name": "item002",
       "type": "video",
-      "file": "test001.avi",
+      "name": "item002",
+      "file": "videofile01.avi",
       "blocking": false
     },
-
     {
-      "name": "item003",
       "type": "audio",
-      "file": "test.mp3",
-      "sink": "00hf873I-I",
+      "name": "item003",
+      "file": "never_gonna_give_you_up.mp3 (2:55:13)",
+      "sink": "00hf873I-INT",
       "blocking": false
     },
-
     {
-      "name": "item004",
       "type": "dmx",
-      "channel": 1,
-      "start": 0,
-      "duration": 300,
-      "end": 255,
+      "name": "item004",
+      "channel": "1",
+      "start": "0",
+      "end": "255",
+      "duration": "300",
       "blocking": false
     },
-
     {
-      "name": "item005",
       "type": "delay",
-      "duration": 300
+      "name": "item005",
+      "duration": "300",
+      "blocking": false
     },
-
     {
-      "name": "item006",
       "type": "script",
+      "name": "item006",
       "cmd": "/home/eni/progs/bin/test.sh",
       "blocking": false
     }
-
   ],
-
   "exit": [
     {
-      "name": "exit-001",
       "type": "lifx",
-      "bulbs": [
-        "00ffeeff", "ff75zvg"
-      ],
-      "h": 320,
-      "s": 0.543,
-      "l": 1,
-      "w": 0.023,
-      "t": 0.1,
-      "blocking": false
-    },
-
-    {
-      "name": "exit-002",
-      "type": "dmx",
-      "channel": 1,
-      "start": 255,
-      "duration": 300,
-      "end": 0,
+      "name": "exit-001",
+      "bulb": "",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "0.1",
       "blocking": false
     }
-
   ]
-
 }

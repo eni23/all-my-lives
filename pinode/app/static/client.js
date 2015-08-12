@@ -27,6 +27,24 @@ $(document).ready(function(){
       }
     });
 
+    $.ajax({
+        type: "GET",
+        url: "/config/status",
+        success : function(data){
+          if (data.enabled==true){
+            $(".btn-onoff").addClass("btn-success");
+            $(".btn-onoff").removeClass("btn-danger");
+            $(".btn-onoff").text("Enabled");
+          }
+          if (data.enabled==false){
+            $(".btn-onoff").addClass("btn-danger");
+            $(".btn-onoff").removeClass("btn-success");
+            $(".btn-onoff").text("Disabled");
+          }
+        }
+    });
+
+
     update_filelist();
 
     tpl.lifx = $("#item-tpl-lifx").html()
@@ -60,6 +78,15 @@ $(document).ready(function(){
 
     $(document).on( "click", ".lifx-colorsel", function(){
       lifx_colorsel_elem = $(this).parent().parent().parent();
+      var h=lifx_colorsel_elem.find(".lifx-h").val(),
+          s=lifx_colorsel_elem.find(".lifx-s").val(),
+          l=lifx_colorsel_elem.find(".lifx-l").val(),
+          w=lifx_colorsel_elem.find(".lifx-w").val();
+      $(".modal-lifx-color-h").val( h )
+      $(".modal-lifx-color-s").val( s )
+      $(".modal-lifx-color-l").val( l )
+      $(".modal-lifx-color-w").val( w )
+      $("#spectrum-color").spectrum("set", { h:h, s:s, l:l });
       $("#modal-lifx-color").modal();
     });
 
@@ -70,8 +97,53 @@ $(document).ready(function(){
       new_item(this, $(".drag-ul-exit"));
     })
 
+    $(".btn-onoff").click(function(){
+      stat=""
+      $.ajax({
+        type: "GET",
+        url: "/config/status",
+        async: false,
+        success : function(data){
+          if (data.enabled==true){
+            $(".btn-onoff").addClass("btn-danger");
+            $(".btn-onoff").removeClass("btn-success");
+            $(".btn-onoff").text("Disabled");
+            $.ajax({
+              type: "GET",
+              url: "/config/disable"
+            });
+          }
+          if (data.enabled==false){
+            $(".btn-onoff").addClass("btn-success");
+            $(".btn-onoff").removeClass("btn-danger");
+            $(".btn-onoff").text("Enabled");
+            $.ajax({
+              type: "GET",
+              url: "/config/enable"
+            });
+          }
+        }
+      });
+    });
 
 
+    $(".btn-save").click(function(){
+      var enter = sketch_to_json( $(".drag-ul-enter") );
+      var exit = sketch_to_json( $(".drag-ul-exit") );
+      var data = {
+        enter: enter,
+        exit: exit
+      }
+      $.ajax({
+        type: "POST",
+        url: "/sketch/update",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success : function(re){
+          console.log(re)
+        }
+      });
+    })
   }
 
 
@@ -172,6 +244,14 @@ $(document).ready(function(){
           item.l = elem.find(".lifx-l").val();
           item.w = elem.find(".lifx-w").val();
           item.t = elem.find(".lifx-t").val();
+
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
+
           sketch.push(item);
       }
 
@@ -183,6 +263,12 @@ $(document).ready(function(){
           item.start = elem.find(".dmx-start").val();
           item.end = elem.find(".dmx-end").val();
           item.duration = elem.find(".dmx-duration").val();
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
           sketch.push(item);
       }
 
@@ -191,7 +277,14 @@ $(document).ready(function(){
           item.type="video";
           item.name = elem.find(".item-desc").val();
           item.file = elem.find(".video-file").val();
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
           sketch.push(item);
+
       }
 
       else if (elem.hasClass("item-audio")) {
@@ -199,7 +292,13 @@ $(document).ready(function(){
           item.type="audio";
           item.name = elem.find(".item-desc").val();
           item.file = elem.find(".audio-file").val();
-          item.sink = elem.find(".audio-file").val();
+          item.sink = elem.find(".audio-sink").val();
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
           sketch.push(item);
       }
 
@@ -208,6 +307,12 @@ $(document).ready(function(){
           item.type="delay";
           item.name = elem.find(".item-desc").val();
           item.duration = elem.find(".delay-duration").val();
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
           sketch.push(item);
       }
 
@@ -215,7 +320,13 @@ $(document).ready(function(){
           var item = {};
           item.type="script";
           item.name = elem.find(".item-desc").val();
-          item.file = elem.find(".script-cmd").val();
+          item.cmd = elem.find(".script-cmd").val();
+          if( elem.find(".blocking").is(':checked')) {
+            item.blocking=true;
+          }
+          else {
+            item.blocking=false;
+          }
           sketch.push(item);
       }
 

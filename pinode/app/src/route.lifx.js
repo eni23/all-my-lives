@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
-
-
-lifx = require('lifx');
+var lifx = require('lifx');
 lx   = lifx.init();
+//lifx.setDebug(true);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,12 +18,12 @@ router.get('/list', function(req, res, next) {
 });
 
 router.get('/on', function(req, res, next) {
-  lx.lightsOn();
+  lx.lightsOn(lx.bulbs[req.query.bulb]);
   res.send('ok');
 });
 
 router.get('/off', function(req, res, next) {
-  lx.lightsOff();
+  lx.lightsOff(lx.bulbs[req.query.bulb]);
   res.send('ok');
 });
 
@@ -38,23 +38,20 @@ router.get('/set', function(req, res, next) {
 
   var lamp = req.query.lamp
 
-  console.log(lx.bulbs)
-
-  if (!lamp){
+  // all lamps in config
+  if (!req.query.lamp){
     var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
     var confcontent = fs.readFileSync(conffile);
     var config=JSON.parse(confcontent);
     for (bulb of config.lifxbulbs){
       if (bulb.id){
-        for (lb of lx.bulbs){
-          console.log(lb);
-        }
-        //lx.lightsColour(hue, sat, lum, white, time, lx.bulbs[bulb.id]);
+        lx.lightsColour(hue, sat, lum, white, time, bulb.id);
       }
     }
   }
+  // single lamp
   else {
-    lx.lightsColour(hue, sat, lum, white, time, lx.bulbs[req.query.lamp]);
+    lx.lightsColour(hue, sat, lum, white, time, req.query.lamp );
   }
   res.send('ok');
 });
