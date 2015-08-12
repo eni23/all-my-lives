@@ -110,8 +110,8 @@ $(document).ready(function(){
 
     $(document).on( "click", ".item-test-single", function(){
       var elem=$(this).parent().parent().parent();
-      var templist=$("<ul><li class='"+elem.attr("class")+"'>"+elem.html()+"</li></ul>")
-      var data=sketch_to_json(templist);
+
+      var data=sketch_to_json(elem);
       $.ajax({
         type: "POST",
         contentType: 'application/json',
@@ -121,6 +121,7 @@ $(document).ready(function(){
           console.log(data);
         }
       });
+      return false;
 
     });
 
@@ -350,7 +351,15 @@ $(document).ready(function(){
 
     sketch = [];
 
-    source.children("li").each(function(){
+    if (source.children("li").length==0){
+      var list=source;
+    }
+    else {
+      source.children("li")
+      var list=source.children("li")
+    }
+
+    list.each(function(){
       elem = $(this);
 
       if (elem.hasClass("item-lifx")){
