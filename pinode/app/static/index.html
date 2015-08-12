@@ -46,12 +46,13 @@
 
 
       <button class="btn btn-success btn-onoff" type="button">Enabled</button>
-      <button class="btn btn-primary btn-save" type="button">
+
+      <!--<button class="btn btn-primary btn-save" type="button">
         Save <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
       </button>
       <button class="btn btn-primary btn-files" type="button" data-toggle="modal" data-target="#files">
         Files <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-      </button>
+      </button>!-->
 
       <div class="tabarea">
 
@@ -264,15 +265,15 @@
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>Channel</label>
-            <input type="number" class="form-control dmx-channel" min="0" max="254" value="<%= channel %>">
+            <input type="number" class="form-control dmx-channel" min="0" max="512" value="<%= channel %>">
           </div>
           <div class="form-group">
             <label>Start Value</label>
-            <input type="number" class="form-control dmx-start" min="0" max="254" value="<%= start %>">
+            <input type="number" class="form-control dmx-start" min="0" max="255" value="<%= start %>">
           </div>
           <div class="form-group">
             <label>Final Value</label>
-            <input type="number" class="form-control dmx-end" min="0" max="254" value="<%= end %>">
+            <input type="number" class="form-control dmx-end" min="0" max="255" value="<%= end %>">
           </div>
           <div class="form-group">
               <button type="button" class="btn btn-primary dmx-valsel">choose Value</button>

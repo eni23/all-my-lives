@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
   res.send("config")
 });
 
-
 router.get('/enable', function(req, res, next) {
   enabled=true;
   res.send("ok");
@@ -30,26 +29,17 @@ router.get('/get', function(req, res, next) {
   res.json(data);
 });
 
-router.get('/get-lifx', function(req, res, next) {
-  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/lifx-bulbs.json"
-  var content = fs.readFileSync(conffile);
-  var data=JSON.parse(content);
-  res.json(data);
-});
-
 router.get('/files', function(req, res, next) {
   var data={};
+  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+  var content = fs.readFileSync(conffile);
+  var config=JSON.parse(content);
 
-  data.video = [
-    "videofile01.avi",
-    "videofile02.avi",
-    "foooobar.avi"
-  ]
-  data.audio = [
-    "never_gonna_give_you_up.mp3 (2:55:13)",
-    "liebeskummer_lohnt_nicht.flac (3:23:89)",
-    "friday.mp3 (4:33:11)"
-  ]
+  data = {};
+
+  data.video = fs.readdirSync(config.videopath)
+  data.audio = fs.readdirSync(config.audiopath)
+
   res.json(data);
 });
 

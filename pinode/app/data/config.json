@@ -3,12 +3,16 @@
   "audiopath": "/home/eni/dl",
   "audiosinks": [
     {
-      "name": "internal",
-      "id": "00hf873I-INT"
+      "name": "3.5mm",
+      "id": "0:1"
     },
     {
-      "name": "external",
-      "id": "8guidfu-EXT"
+      "name": "hdmi",
+      "id": "0:1"
+    },
+    {
+      "name": "extern",
+      "id": "1:0"
     }
   ],
   "lifxbulbs": [
@@ -25,7 +29,7 @@
       "id": "d073d5007e55"
     },
     {
-      "name": "fuuu",
+      "name": "false bulb",
       "id": "dfgdwera"
     }
   ]

@@ -11,13 +11,26 @@
     },
     {
       "type": "lifx",
-      "name": "lifx911",
+      "name": "lifx911 fooobar",
       "bulb": "",
       "h": "0",
       "s": "0",
       "l": "0.6",
       "w": "0.025",
       "t": "0",
+      "blocking": false
+    },
+    {
+      "type": "video",
+      "name": "item002",
+      "file": "-- LT -- (Linotype GmbH) -- Frutiger_Next.7z",
+      "blocking": false
+    },
+    {
+      "type": "audio",
+      "name": "item003",
+      "file": "-- LT -- (Linotype GmbH) -- Frutiger_Next.7z",
+      "sink": "0:1",
       "blocking": false
     },
     {
@@ -32,19 +45,6 @@
       "blocking": false
     },
     {
-      "type": "video",
-      "name": "item002",
-      "file": "videofile01.avi",
-      "blocking": false
-    },
-    {
-      "type": "audio",
-      "name": "item003",
-      "file": "never_gonna_give_you_up.mp3 (2:55:13)",
-      "sink": "00hf873I-INT",
-      "blocking": false
-    },
-    {
       "type": "delay",
       "name": "item005",
       "duration": "300",
@@ -54,6 +54,13 @@
       "type": "script",
       "name": "item006",
       "cmd": "/home/eni/progs/bin/test.sh",
+      "blocking": false
+    },
+    {
+      "type": "audio",
+      "name": "",
+      "file": "-- LT -- (Linotype GmbH) -- Frutiger_Next.7z",
+      "sink": "0:1",
       "blocking": false
     }
   ],
@@ -67,6 +74,24 @@
       "l": "0",
       "w": "0",
       "t": "0.1",
+      "blocking": false
+    },
+    {
+      "type": "dmx",
+      "name": "",
+      "channel": "0",
+      "start": "0",
+      "end": "0",
+      "duration": "0",
+      "blocking": false
+    },
+    {
+      "type": "dmx",
+      "name": "",
+      "channel": "0",
+      "start": "0",
+      "end": "0",
+      "duration": "0",
       "blocking": false
     }
   ]

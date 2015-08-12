@@ -5,3 +5,4 @@ sensorbox/build/*
 node_modules
 pinode/node_modules/*
 !pinode/node_modules/lifx
+pinode/npm-debug.log

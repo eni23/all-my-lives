@@ -6,17 +6,20 @@ var files = {};
 var tpl = {};
 var lifx_colorsel_elem=false;
 var dmx_valsel_elem=false;
+var disable_autosave=false;
+
 $(document).ready(function(){
-  var list=$(".drag-ul-enter").get(0)
-  var sortable = Sortable.create(list)
 
 
   init = function(){
 
-    var enter_list=$(".drag-ul-enter").get(0),
-        enter_sortable = Sortable.create(enter_list),
-        exit_list=$(".drag-ul-exit").get(0),
-        exit_sortable = Sortable.create(exit_list);
+    sortable_opts = {
+      onEnd: function (evt) {
+        autosave();
+      }
+    }
+    Sortable.create($(".drag-ul-enter")[0],sortable_opts);
+    Sortable.create($(".drag-ul-exit")[0],sortable_opts);
 
     $.ajax({
       type: "GET",
@@ -26,6 +29,7 @@ $(document).ready(function(){
         config = data ;
       }
     });
+    update_filelist();
 
     $.ajax({
         type: "GET",
@@ -45,7 +49,6 @@ $(document).ready(function(){
     });
 
 
-    update_filelist();
 
     tpl.lifx = $("#item-tpl-lifx").html()
     tpl.dmx = $("#item-tpl-dmx").html()
@@ -79,7 +82,14 @@ $(document).ready(function(){
       dmx_valsel_elem = $(this).parent().parent().parent();
       $(".modal-dmx-value-val").val( dmx_valsel_elem.find(".dmx-end").val() );
       $("#modal-dmx-value").modal();
+      disable_autosave=true;
     });
+
+    $('#modal-dmx-value,#modal-lifx-color').on('hidden.bs.modal', function () {
+        disable_autosave=false;
+        autosave();
+    })
+
 
 
     $(document).on( "click", ".lifx-colorsel", function(){
@@ -93,14 +103,17 @@ $(document).ready(function(){
       $(".modal-lifx-color-l").val( l )
       $(".modal-lifx-color-w").val( w )
       $("#spectrum-color").spectrum("set", { h:h, s:s, l:l });
+      disable_autosave=true;
       $("#modal-lifx-color").modal();
     });
 
     $(".new-item-enter").click(function(){
       new_item(this, $(".drag-ul-enter"));
+      autosave();
     })
     $(".new-item-exit").click(function(){
       new_item(this, $(".drag-ul-exit"));
+      autosave();
     })
 
     $(".btn-onoff").click(function(){
@@ -149,9 +162,78 @@ $(document).ready(function(){
           console.log(re)
         }
       });
-    })
+    });
+
+    //autosave
+    $(document).on( "change", "input", function(){
+      if (disable_autosave==true){
+        return;
+      }
+      autosave();
+    });
+
+    $("#spectrum-color").spectrum({
+      flat: true,
+      showInput: false,
+      showAlpha: false,
+      move: function(c) {
+        var color = c.toHsl();
+        color.w = $('input.range-w').val();
+        $('input.range-h').val(color.h);
+        $('input.range-s').val(color.s);
+        $('input.range-l').val(color.l);
+        update_lifx_item_color(color);
+        if( $("#lifx-color-cb-live").is(':checked')) {
+          set_lifx_color(color);
+        }
+      }
+    });
+
+    $(".bar-color").on("input", function(e){
+      var color={};
+      color.h = $('input.range-h').val(),
+      color.s = $('input.range-s').val(),
+      color.l = $('input.range-l').val(),
+      color.w = $('input.range-w').val();
+      update_lifx_item_color(color);
+      $("#spectrum-color").spectrum("set", { h:color.h, s:color.s, l:color.l });
+      if( $("#lifx-color-cb-live").is(':checked')) {
+        set_lifx_color(color);
+      }
+    });
+
+    $(".bar-dmx").on("input", function(e){
+      var value=$(".modal-dmx-value-val").val(),
+          channel=dmx_valsel_elem.find(".dmx-channel").val();
+      dmx_valsel_elem.find(".dmx-end").val( value );
+      $.ajax('/dmx/set', {
+        data: {
+          "channel": channel,
+          "value":value
+        }
+      });
+    });
+
+
   }
 
+  autosave = function(){
+    var enter = sketch_to_json( $(".drag-ul-enter") );
+    var exit = sketch_to_json( $(".drag-ul-exit") );
+    var data = {
+      enter: enter,
+      exit: exit
+    }
+    $.ajax({
+      type: "POST",
+      url: "/sketch/update",
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success : function(re){
+        console.log(re)
+      }
+    });
+  }
 
   new_item = function( e, target ){
 
@@ -363,72 +445,9 @@ $(document).ready(function(){
     lifx_colorsel_elem.find(".lifx-w").val(color.w);
   }
 
-  $("#spectrum-color").spectrum({
-    flat: true,
-    showInput: false,
-    showAlpha: false,
-    move: function(c) {
-      var color = c.toHsl();
-      color.w = $('input.range-w').val();
-      $('input.range-h').val(color.h);
-      $('input.range-s').val(color.s);
-      $('input.range-l').val(color.l);
-      update_lifx_item_color(color);
-      if( $("#lifx-color-cb-live").is(':checked')) {
-        set_lifx_color(color);
-      }
-    }
-  })
-  $(".bar-color").on("input", function(e){
-    var color={};
-    color.h = $('input.range-h').val(),
-    color.s = $('input.range-s').val(),
-    color.l = $('input.range-l').val(),
-    color.w = $('input.range-w').val();
-    update_lifx_item_color(color);
-    $("#spectrum-color").spectrum("set", { h:color.h, s:color.s, l:color.l });
-    if( $("#lifx-color-cb-live").is(':checked')) {
-      set_lifx_color(color);
-    }
-  });
-
-  $(".bar-dmx").on("input", function(e){
-    var value=$(".modal-dmx-value-val").val(),
-        channel=dmx_valsel_elem.find(".dmx-channel").val();
-    dmx_valsel_elem.find(".dmx-end").val( value );
-    $.ajax('/dmx/set', {
-      data: {
-        "channel": channel,
-        "value":value
-      }
-    });
-  });
 
 
-  //var item_lifx = $("#item-tpl-lifx").html()
-  //var html = ejs.render(item_lifx, data);
 
-  /*$('input.bar').on('slide',function(){
-  var h = $('input.range-h').val(),
-  s = $('input.range-s').val(),
-  l = $('input.range-l').val(),
-  w = $('input.range-w').val(),
-  t = $('input.range-t').val();
-  console.log(s);
-  $.ajax('/lifx/set', {
-  data: {
-  "h":h,
-  "s":s,
-  "l":l,
-  "w":w,
-  "t":t
-  }
-  });
-  });
-
-  $('input.bar').slider();
-  */
-  //console.log(html);
 
   init();
 
