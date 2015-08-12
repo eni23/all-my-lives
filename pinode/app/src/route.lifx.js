@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
+var fs = require('fs');
+
+
 lifx = require('lifx');
 lx   = lifx.init();
 
@@ -32,9 +36,26 @@ router.get('/set', function(req, res, next) {
 	var white = parseInt(req.query.w * 0xffff)
   var time = parseInt(req.query.t * 0xffff)
 
-  console.log(hue,sat,lum,white,time);
+  var lamp = req.query.lamp
 
-  lx.lightsColour(hue, sat, lum, white, time);
+  console.log(lx.bulbs)
+
+  if (!lamp){
+    var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+    var confcontent = fs.readFileSync(conffile);
+    var config=JSON.parse(confcontent);
+    for (bulb of config.lifxbulbs){
+      if (bulb.id){
+        for (lb of lx.bulbs){
+          console.log(lb);
+        }
+        //lx.lightsColour(hue, sat, lum, white, time, lx.bulbs[bulb.id]);
+      }
+    }
+  }
+  else {
+    lx.lightsColour(hue, sat, lum, white, time, lx.bulbs[req.query.lamp]);
+  }
   res.send('ok');
 });
 

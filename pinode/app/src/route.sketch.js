@@ -15,16 +15,16 @@ router.get('/enter/get', function(req, res, next) {
   var content = fs.readFileSync(sketchfile);
   console.log(content)
   var data=JSON.parse(content);
-
-  res.json(data["enter"]);
+  res.json(data.enter);
 });
 
-router.get('/get-lifx', function(req, res, next) {
-  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/lifx-bulbs.json"
-  var content = fs.readFileSync(conffile);
+router.get('/exit/get', function(req, res, next) {
+  var content = fs.readFileSync(sketchfile);
+  console.log(content)
   var data=JSON.parse(content);
-  res.json(data);
+  res.json(data.exit);
 });
+
 
 
 module.exports = router;

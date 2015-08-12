@@ -12,7 +12,7 @@ body {
   top: 50px;
 }
 
-.dragarea-enter {
+.dragarea-enter, .dragarea-exit {
   margin-top: 10px;
 }
 
@@ -56,4 +56,17 @@ input.item-desc:focus {
 
 .inline-small {
   width:50px;
+}
+
+.tabarea {
+  margin-top:20px;
+}
+
+.bg-tab {
+  margin-top: 15px;
+}
+
+
+.item-menu {
+  float: right
 }

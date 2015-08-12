@@ -13,8 +13,12 @@
   ],
   "lifxbulbs": [
     {
+      "name": "all Lamps",
+      "value": "0"
+    },
+    {
       "name": "lamp-01",
-      "id": "00ffeeff"
+      "id": "d073d501596e"
     },
     {
       "name": "lamp-02",

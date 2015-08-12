@@ -4,7 +4,7 @@
     {
       "name": "item001",
       "type": "lifx",
-      "bulb": "00ffeeff",
+      "bulb": "d073d501596e",
       "h": 320,
       "s": 0.543,
       "l": 1,
@@ -55,7 +55,7 @@
 
   "exit": [
     {
-      "name": "item001",
+      "name": "exit-001",
       "type": "lifx",
       "bulbs": [
         "00ffeeff", "ff75zvg"
@@ -69,7 +69,7 @@
     },
 
     {
-      "name": "item002",
+      "name": "exit-002",
       "type": "dmx",
       "channel": 1,
       "start": 255,
