@@ -1,0 +1,16 @@
+{
+  "lifx-bulbs": [
+    {
+      "name": "lamp-01",
+      "id": "00ffeeff"
+    },
+    {
+      "name": "lamp-02",
+      "id": "ff75zvg"
+    },
+    {
+      "name": "lamp-02",
+      "id": "ff75zvg"
+    }
+  ]
+}

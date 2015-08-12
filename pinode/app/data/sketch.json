@@ -1,0 +1,83 @@
+{
+  "enter": [
+
+    {
+      "name": "item001",
+      "type": "lifx",
+      "bulb": "00ffeeff",
+      "h": 320,
+      "s": 0.543,
+      "l": 1,
+      "w": 0.023,
+      "t": 0.1,
+      "blocking": false
+    },
+
+    {
+      "name": "item002",
+      "type": "video",
+      "file": "test001.avi",
+      "blocking": false
+    },
+
+    {
+      "name": "item003",
+      "type": "audio",
+      "file": "test.mp3",
+      "sink": "00hf873I-I",
+      "blocking": false
+    },
+
+    {
+      "name": "item004",
+      "type": "dmx",
+      "channel": 1,
+      "start": 0,
+      "duration": 300,
+      "end": 255,
+      "blocking": false
+    },
+
+    {
+      "name": "item005",
+      "type": "delay",
+      "duration": 300
+    },
+
+    {
+      "name": "item006",
+      "type": "script",
+      "cmd": "/home/eni/progs/bin/test.sh",
+      "blocking": false
+    }
+
+  ],
+
+  "exit": [
+    {
+      "name": "item001",
+      "type": "lifx",
+      "bulbs": [
+        "00ffeeff", "ff75zvg"
+      ],
+      "h": 320,
+      "s": 0.543,
+      "l": 1,
+      "w": 0.023,
+      "t": 0.1,
+      "blocking": false
+    },
+
+    {
+      "name": "item002",
+      "type": "dmx",
+      "channel": 1,
+      "start": 255,
+      "duration": 300,
+      "end": 0,
+      "blocking": false
+    }
+
+  ]
+
+}

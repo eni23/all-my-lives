@@ -58,16 +58,48 @@
         <span class="input-group-addon" id="sizing-addon2">W</span>
         <input class="bar range-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
       </div>
-      <div class="input-group">
-        <span class="input-group-addon" id="sizing-addon2">T</span>
-        <input class="bar range-t" type="range" value="0"  type="range" value="0" min="0" max="1" step="0.01" />
-      </div>
+
 -->
 
 
 
-  <button type="button" class="btn btn-primary" data-toggle="popover-x" data-target="#popover-color" data-placement="bottom">choose Color</button>
+  <button type="button" class="btn btn-primary" data-toggle="popover-x" data-target="#popover-color-2" data-placement="bottom">choose Color</button>
 
+<div id="popover-color-2" class="popover popover-default popover-color">
+  <div class="arrow"></div>
+      <h3 class="popover-title">
+        <span class="close" data-dismiss="popover-x">&times;</span>
+        <b>Select color  </b>
+      </h3>
+  <div class="popover-content">
+
+      <div class="row">
+        <div class="col-md-2 bar-title">H</div>
+        <div class="col-md-10">
+          <input class="bar range-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 bar-title">S</div>
+        <div class="col-md-10">
+          <input class="bar range-s" type="range" value="0" min="0" max="1" step="0.01"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 bar-title">L</div>
+        <div class="col-md-10">
+          <input class="bar range-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 bar-title">W</div>
+        <div class="col-md-10">
+          <input class="bar range-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
+        </div>
+      </div>
+
+  </div>
+</div>
 
 
     <div id="popover-color" class="popover popover-default popover-color">
@@ -126,7 +158,8 @@
 
     <script>
       $(document).ready(function(){
-        $('input.bar').on('slide',function(){
+
+        /*$('input.bar').on('slide',function(){
           var h = $('input.range-h').val(),
               s = $('input.range-s').val(),
               l = $('input.range-l').val(),
@@ -144,7 +177,7 @@
               });
         });
 
-        $('input.bar').slider();
+        $('input.bar').slider();*/
 
 
       });
