@@ -17,6 +17,7 @@ deb   http://apt.openlighting.org/raspbian  wheezy main
 
 wget http://node-arm.herokuapp.com/node_latest_armhf.deb
 sudo dpkg -i node_latest_armhf.deb
+curl -L https://npmjs.com/install.sh | sh
 
 
 ```
