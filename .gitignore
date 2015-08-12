@@ -4,4 +4,4 @@ sensorbox/build/*
 
 node_modules
 pinode/node_modules/*
-!pinode/node_modules/lifx/*
+!pinode/node_modules/lifx
