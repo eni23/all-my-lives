@@ -1,6 +1,17 @@
 {
   "enter": [
     {
+      "type": "lifx",
+      "name": "nulll2ojsdfsgd",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "0.52",
+      "w": "0.016",
+      "t": "10.1",
+      "blocking": false
+    },
+    {
       "type": "audio",
       "name": "item003",
       "file": "-- LT -- (Linotype GmbH) -- Frutiger_Next.7z",
@@ -8,14 +19,12 @@
       "blocking": false
     },
     {
-      "type": "lifx",
-      "name": "nulll2ojsdfsgd",
-      "bulb": "",
-      "h": "330",
-      "s": "0.543",
-      "l": "1",
-      "w": "0.023",
-      "t": "0.1",
+      "type": "dmx",
+      "name": "",
+      "channel": "2",
+      "start": "0",
+      "end": "14",
+      "duration": "0",
       "blocking": false
     },
     {
