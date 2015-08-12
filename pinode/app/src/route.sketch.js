@@ -30,7 +30,13 @@ router.post('/update', function(req, res, next) {
   }
   var json = JSON.stringify(data, null, 2);
   fs.writeFileSync(sketchfile,json,'utf8');
-  res.json({ status:true });
+  res.json({ success:true });
 });
+
+router.post('/test-single', function(req, res, next) {
+  console.log(req.body);
+  res.json({ success:true });
+});
+
 
 module.exports = router;

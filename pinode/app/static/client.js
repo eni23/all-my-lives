@@ -76,6 +76,7 @@ $(document).ready(function(){
     $(document).on( "click", ".item-delete", function(){
       var elem=$(this).parent().parent().parent();
       elem.remove();
+      autosave();
     });
 
     $(document).on( "click", ".dmx-valsel", function(){
@@ -107,12 +108,30 @@ $(document).ready(function(){
       $("#modal-lifx-color").modal();
     });
 
+    $(document).on( "click", ".item-test-single", function(){
+      var elem=$(this).parent().parent().parent();
+      var templist=$("<ul><li class='"+elem.attr("class")+"'>"+elem.html()+"</li></ul>")
+      var data=sketch_to_json(templist);
+      $.ajax({
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        url: "/sketch/test-single",
+        success : function(data){
+          console.log(data);
+        }
+      });
+
+    });
+
     $(".new-item-enter").click(function(){
       new_item(this, $(".drag-ul-enter"));
+      animate_item($(".drag-ul-enter>li:last"));
       autosave();
     })
     $(".new-item-exit").click(function(){
       new_item(this, $(".drag-ul-exit"));
+      animate_item($(".drag-ul-exit>li:last"));
       autosave();
     })
 
@@ -215,6 +234,18 @@ $(document).ready(function(){
     });
 
 
+  }
+
+  animate_item = function(item){
+    var savecolor=item.css("backgroundColor");
+    $('html, body').animate({
+          scrollTop: item.offset().top
+        }, 200, function() {
+          item.animate({
+            backgroundColor:'#72f77f'},200, function(){
+              item.animate({backgroundColor:savecolor},300 );
+          });
+      });
   }
 
   autosave = function(){
