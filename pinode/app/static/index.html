@@ -133,25 +133,25 @@
             <div class="row">
               <div class="col-md-2 bar-title">Hue</div>
               <div class="col-md-10">
-                <input class="bar range-h modal-lifx-color-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
+                <input class="bar bar-color range-h modal-lifx-color-h" type="range" value="0" type="range" value="0" min="0" max="360" step="1" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-2 bar-title">Saturation</div>
               <div class="col-md-10">
-                <input class="bar range-s modal-lifx-color-s" type="range" value="0" min="0" max="1" step="0.01"/>
+                <input class="bar bar-color range-s modal-lifx-color-s" type="range" value="0" min="0" max="1" step="0.01"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2 bar-title">Lightness</div>
               <div class="col-md-10">
-                <input class="bar range-l modal-lifx-color-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
+                <input class="bar bar-color range-l modal-lifx-color-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
               </div>
             </div>
             <div class="row item-inline-form-bottom">
               <div class="col-md-2 bar-title">White</div>
               <div class="col-md-10">
-                <input class="bar range-w modal-lifx-color-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
+                <input class="bar bar-color range-w modal-lifx-color-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
               </div>
             </div>
             <div class="row">
@@ -169,14 +169,15 @@
     </div><!-- /.modal -->
 
     <!-- modal for file explorer !-->
-    <div class="modal fade modal-lifx-color" tabindex="-1" role="dialog" aria-labelledby="fileslabel" id="files" >
+    <div class="modal fade modal-dmx-value" tabindex="-1" role="dialog" aria-labelledby="fileslabel" id="modal-dmx-value" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Files</h4>
+            <h4 class="modal-title">Select DMX Value</h4>
           </div>
           <div class="modal-body">
+            <input class="bar bar-dmx modal-dmx-value-val" type="range" value="0" type="range" value="0" min="0" max="254" step="1" />
           </div>
         </div>
       </div>
@@ -272,6 +273,9 @@
           <div class="form-group">
             <label>Final Value</label>
             <input type="number" class="form-control dmx-end" min="0" max="254" value="<%= end %>">
+          </div>
+          <div class="form-group">
+              <button type="button" class="btn btn-primary dmx-valsel">choose Value</button>
           </div>
           <div class="form-group">
             <label>Duration (ms)</label>

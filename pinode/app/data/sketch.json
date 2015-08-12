@@ -1,13 +1,22 @@
 {
   "enter": [
     {
+      "type": "dmx",
+      "name": "item004",
+      "channel": "1",
+      "start": "0",
+      "end": "255",
+      "duration": "300",
+      "blocking": false
+    },
+    {
       "type": "lifx",
       "name": "lifx911",
       "bulb": "",
       "h": "0",
       "s": "0",
-      "l": "0",
-      "w": "0",
+      "l": "0.6",
+      "w": "0.025",
       "t": "0",
       "blocking": false
     },
@@ -33,15 +42,6 @@
       "name": "item003",
       "file": "never_gonna_give_you_up.mp3 (2:55:13)",
       "sink": "00hf873I-INT",
-      "blocking": false
-    },
-    {
-      "type": "dmx",
-      "name": "item004",
-      "channel": "1",
-      "start": "0",
-      "end": "255",
-      "duration": "300",
       "blocking": false
     },
     {

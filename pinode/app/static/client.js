@@ -5,7 +5,7 @@ var config = {};
 var files = {};
 var tpl = {};
 var lifx_colorsel_elem=false;
-
+var dmx_valsel_elem=false;
 $(document).ready(function(){
   var list=$(".drag-ul-enter").get(0)
   var sortable = Sortable.create(list)
@@ -73,6 +73,12 @@ $(document).ready(function(){
     $(document).on( "click", ".item-delete", function(){
       var elem=$(this).parent().parent().parent();
       elem.remove();
+    });
+
+    $(document).on( "click", ".dmx-valsel", function(){
+      dmx_valsel_elem = $(this).parent().parent().parent();
+      $(".modal-dmx-value-val").val( dmx_valsel_elem.find(".dmx-end").val() );
+      $("#modal-dmx-value").modal();
     });
 
 
@@ -337,10 +343,7 @@ $(document).ready(function(){
 
 
   set_lifx_color = function(color){
-
     var lamp=lifx_colorsel_elem.find(".lifx-bulb").val();
-    console.log(lamp);
-
     $.ajax('/lifx/set', {
       data: {
         "lamp": lamp,
@@ -376,7 +379,7 @@ $(document).ready(function(){
       }
     }
   })
-  $(".bar").on("input", function(e){
+  $(".bar-color").on("input", function(e){
     var color={};
     color.h = $('input.range-h').val(),
     color.s = $('input.range-s').val(),
@@ -389,6 +392,17 @@ $(document).ready(function(){
     }
   });
 
+  $(".bar-dmx").on("input", function(e){
+    var value=$(".modal-dmx-value-val").val(),
+        channel=dmx_valsel_elem.find(".dmx-channel").val();
+    dmx_valsel_elem.find(".dmx-end").val( value );
+    $.ajax('/dmx/set', {
+      data: {
+        "channel": channel,
+        "value":value
+      }
+    });
+  });
 
 
   //var item_lifx = $("#item-tpl-lifx").html()
