@@ -1,36 +1,53 @@
 {
   "enter": [
     {
-      "type": "audio",
-      "name": "one",
-      "file": "309.pdf",
-      "sink": "1:0",
-      "blocking": false
-    },
-    {
-      "type": "script",
-      "name": "two",
-      "cmd": "/home/eni/progs/bin/test.sh",
-      "blocking": false
-    },
-    {
       "type": "lifx",
       "name": "three",
-      "bulb": "d073d5007e55",
+      "bulb": "d073d501596e",
       "h": "0",
       "s": "0",
       "l": "1",
       "w": "0.01",
-      "t": "2000",
+      "t": "600",
+      "blocking": true
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "600",
       "blocking": false
     },
     {
-      "type": "dmx",
-      "name": "four",
-      "channel": "1",
-      "start": "0",
-      "end": "0",
-      "duration": "0",
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d5007e55",
+      "h": "285.88",
+      "s": "1",
+      "l": "0.5",
+      "w": "0",
+      "t": "600",
+      "blocking": true
+    },
+    {
+      "type": "delay",
+      "name": "",
+      "duration": "200",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "1000",
       "blocking": false
     }
   ],
@@ -39,12 +56,12 @@
       "type": "lifx",
       "name": "exit-000",
       "bulb": "",
-      "h": "0",
-      "s": "0",
-      "l": "0",
+      "h": "259.41",
+      "s": "1",
+      "l": "0.5",
       "w": "0",
-      "t": "0",
-      "blocking": false
+      "t": "1000",
+      "blocking": true
     },
     {
       "type": "lifx",
@@ -54,7 +71,7 @@
       "s": "0",
       "l": "0",
       "w": "0",
-      "t": "0.1",
+      "t": "350",
       "blocking": false
     }
   ]

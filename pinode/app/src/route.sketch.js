@@ -52,7 +52,7 @@ router.post('/test-single', function(req, res, next) {
 
 });
 
-router.post('/test-enter', function(req, res, next) {
+router.get('/test-enter', function(req, res, next) {
 
   var content = fs.readFileSync(conffile);
   sketchrunner.config=JSON.parse(content);
@@ -67,7 +67,7 @@ router.post('/test-enter', function(req, res, next) {
 });
 
 
-router.post('/test-exit', function(req, res, next) {
+router.get('/test-exit', function(req, res, next) {
 
   var content = fs.readFileSync(conffile);
   sketchrunner.config=JSON.parse(content);
@@ -81,7 +81,7 @@ router.post('/test-exit', function(req, res, next) {
 
 });
 
-router.post('/stop', function(req, res, next) {
+router.get('/stop', function(req, res, next) {
   sketchrunner.stop();
 });
 
