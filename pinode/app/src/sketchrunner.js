@@ -35,7 +35,7 @@ module.exports = {
 
   stop: function(){
     this.spawn_exec("killall mplayer", this.falsecallback);
-    this.spawn_exec("killall omxplayer", this.falsecallback);
+    this.spawn_exec("killall omxplayer.bin", this.falsecallback);
     this.is_running = false;
     this.sketchdata = [{}];
     clearTimeout(this.next_timeout);
