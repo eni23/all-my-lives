@@ -214,7 +214,11 @@
           <label>Lamp</label>
           <select class="form-control item-inline-form-bottom lifx-bulb">
             <% for(var i=0; i<lamps.length; i++) { %>
-              <option value="<%= lamps[i].id %>" <%= lamps[i].selected %>><%= lamps[i].name %></option>
+              <% if(lamps[i].id == bulb){ %>
+                <option value="<%= lamps[i].id %>" selected="selected"><%= lamps[i].name %></option>
+              <% } else { %>
+                <option value="<%= lamps[i].id %>"><%= lamps[i].name %></option>
+              <% } %>
             <% } %>
           </select>
           <form class="form-inline item-inline-form-bottom">
@@ -243,7 +247,11 @@
               </div>
           </form>
           <label class="item-inline-form">
-            <input type="checkbox" class="blocking" <%= blocking %> >
+            <% if(blocking){ %>
+              <input type="checkbox" class="blocking" checked="checked" >
+            <% } else { %>
+              <input type="checkbox" class="blocking">
+            <% } %>
             blocking
           </label>
         </div>
@@ -286,7 +294,11 @@
           </div>
         </form>
         <label class="item-inline-form">
-          <input type="checkbox" class="blocking">
+          <% if(blocking){ %>
+            <input type="checkbox" class="blocking" checked="checked" >
+          <% } else { %>
+            <input type="checkbox" class="blocking">
+          <% } %>
           blocking
         </label>
       </li>
@@ -310,17 +322,29 @@
           <label>File</label>
           <select class="form-control item-inline-form-bottom audio-file">
             <% for(var i=0; i<files.length; i++) { %>
-              <option><%= files[i] %></option>
+              <% if(files[i] == file){ %>
+                <option selected="selected"><%= files[i] %></option>
+              <% } else { %>
+                <option><%= files[i] %></option>
+              <% } %>
             <% } %>
           </select>
           <label>Sink</label>
           <select class="form-control item-inline-form-bottom audio-sink">
             <% for(var i=0; i<sinks.length; i++) { %>
-              <option value="<%= sinks[i].id %>" <%= sinks[i].selected %>><%= sinks[i].name %></option>
+              <% if(sinks[i].id == sink){ %>
+                <option value="<%= sinks[i].id %>" selected="selected"><%= sinks[i].name %></option>
+              <% } else { %>
+                <option value="<%= sinks[i].id %>"><%= sinks[i].name %></option>
+              <% } %>
             <% } %>
           </select>
           <label class="item-inline-form">
-            <input type="checkbox" class="blocking">
+            <% if(blocking){ %>
+              <input type="checkbox" class="blocking" checked="checked" >
+            <% } else { %>
+              <input type="checkbox" class="blocking">
+            <% } %>
             blocking
           </label>
         </div>
@@ -345,11 +369,19 @@
           <label>File</label>
           <select class="form-control item-inline-form-bottom video-file">
             <% for(var i=0; i<files.length; i++) { %>
-              <option><%= files[i] %></option>
+              <% if(files[i] == file){ %>
+                <option selected="selected"><%= files[i] %></option>
+              <% } else { %>
+                <option><%= files[i] %></option>
+              <% } %>
             <% } %>
           </select>
           <label class="item-inline-form">
-            <input type="checkbox" class="blocking">
+            <% if(blocking){ %>
+              <input type="checkbox" class="blocking" checked="checked" >
+            <% } else { %>
+              <input type="checkbox" class="blocking">
+            <% } %>
             blocking
           </label>
         </div>
@@ -395,7 +427,11 @@
           <label>Path or Command</label>
           <input type="text" class="form-control item-inline-form-bottom script-cmd" value="<%= cmd %>">
           <label class="item-inline-form">
-            <input type="checkbox" class="blocking">
+            <% if(blocking){ %>
+              <input type="checkbox" class="blocking" checked="checked" >
+            <% } else { %>
+              <input type="checkbox" class="blocking">
+            <% } %>
             blocking
           </label>
         </div>

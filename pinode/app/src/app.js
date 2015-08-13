@@ -4,6 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var path = require('path');
+var fs = require('fs');
+
+var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+var confcontent = fs.readFileSync(conffile);
+var config=JSON.parse(confcontent);
+
+var options = {
+    host: config.artnethost
+}
+
+artnet = require('artnet')(options);
+lifx = require('lifx');
+lx   = lifx.init();
 
 
 

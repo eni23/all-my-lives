@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
-var lifx = require('lifx');
-lx   = lifx.init();
 //lifx.setDebug(true);
 
+console.log(lx,artnet)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

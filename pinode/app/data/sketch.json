@@ -1,40 +1,29 @@
 {
   "enter": [
     {
+      "type": "script",
+      "name": "test",
+      "cmd": "/bin/sleep 1",
+      "blocking": true
+    },
+    {
       "type": "lifx",
       "name": "nulll2ojsdfsgd",
-      "bulb": "d073d501596e",
+      "bulb": "d073d5007e55",
       "h": "0",
       "s": "0",
-      "l": "0.52",
+      "l": "1",
       "w": "0.016",
-      "t": "10.1",
-      "blocking": false
+      "t": "1500",
+      "blocking": true
     },
     {
       "type": "audio",
-      "name": "item003",
-      "file": "-- LT -- (Linotype GmbH) -- Frutiger_Next.7z",
+      "name": "",
+      "file": "moodswing.mp3",
       "sink": "0:1",
       "blocking": false
     },
-    {
-      "type": "dmx",
-      "name": "",
-      "channel": "2",
-      "start": "0",
-      "end": "14",
-      "duration": "0",
-      "blocking": false
-    },
-    {
-      "type": "script",
-      "name": "item006",
-      "cmd": "/home/eni/progs/bin/test.sh",
-      "blocking": false
-    }
-  ],
-  "exit": [
     {
       "type": "lifx",
       "name": "",
@@ -47,15 +36,59 @@
       "blocking": false
     },
     {
+      "type": "dmx",
+      "name": "",
+      "channel": "1",
+      "start": "0",
+      "end": "73",
+      "duration": "3000",
+      "blocking": true
+    },
+    {
+      "type": "audio",
+      "name": "",
+      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
+      "sink": "0:1",
+      "blocking": false
+    }
+  ],
+  "exit": [
+    {
       "type": "lifx",
       "name": "exit-001",
-      "bulb": "",
+      "bulb": "d073d5007e55",
       "h": "0",
       "s": "0",
       "l": "0",
       "w": "0",
       "t": "0.1",
       "blocking": false
+    },
+    {
+      "type": "dmx",
+      "name": "",
+      "channel": "0",
+      "start": "0",
+      "end": "112",
+      "duration": "0",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "0",
+      "blocking": false
+    },
+    {
+      "type": "script",
+      "name": "fuuu bar",
+      "cmd": "led red",
+      "blocking": true
     }
   ]
 }

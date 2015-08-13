@@ -35,7 +35,6 @@ router.get('/files', function(req, res, next) {
   var content = fs.readFileSync(conffile);
   var config=JSON.parse(content);
 
-  data = {};
 
   data.video = fs.readdirSync(config.videopath)
   data.audio = fs.readdirSync(config.audiopath)

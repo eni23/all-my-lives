@@ -3,11 +3,6 @@ var router = express.Router();
 var path = require('path');
 var fs = require('fs');
 
-var options = {
-    host: '10.10.1.5'
-}
-
-var artnet = require('artnet')(options);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

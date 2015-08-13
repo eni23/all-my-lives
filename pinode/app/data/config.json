@@ -1,18 +1,31 @@
 {
-  "videopath": "/home/eni/dl",
-  "audiopath": "/home/eni/dl",
+  "videopath": "/home/eni/Musik",
+  "audiopath": "/home/eni/Musik",
+  "artnethost": "10.10.1.5",
   "audiosinks": [
     {
       "name": "3.5mm",
-      "id": "0:1"
+      "id": "0:0",
+      "player": "omxplayer",
+      "dev": "local"
     },
     {
       "name": "hdmi",
-      "id": "0:1"
+      "id": "0:1",
+      "player": "omxplayer",
+      "dev": "hdmi"
     },
     {
-      "name": "extern",
-      "id": "1:0"
+      "name": "extern-00",
+      "id": "1:0",
+      "player": "mplayer",
+      "dev": "1:0"
+    },
+    {
+      "name": "extern-01",
+      "id": "1:1",
+      "player": "mplayer",
+      "dev": "1:1"
     }
   ],
   "lifxbulbs": [
