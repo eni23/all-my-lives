@@ -40,6 +40,11 @@ router.post('/test-single', function(req, res, next) {
   //console.log(item);
 
   var sketch =  [ item ];
+
+  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+  var content = fs.readFileSync(conffile);
+  sketchrunner.config=JSON.parse(content);
+
   sketchrunner.stop();
   sketchrunner.start(sketch);
   res.json({ success:true });
