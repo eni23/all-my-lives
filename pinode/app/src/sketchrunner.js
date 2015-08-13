@@ -8,6 +8,10 @@ require('array.prototype.find');
  *
  * Author: Cyrill von Wattenwyl < eni@e23.ch >
  *
+ * Usage:
+ * taskrunner.start( sketch.json )
+ * taskrunner.stop()
+ *
  ********************************************************************/
 
 
@@ -27,8 +31,11 @@ module.exports = {
   dmxblocking: false,
   dmxchannel: false,
 
+  falsecallback: function(){},
 
   stop: function(){
+    this.spawn_exec("killall mplayer", this.falsecallback);
+    this.spawn_exec("killall omxplayer", this.falsecallback);
     this.is_running = false;
     this.sketchdata = [{}];
     clearTimeout(this.next_timeout);
@@ -113,19 +120,30 @@ module.exports = {
 
     switch ( item.type ) {
 
+
       case "lifx":
+
+        var time_ms = ( ( item.t / 1000 ) * 16.6666666 );
+
+        var hue = parseInt(item.h * (0xffff / 360))
+      	var sat = parseInt(item.s * 0xffff)
+      	var lum = parseInt(item.l * 0xffff)
+      	var white = parseInt(item.w * 0xffff)
+        var time = parseInt( (time_ms / 1000) * 0xffff)
+
+
         console.log("run lifx");
         // all lamps in config
         if ( !item.bulb ){
           for ( bulb of this.config.lifxbulbs ){
             if ( bulb.id ){
-              lx.lightsColour( item.h, item.s, item.l, item.w, item.t, bulb.id );
+              lx.lightsColour( hue, sat, lum, white, time, bulb.id );
             }
           }
         }
         // single lamp
         else {
-          lx.lightsColour( item.h, item.s, item.l, item.w, item.t, item.bulb );
+          lx.lightsColour( hue, sat, lum, white, time, item.bulb );
         }
         if ( item.blocking ){
           console.log("lifx blocking");
@@ -169,7 +187,7 @@ module.exports = {
           this.spawn_exec( shellcmd, this.aftersleep );
           return;
         }
-        this.spawn_exec( shellcmd, this.aftersleep );
+        this.spawn_exec( shellcmd, this.falsecallback );
         break;
 
 
@@ -182,7 +200,7 @@ module.exports = {
           this.spawn_exec( shellcmd, this.aftersleep );
           return;
         }
-        this.spawn_exec( shellcmd, this.aftersleep );
+        this.spawn_exec( shellcmd, this.falsecallback );
         break;
 
 
@@ -200,7 +218,7 @@ module.exports = {
           return;
         }
         else {
-          this.spawn_exec( item.cmd, this.aftersleep );
+          this.spawn_exec( item.cmd, this.falsecallback );
         }
         break;
 

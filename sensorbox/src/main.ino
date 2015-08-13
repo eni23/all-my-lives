@@ -19,7 +19,7 @@
 // gpio port of for person detection sensor (pir)
 #define GPIO_PIR 2
 // gpio port for door sensor (reed)
-#define GPIO_REED 4
+#define GPIO_REED 14
 // delay in main loop ticks for events
 #define TRIGGER_DELAY 2500
 // serial port baudrate

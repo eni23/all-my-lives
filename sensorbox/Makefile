@@ -66,6 +66,9 @@ verify: update-temp version
 upload: find-serial
 	$(ESPTOOL) -vv -cd ck -cb $(UPLOAD_BAUD) -cp $(USBTTY) -ca 0x00000 -cf $(ELF00) -ca 0x10000 -cf $(ELF01)
 
+upload-slow: find-serial
+	$(ESPTOOL) -vv -cd ck -cb $(MONITOR_BAUD) -cp $(USBTTY) -ca 0x00000 -cf $(ELF00) -ca 0x10000 -cf $(ELF01)
+
 upload-arduino: find-serial
 	$(ACMD) --verbose-upload --pref serial.port=$(USBTTY) --upload $(MAIN) $(COLORIZE)
 

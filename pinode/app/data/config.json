@@ -1,8 +1,8 @@
 {
   "nodename": "aml-devnode",
   "nodeip": "127.0.0.1",
-  "videopath": "/home/eni/Musik",
-  "audiopath": "/home/eni/Musik",
+  "videopath": "/home/eni/dl",
+  "audiopath": "/home/eni/dl",
   "artnethost": "10.10.1.5",
   "audiosinks": [
     {
