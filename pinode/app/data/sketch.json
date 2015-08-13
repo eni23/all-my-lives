@@ -1,6 +1,12 @@
 {
   "enter": [
     {
+      "type": "video",
+      "name": "blockingvideo",
+      "file": "LOO & PLACIDO - ELECTRONIC POPSTAR KILLERS.mp3",
+      "blocking": true
+    },
+    {
       "type": "script",
       "name": "test",
       "cmd": "/bin/sleep 1",
@@ -18,11 +24,17 @@
       "blocking": true
     },
     {
+      "type": "video",
+      "name": "new",
+      "file": "vodkazombierambogang.zip",
+      "blocking": false
+    },
+    {
       "type": "audio",
       "name": "",
       "file": "moodswing.mp3",
-      "sink": "0:1",
-      "blocking": false
+      "sink": "1:0",
+      "blocking": true
     },
     {
       "type": "lifx",
@@ -48,7 +60,7 @@
       "type": "audio",
       "name": "",
       "file": "Alligatoah - Schlaftabletten, Rotwein 4",
-      "sink": "0:1",
+      "sink": "1:1",
       "blocking": false
     }
   ],

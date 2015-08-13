@@ -1,8 +1,16 @@
 var exec = require('child_process').exec;
+require('array.prototype.find');
 
-/**********************************************
+/********************************************************************
  * Sketch-Runner
- **********************************************/
+ *
+ * this Code runs the "Sketches" created by webfrontend
+ *
+ * Author: Cyrill von Wattenwyl < eni@e23.ch >
+ *
+ ********************************************************************/
+
+
 
 module.exports = {
 
@@ -52,7 +60,7 @@ module.exports = {
 
   next: function(){
     var item = this.sketchdata[this.sketchidx];
-    if (item){
+    if ( item ){
       this.sketchidx++;
       return item;
     }
@@ -70,22 +78,22 @@ module.exports = {
 
   aftersleep: function(){
     var nextitem=that.next();
-    if (nextitem){
-      that.processitem(nextitem);
+    if ( nextitem ){
+      that.processitem( nextitem );
     }
   },
 
 
   dmxrunner: function(){
-    console.log("set dmx to:" + that.dmxnum );
-    artnet.set(0, parseInt( that.dmxchannel ), parseInt( that.dmxnum ));
+    //console.log("set dmx to:" + that.dmxnum );
+    artnet.set(0, parseInt( that.dmxchannel ), parseInt( that.dmxnum ) );
     if ((that.dmxstep-1) < that.dmxnum ) {
       console.log("dmx done");
       if ( that.dmxblocking ) {
         that.dmxblocking = false;
-        var nextitem=that.next();
-        if (nextitem){
-          that.processitem(nextitem);
+        var nextitem = that.next();
+        if ( nextitem ){
+          that.processitem( nextitem );
         }
       }
       return;
@@ -96,6 +104,10 @@ module.exports = {
 
 
   processitem: function( item ){
+
+    if ( this.dmxblocking ){
+      return;
+    }
 
     switch ( item.type ) {
 
@@ -115,7 +127,7 @@ module.exports = {
         }
         if ( item.blocking ){
           console.log("lifx blocking");
-          this.sleepnext(item.t);
+          this.sleepnext( item.t );
           return;
         }
         break;
@@ -123,11 +135,10 @@ module.exports = {
       case "dmx":
         console.log("run dmx");
         this.dmxchannel = item.channel;
-        this.dmxstep = item.end-item.start;
+        this.dmxstep = item.end - item.start;
         this.dmxnum = 0;
         this.dmxsleep = item.duration / this.dmxstep ;
         this.dmxrunner();
-
         if ( item.blocking ){
           console.log("dmx blocking");
           this.dmxblocking = true;
@@ -139,17 +150,43 @@ module.exports = {
         break;
 
       case "audio":
-        console.log(item)
+        //console.log(item)
         console.log("run audio");
+        var audiodev = this.config.audiosinks.find(function(a) { return a.id == item.sink; });
+        var shellcmd = "";
+        if (audiodev.player == "omxplayer" ){
+          shellcmd = "omxplayer -o " + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'" ;
+        }
+        else {
+          shellcmd = "mplayer -ao alsa:device=hw=" + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'";
+        }
+        console.log(shellcmd);
+
+        if ( item.blocking ){
+          console.log("audio blocking");
+          this.spawn_exec( shellcmd, this.aftersleep );
+          return;
+        }
+        this.spawn_exec( shellcmd, this.aftersleep );
         break;
+
 
       case "video":
         console.log("run video");
+        var shellcmd = "omxplayer -o local '" + this.config.videopath + "/" + item.file + "'" ;
+        console.log( shellcmd );
+        if ( item.blocking ){
+          console.log("video blocking");
+          this.spawn_exec( shellcmd, this.aftersleep );
+          return;
+        }
+        this.spawn_exec( shellcmd, this.aftersleep );
         break;
+
 
       case "delay":
         console.log("delay");
-        this.sleepnext(item.duration);
+        this.sleepnext( item.duration );
         return;
         break;
 
@@ -157,11 +194,11 @@ module.exports = {
         console.log("run script");
         if ( item.blocking ){
           console.log("script blocking");
-          this.spawn_exec(item.cmd, this.aftersleep );
+          this.spawn_exec( item.cmd, this.aftersleep );
           return;
         }
         else {
-          this.spawn_exec(item.cmd, this.aftersleep );
+          this.spawn_exec( item.cmd, this.aftersleep );
         }
         break;
 
@@ -170,9 +207,9 @@ module.exports = {
 
     }
 
-    var nextitem=this.next();
-    if (nextitem){
-      this.processitem(nextitem);
+    var nextitem = this.next();
+    if ( nextitem ){
+      this.processitem( nextitem );
     }
 
   }

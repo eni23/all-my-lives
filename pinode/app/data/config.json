@@ -1,4 +1,6 @@
 {
+  "nodename": "aml-devnode",
+  "nodeip": "127.0.0.1",
   "videopath": "/home/eni/Musik",
   "audiopath": "/home/eni/Musik",
   "artnethost": "10.10.1.5",
@@ -19,13 +21,13 @@
       "name": "extern-00",
       "id": "1:0",
       "player": "mplayer",
-      "dev": "1:0"
+      "dev": "1.0"
     },
     {
       "name": "extern-01",
       "id": "1:1",
       "player": "mplayer",
-      "dev": "1:1"
+      "dev": "1.1"
     }
   ],
   "lifxbulbs": [
