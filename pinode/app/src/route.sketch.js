@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var bodyParser = require('body-parser')
 
+var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
 var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
 var jsonParser = bodyParser.json()
 
@@ -49,6 +50,39 @@ router.post('/test-single', function(req, res, next) {
   sketchrunner.start(sketch);
   res.json({ success:true });
 
+});
+
+router.post('/test-enter', function(req, res, next) {
+
+  var content = fs.readFileSync(conffile);
+  sketchrunner.config=JSON.parse(content);
+  var scontent = fs.readFileSync(sketchfile);
+  var sketch=JSON.parse(scontent);
+
+
+  sketchrunner.stop();
+  sketchrunner.start(sketch.enter);
+  res.json({ success:true });
+
+});
+
+
+router.post('/test-exit', function(req, res, next) {
+
+  var content = fs.readFileSync(conffile);
+  sketchrunner.config=JSON.parse(content);
+  var scontent = fs.readFileSync(sketchfile);
+  var sketch=JSON.parse(scontent);
+
+
+  sketchrunner.stop();
+  sketchrunner.start(sketch.exit);
+  res.json({ success:true });
+
+});
+
+router.post('/stop', function(req, res, next) {
+  sketchrunner.stop();
 });
 
 

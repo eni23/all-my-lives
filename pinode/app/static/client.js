@@ -165,6 +165,17 @@ $(document).ready(function(){
       });
     });
 
+    $(".btn-stopsketch").click(function(){
+      $.ajax('/sketch/stop');
+    });
+
+    $(".test-enter").click(function(){
+      $.ajax('/sketch/test-enter');
+    });
+
+    $(".test-exit").click(function(){
+      $.ajax('/sketch/test-exit');
+    });
 
     $(".btn-save").click(function(){
       var enter = sketch_to_json( $(".drag-ul-enter") );
