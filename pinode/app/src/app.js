@@ -18,6 +18,7 @@ var options = {
 artnet = require('artnet')(options);
 lifx = require('lifx');
 lx   = lifx.init();
+sketchrunner = require('./sketchrunner');
 
 
 

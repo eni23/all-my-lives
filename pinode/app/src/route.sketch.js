@@ -34,8 +34,16 @@ router.post('/update', function(req, res, next) {
 });
 
 router.post('/test-single', function(req, res, next) {
-  console.log(req.body);
+
+  var item = req.body[0];
+  item.blocking = false;
+  //console.log(item);
+
+  var sketch =  [ item ];
+  sketchrunner.stop();
+  sketchrunner.start(sketch);
   res.json({ success:true });
+
 });
 
 

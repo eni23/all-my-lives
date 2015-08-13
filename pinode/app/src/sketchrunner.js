@@ -32,6 +32,8 @@ module.exports = {
     this.is_running = false;
     this.sketchdata = [{}];
     clearTimeout(this.next_timeout);
+    clearTimeout(this.dmxtimeout);
+    this.dmxblocking = false;
   },
 
 

@@ -62,6 +62,12 @@
       "file": "Alligatoah - Schlaftabletten, Rotwein 4",
       "sink": "1:1",
       "blocking": false
+    },
+    {
+      "type": "script",
+      "name": "",
+      "cmd": "/usr/bin/false",
+      "blocking": false
     }
   ],
   "exit": [
