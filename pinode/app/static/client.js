@@ -31,7 +31,12 @@ $(document).ready(function(){
         config = data ;
       }
     });
+    $(".header-nodename").html(config.nodename);
+    $(".header-nodeip").html(config.nodeip);
+
     update_filelist();
+
+
 
     $.ajax({
         type: "GET",

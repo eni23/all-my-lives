@@ -18,7 +18,10 @@ router.get('/disable', function(req, res, next) {
   res.send("ok");
 });
 router.get('/status', function(req, res, next) {
-  res.json({enabled:enabled});
+  res.json({
+    enabled: enabled,
+    running: sketchrunner.is_running
+  });
 });
 
 
