@@ -83,7 +83,8 @@ router.get('/test-exit', function(req, res, next) {
 
 router.get('/stop', function(req, res, next) {
   sketchrunner.stop();
-});
+  res.json({ success:true });
+})
 
 
 module.exports = router;

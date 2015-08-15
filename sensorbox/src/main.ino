@@ -89,7 +89,7 @@ void read_gpio() {
  * arduino-init function
  **/
 void setup() {
-  pinMode( GPIO_REED, INPUT );
+  pinMode( GPIO_REED, INPUT_PULLUP );
   //pinMode( GPIO_PIR, INPUT_PULLDOWN );
   pinMode(GPIO_PIR, INPUT_PULLDOWN);
 

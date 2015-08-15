@@ -27,6 +27,7 @@ module.exports = {
   dmxstep: 0,
   dmxnum: 0,
   dmxsleep: 0,
+  dmxstart: 0,
   dmxtimeout: false,
   dmxblocking: false,
   dmxchannel: false,
@@ -94,9 +95,9 @@ module.exports = {
 
 
   dmxrunner: function(){
-    //console.log("set dmx to:" + that.dmxnum );
+    console.log("set dmx to:" + that.dmxnum );
     artnet.set(0, parseInt( that.dmxchannel ), parseInt( that.dmxnum ) );
-    if ((that.dmxstep-1) < that.dmxnum ) {
+    if ( ( that.dmxstep - 1 ) < ( that.dmxnum - that.dmxstart ) ) {
       console.log("dmx done");
       if ( that.dmxblocking ) {
         that.dmxblocking = false;
@@ -156,7 +157,9 @@ module.exports = {
         console.log("run dmx");
         this.dmxchannel = item.channel;
         this.dmxstep = item.end - item.start;
-        this.dmxnum = 0;
+        console.log(this.dmxstep);
+        this.dmxnum = item.start;
+        this.dmxstart = item.start;
         this.dmxsleep = item.duration / this.dmxstep ;
         this.dmxrunner();
         if ( item.blocking ){

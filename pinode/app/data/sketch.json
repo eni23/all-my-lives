@@ -2,17 +2,6 @@
   "enter": [
     {
       "type": "lifx",
-      "name": "three",
-      "bulb": "d073d501596e",
-      "h": "0",
-      "s": "0",
-      "l": "1",
-      "w": "0.01",
-      "t": "600",
-      "blocking": true
-    },
-    {
-      "type": "lifx",
       "name": "",
       "bulb": "d073d501596e",
       "h": "0",
@@ -24,10 +13,30 @@
     },
     {
       "type": "lifx",
+      "name": "three",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "1",
+      "w": "0.041",
+      "t": "600",
+      "blocking": true
+    },
+    {
+      "type": "dmx",
       "name": "",
-      "bulb": "d073d5007e55",
+      "channel": "3",
+      "start": "90",
+      "end": "236",
+      "duration": "2320",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
       "h": "285.88",
-      "s": "1",
+      "s": "0",
       "l": "0.5",
       "w": "0",
       "t": "600",
