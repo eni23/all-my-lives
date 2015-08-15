@@ -16,7 +16,9 @@ $(document).ready(function(){
     sortable_opts = {
       onEnd: function (evt) {
         autosave();
-      }
+      },
+      handle: ".item-sort-icon",
+      //draggable: ".sketch-item"
     }
     Sortable.create($(".drag-ul-enter")[0],sortable_opts);
     Sortable.create($(".drag-ul-exit")[0],sortable_opts);
@@ -47,7 +49,6 @@ $(document).ready(function(){
           }
         }
     });
-
 
 
     tpl.lifx = $("#item-tpl-lifx").html()
