@@ -63,7 +63,7 @@ module.exports = {
     that=this
     this.sketchdata = data;
     this.sketchidx = 0;
-    is_running = true;
+    this.is_running = true;
     this.processitem( this.next() );
   },
 
@@ -75,6 +75,7 @@ module.exports = {
       return item;
     }
     else {
+      console.log("sketch done");
       this.is_running = false;
       return false;
     }

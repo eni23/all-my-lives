@@ -6,7 +6,6 @@ var fs = require('fs');
 //lifx.setDebug(true);
 //console.log(lx,artnet)
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.send('lifx');
 });

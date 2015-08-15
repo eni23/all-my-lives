@@ -28,6 +28,7 @@ var config = require('./route.config');
 var sketch = require('./route.sketch');
 var files = require('./route.files');
 var dmx = require('./route.dmx');
+var trigger = require('./route.trigger');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/config', config);
 app.use('/sketch', sketch);
 app.use('/files', files);
 app.use('/dmx', dmx);
+app.use('/trigger', trigger);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

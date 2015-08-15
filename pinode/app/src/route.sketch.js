@@ -2,33 +2,39 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
-var bodyParser = require('body-parser')
 
-var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
-var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
-var jsonParser = bodyParser.json()
+function get_sketch(){
+  var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
+  var raw_sketch = fs.readFileSync(sketchfile);
+  return JSON.parse(raw_sketch);
+}
+function get_config(){
+  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+  var raw_config = fs.readFileSync(conffile);
+  return JSON.parse(raw_config);
+}
+
 
 router.get('/', function(req, res, next) {
   res.send("sketch")
 });
 
 router.get('/enter/get', function(req, res, next) {
-  var content = fs.readFileSync(sketchfile);
-  var data=JSON.parse(content);
-  res.json(data.enter);
+  var sketch = get_sketch();
+  res.json(sketch.enter);
 });
 
 router.get('/exit/get', function(req, res, next) {
-  var content = fs.readFileSync(sketchfile);
-  var data=JSON.parse(content);
-  res.json(data.exit);
+  var sketch = get_sketch();
+  res.json(sketch.exit);
 });
 
 router.get('/download', function(req, res, next) {
-  var content = fs.readFileSync(sketchfile);
+  var sketch = get_sketch();
+  var json = JSON.stringify(sketch, null, 2);
   res.setHeader('Content-disposition', 'attachment; filename=sketch.json');
   res.setHeader('Content-type', 'text/json');
-  res.send(content);
+  res.send(sketch);
 });
 
 router.post('/update', function(req, res, next) {
@@ -36,6 +42,7 @@ router.post('/update', function(req, res, next) {
     enter: req.body.enter,
     exit: req.body.exit
   }
+  var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
   var json = JSON.stringify(data, null, 2);
   fs.writeFileSync(sketchfile,json,'utf8');
   res.json({ success:true });
@@ -45,13 +52,9 @@ router.post('/test-single', function(req, res, next) {
 
   var item = req.body[0];
   item.blocking = false;
-  //console.log(item);
-
   var sketch =  [ item ];
 
-  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
-  var content = fs.readFileSync(conffile);
-  sketchrunner.config=JSON.parse(content);
+  sketchrunner.config=get_config();
 
   sketchrunner.stop();
   sketchrunner.start(sketch);
@@ -61,11 +64,8 @@ router.post('/test-single', function(req, res, next) {
 
 router.get('/test-enter', function(req, res, next) {
 
-  var content = fs.readFileSync(conffile);
-  sketchrunner.config=JSON.parse(content);
-  var scontent = fs.readFileSync(sketchfile);
-  var sketch=JSON.parse(scontent);
-
+  sketchrunner.config=get_config();
+  var sketch = get_sketch();
 
   sketchrunner.stop();
   sketchrunner.start(sketch.enter);
@@ -76,11 +76,8 @@ router.get('/test-enter', function(req, res, next) {
 
 router.get('/test-exit', function(req, res, next) {
 
-  var content = fs.readFileSync(conffile);
-  sketchrunner.config=JSON.parse(content);
-  var scontent = fs.readFileSync(sketchfile);
-  var sketch=JSON.parse(scontent);
-
+  sketchrunner.config=get_config();
+  var sketch = get_sketch();
 
   sketchrunner.stop();
   sketchrunner.start(sketch.exit);

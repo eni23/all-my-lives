@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 var fs = require('fs');
 
-var enabled = true;
+enabled = true;
 
 router.get('/', function(req, res, next) {
   res.send("config")
