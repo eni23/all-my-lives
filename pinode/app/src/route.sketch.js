@@ -24,6 +24,13 @@ router.get('/exit/get', function(req, res, next) {
   res.json(data.exit);
 });
 
+router.get('/download', function(req, res, next) {
+  var content = fs.readFileSync(sketchfile);
+  res.setHeader('Content-disposition', 'attachment; filename=sketch.json');
+  res.setHeader('Content-type', 'text/json');
+  res.send(content);
+});
+
 router.post('/update', function(req, res, next) {
   data = {
     enter: req.body.enter,

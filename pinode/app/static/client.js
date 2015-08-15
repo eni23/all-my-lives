@@ -169,6 +169,9 @@ $(document).ready(function(){
     $(".btn-stopsketch").click(function(){
       $.ajax('/sketch/stop');
     });
+    $(".btn-downloadsketch").click(function(){
+      location.href="/sketch/download"
+    });
 
     $(".test-enter").click(function(){
       $.ajax('/sketch/test-enter');
