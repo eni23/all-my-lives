@@ -39,14 +39,12 @@ $(document).ready(function(){
 
     socket.on('start-sketch', function(){
       $(".btn-stopsketch").show();
-      //$(".btn-notrunning").hide();
-      $(".header-status").animate({color:'color:rgb(161, 15, 63)'}, 500 );
+      $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
       $(".header-status").atrr("title","Sketch is running");
     });
 
     socket.on('stop-sketch', function(){
       $(".btn-stopsketch").hide();
-      //$(".btn-notrunning").show();
       $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
       $(".header-status").atrr("title","Sketch not running");
     });
@@ -69,7 +67,7 @@ $(document).ready(function(){
           if (data.running){
             $(".btn-stopsketch").show();
             $(".btn-notrunning").hide();
-            $(".header-status").css({color:'rgb(10, 180, 52)'});
+            $(".header-status").css({color:'rgb(161, 15, 63)'});
           }
         }
     });
