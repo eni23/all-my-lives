@@ -218,51 +218,52 @@
 
           </div>
         </h4>
-        <div class="form-group">
-          <label>Lamp</label>
-          <select class="form-control item-inline-form-bottom lifx-bulb input-sm">
-            <% for(var i=0; i<lamps.length; i++) { %>
-              <% if(lamps[i].id == bulb){ %>
-                <option value="<%= lamps[i].id %>" selected="selected"><%= lamps[i].name %></option>
-              <% } else { %>
-                <option value="<%= lamps[i].id %>"><%= lamps[i].name %></option>
-              <% } %>
-            <% } %>
-          </select>
           <form class="form-inline item-inline-form-bottom">
-              <div class="form-group">
-                <label>H</label>
-                <input type="number" class="form-control inline-small lifx-h input-sm" min="0" max="360" value="<%= h %>">
-              </div>
-              <div class="form-group">
-                <label>S</label>
-                <input type="number" class="form-control inline-small lifx-s input-sm" min="0" max="1" step="0.01" value="<%= s %>">
-              </div>
-              <div class="form-group">
-                <label>L</label>
-                <input type="number" class="form-control inline-small lifx-l input-sm" min="0" max="1" step="0.01" value="<%= l %>">
-              </div>
-              <div class="form-group">
-                <label>W</label>
-                <input type="number" class="form-control inline-small lifx-w input-sm" min="0" max="1" step="0.001" value="<%= w %>">
-              </div>
-              <div class="form-group">
-                <button type="button" class="btn btn-primary lifx-colorsel btn-sm">choose Color</button>
-              </div>
-              <div class="form-group">
-                <label>Duration (ms)</label>
-                <input type="number" class="form-control lifx-t input-sm" value="<%= t %>">
-              </div>
-          </form>
-          <label class="item-inline-form">
-            <% if(blocking){ %>
-              <input type="checkbox" class="blocking" checked="checked" >
-            <% } else { %>
-              <input type="checkbox" class="blocking">
-            <% } %>
-            blocking
-          </label>
-        </div>
+            <div class="form-group">
+              <label>Lamp</label>
+              <select class="form-control item-inline-form-bottom lifx-bulb input-sm sel-inline sel-lifix-fix">
+                <% for(var i=0; i<lamps.length; i++) { %>
+                  <% if(lamps[i].id == bulb){ %>
+                    <option value="<%= lamps[i].id %>" selected="selected"><%= lamps[i].name %></option>
+                  <% } else { %>
+                    <option value="<%= lamps[i].id %>"><%= lamps[i].name %></option>
+                  <% } %>
+                <% } %>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>H</label>
+              <input type="number" class="form-control inline-small lifx-h input-sm" min="0" max="360" value="<%= h %>">
+            </div>
+            <div class="form-group">
+              <label>S</label>
+              <input type="number" class="form-control inline-small lifx-s input-sm" min="0" max="1" step="0.01" value="<%= s %>">
+            </div>
+            <div class="form-group">
+              <label>L</label>
+              <input type="number" class="form-control inline-small lifx-l input-sm" min="0" max="1" step="0.01" value="<%= l %>">
+            </div>
+            <div class="form-group">
+              <label>W</label>
+              <input type="number" class="form-control inline-small lifx-w input-sm" min="0" max="1" step="0.001" value="<%= w %>">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary lifx-colorsel btn-sm">choose Color</button>
+            </div>
+            <div class="form-group">
+              <label>Duration (ms)</label>
+              <input type="number" class="form-control lifx-t input-sm" value="<%= t %>">
+            </div>
+            <label class="item-inline-form">
+              <% if(blocking){ %>
+                <input type="checkbox" class="blocking" checked="checked" >
+              <% } else { %>
+                <input type="checkbox" class="blocking">
+              <% } %>
+              blocking
+            </label>
+        </form>
       </li>
     </script>
 
@@ -303,15 +304,15 @@
             <label>Duration (ms)</label>
             <input type="number" class="form-control dmx-duration input-sm" value="<%= duration %>">
           </div>
+          <label class="item-inline-form">
+            <% if(blocking){ %>
+              <input type="checkbox" class="blocking" checked="checked" >
+            <% } else { %>
+              <input type="checkbox" class="blocking">
+            <% } %>
+            blocking
+          </label>
         </form>
-        <label class="item-inline-form">
-          <% if(blocking){ %>
-            <input type="checkbox" class="blocking" checked="checked" >
-          <% } else { %>
-            <input type="checkbox" class="blocking">
-          <% } %>
-          blocking
-        </label>
       </li>
     </script>
 
@@ -332,27 +333,31 @@
             </button>
           </div>
         </h4>
-        <div class="form-group">
-          <label>File</label>
-          <select class="form-control item-inline-form-bottom audio-file input-sm">
-            <% for(var i=0; i<files.length; i++) { %>
-              <% if(files[i] == file){ %>
-                <option selected="selected"><%= files[i] %></option>
-              <% } else { %>
-                <option><%= files[i] %></option>
+        <form class="form-inline item-inline-form-bottom">
+          <div class="form-group">
+            <label>File</label>
+            <select class="form-control audio-file input-sm sel-inline">
+              <% for(var i=0; i<files.length; i++) { %>
+                <% if(files[i] == file){ %>
+                  <option selected="selected"><%= files[i] %></option>
+                <% } else { %>
+                  <option><%= files[i] %></option>
+                <% } %>
               <% } %>
-            <% } %>
-          </select>
-          <label>Sink</label>
-          <select class="form-control item-inline-form-bottom audio-sink input-sm">
-            <% for(var i=0; i<sinks.length; i++) { %>
-              <% if(sinks[i].id == sink){ %>
-                <option value="<%= sinks[i].id %>" selected="selected"><%= sinks[i].name %></option>
-              <% } else { %>
-                <option value="<%= sinks[i].id %>"><%= sinks[i].name %></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sink</label>
+            <select class="form-control audio-sink input-sm sel-inline">
+              <% for(var i=0; i<sinks.length; i++) { %>
+                <% if(sinks[i].id == sink){ %>
+                  <option value="<%= sinks[i].id %>" selected="selected"><%= sinks[i].name %></option>
+                <% } else { %>
+                  <option value="<%= sinks[i].id %>"><%= sinks[i].name %></option>
+                <% } %>
               <% } %>
-            <% } %>
-          </select>
+            </select>
+          </div>
           <label class="item-inline-form">
             <% if(blocking){ %>
               <input type="checkbox" class="blocking" checked="checked" >
@@ -361,7 +366,7 @@
             <% } %>
             blocking
           </label>
-        </div>
+        </form>
       </li>
     </script>
 
@@ -382,17 +387,19 @@
             </button>
           </div>
         </h4>
-        <div class="form-group">
-          <label>File</label>
-          <select class="form-control item-inline-form-bottom video-file input-sm">
-            <% for(var i=0; i<files.length; i++) { %>
-              <% if(files[i] == file){ %>
-                <option selected="selected"><%= files[i] %></option>
-              <% } else { %>
-                <option><%= files[i] %></option>
+        <form class="form-inline item-inline-form-bottom">
+          <div class="form-group">
+            <label>File</label>
+            <select class="form-control video-file input-sm sel-inline">
+              <% for(var i=0; i<files.length; i++) { %>
+                <% if(files[i] == file){ %>
+                  <option selected="selected"><%= files[i] %></option>
+                <% } else { %>
+                  <option><%= files[i] %></option>
+                <% } %>
               <% } %>
-            <% } %>
-          </select>
+            </select>
+          </div>
           <label class="item-inline-form">
             <% if(blocking){ %>
               <input type="checkbox" class="blocking" checked="checked" >
@@ -401,7 +408,7 @@
             <% } %>
             blocking
           </label>
-        </div>
+        </form>
       </li>
     </script>
 
@@ -422,10 +429,12 @@
             </button>
           </div>
         </h4>
-        <div class="form-group">
-          <label>Duration (ms)</label>
-          <input type="number" class="form-control item-inline-form-bottom delay-duration input-sm" value="<%= duration %>">
-        </div>
+        <form class="form-inline item-inline-form-bottom">
+          <div class="form-group">
+            <label>Duration (ms)</label>
+            <input type="number" class="form-control delay-duration input-sm" value="<%= duration %>">
+          </div>
+        </form>
       </li>
     </script>
 
@@ -446,9 +455,11 @@
             </button>
           </div>
         </h4>
-        <div class="form-group">
-          <label>Path or Command</label>
-          <input type="text" class="form-control item-inline-form-bottom script-cmd input-sm" value="<%= cmd %>">
+        <form class="form-inline item-inline-form-bottom">
+          <div class="form-group">
+            <label>Path or Command</label>
+            <input type="text" class="form-control script-cmd input-sm" value="<%= cmd %>">
+          </div>
           <label class="item-inline-form">
             <% if(blocking){ %>
               <input type="checkbox" class="blocking" checked="checked" >
@@ -457,7 +468,7 @@
             <% } %>
             blocking
           </label>
-        </div>
+        </form>
       </li>
     </script>
 

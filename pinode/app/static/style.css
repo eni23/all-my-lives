@@ -82,3 +82,14 @@ input.item-desc:focus {
 .btn-stopsketch{
   display: none;
 }
+
+
+.sel-inline {
+  display: inline;
+}
+.sel-lifix-fix {
+  margin-top: 9px !important;
+}
+.script-cmd {
+  min-width: 300px;
+}

@@ -16,7 +16,7 @@
       "l": "0",
       "w": "0",
       "t": "1000",
-      "blocking": true
+      "blocking": false
     },
     {
       "type": "dmx",
@@ -25,6 +25,24 @@
       "start": "0",
       "end": "255",
       "duration": "10000",
+      "blocking": false
+    },
+    {
+      "type": "video",
+      "name": "",
+      "file": "big_buck_bunny_720p_1mb.mp4",
+      "blocking": false
+    },
+    {
+      "type": "delay",
+      "name": "",
+      "duration": "0",
+      "blocking": false
+    },
+    {
+      "type": "script",
+      "name": "",
+      "cmd": "/usr/bin/false",
       "blocking": false
     }
   ],
