@@ -1,0 +1,6 @@
+#!/bin/bash
+
+exec 2>&1
+
+PORT=80
+exec /usr/local/bin/node /opt/all-my-lives/pinode/bin/www
