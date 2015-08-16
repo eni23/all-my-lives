@@ -13,7 +13,10 @@ pkill -USR1 -n -x dd
 # ola (aml-manager only)
 vim /etc/apt/sources.list
 deb   http://apt.openlighting.org/raspbian  wheezy main
-apt-get install vim mplayer daemontools daemontools-run
+apt-get install ola
+
+
+apt-get install vim mplayer daemontools daemontools-run git
 
 # nodejs & npm (all nodes)
 wget http://node-arm.herokuapp.com/node_latest_armhf.deb
@@ -21,7 +24,9 @@ sudo dpkg -i node_latest_armhf.deb
 apt-get install nodejs
 curl -L https://npmjs.com/install.sh | sh
 
-
+# install aml
+mkdir /etc/service/aml-pinode
+cp
 
 
 ```
