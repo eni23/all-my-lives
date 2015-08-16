@@ -13,7 +13,7 @@ node.js-based app, plays a predefined "sketch" when a url is triggered by sensor
 supports video, audio, lifx, dmx and shell-scripts in "sketches". runs on a raspi2.
 
 Screenshot:
-![Screenshot-01](http://i.imgur.com/CvwidAm.png)
+![Screenshot-01](http://i.imgur.com/lbE9neZ.png)
 ![Screenshot-02](http://i.imgur.com/z0KPowF.png)
 
 
