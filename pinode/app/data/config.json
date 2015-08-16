@@ -1,8 +1,8 @@
 {
   "nodename": "aml-001",
   "nodeip": "10.10.1.10",
-  "videopath": "/mnt/media",
-  "audiopath": "/mnt/media",
+  "videopath": "/opt/media",
+  "audiopath": "/opt/media",
   "artnethost": "10.10.1.5",
   "audiosinks": [
     {
