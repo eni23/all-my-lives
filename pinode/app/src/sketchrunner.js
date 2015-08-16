@@ -42,7 +42,7 @@ module.exports = {
     clearTimeout(this.next_timeout);
     clearTimeout(this.dmxtimeout);
     this.dmxblocking = false;
-    //io.emit("stop-sketch");
+    io.emit("stop-sketch");
   },
 
 
@@ -66,7 +66,7 @@ module.exports = {
     this.sketchidx = 0;
     this.is_running = true;
     this.processitem( this.next() );
-    //io.emit("start-sketch");
+    io.emit("start-sketch");
   },
 
 
@@ -79,7 +79,7 @@ module.exports = {
     else {
       console.log("sketch done");
       this.is_running = false;
-      //io.emit("stop-sketch");
+      io.emit("stop-sketch");
       return false;
     }
   },
