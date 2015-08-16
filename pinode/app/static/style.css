@@ -5,7 +5,10 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
-
+.header-status {
+  color:rgb(10, 180, 52);
+  font-size: 80%
+}
 
 .top-nodeinfo {
   color: white !important;
@@ -69,4 +72,13 @@ input.item-desc:focus {
 
 .item-menu {
   float: right
+}
+
+
+.btn-notrunning {
+  cursor: inherit;
+}
+
+.btn-stopsketch{
+  display: none;
 }

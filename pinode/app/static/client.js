@@ -7,6 +7,7 @@ var tpl = {};
 var lifx_colorsel_elem=false;
 var dmx_valsel_elem=false;
 var disable_autosave=false;
+var socket = io();
 
 $(document).ready(function(){
 
@@ -36,6 +37,19 @@ $(document).ready(function(){
 
     update_filelist();
 
+    socket.on('start-sketch', function(){
+      $(".btn-stopsketch").show();
+      //$(".btn-notrunning").hide();
+      $(".header-status").animate({color:'color:rgb(161, 15, 63)'}, 500 );
+      $(".header-status").atrr("title","Sketch is running");
+    });
+
+    socket.on('stop-sketch', function(){
+      $(".btn-stopsketch").hide();
+      //$(".btn-notrunning").show();
+      $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
+      $(".header-status").atrr("title","Sketch not running");
+    });
 
 
     $.ajax({
@@ -51,6 +65,11 @@ $(document).ready(function(){
             $(".btn-onoff").addClass("btn-danger");
             $(".btn-onoff").removeClass("btn-success");
             $(".btn-onoff").text("Disabled");
+          }
+          if (data.running){
+            $(".btn-stopsketch").show();
+            $(".btn-notrunning").hide();
+            $(".header-status").css({color:'rgb(10, 180, 52)'});
           }
         }
     });

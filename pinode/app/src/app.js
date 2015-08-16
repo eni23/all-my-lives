@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
+var socket_io = require('socket.io');
 
 var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
 var confcontent = fs.readFileSync(conffile);
@@ -31,6 +32,9 @@ var dmx = require('./route.dmx');
 var trigger = require('./route.trigger');
 
 var app = express();
+io = socket_io();
+app.io = io;
+
 
 // view engine setup
 app.set('views', path.join(path.dirname(__dirname), 'tpl'));

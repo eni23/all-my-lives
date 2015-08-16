@@ -14,7 +14,7 @@
     {
       "type": "delay",
       "name": "",
-      "duration": "2500",
+      "duration": "25000",
       "blocking": false
     },
     {
