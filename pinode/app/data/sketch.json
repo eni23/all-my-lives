@@ -1,37 +1,10 @@
 {
   "enter": [
     {
-      "type": "lifx",
+      "type": "audio",
       "name": "",
-      "bulb": "",
-      "h": "0",
-      "s": "0",
-      "l": "0.7940999999999999",
-      "w": "0",
-      "t": "1000",
-      "blocking": true
-    },
-    {
-      "type": "delay",
-      "name": "",
-      "duration": "25000",
-      "blocking": false
-    },
-    {
-      "type": "lifx",
-      "name": "",
-      "bulb": "",
-      "h": "249",
-      "s": "0.81",
-      "l": "1",
-      "w": "0",
-      "t": "2000",
-      "blocking": true
-    },
-    {
-      "type": "delay",
-      "name": "",
-      "duration": "5000",
+      "file": "bcd",
+      "sink": "0:0",
       "blocking": false
     },
     {
@@ -46,20 +19,12 @@
       "blocking": true
     },
     {
-      "type": "delay",
+      "type": "dmx",
       "name": "",
-      "duration": "2000",
-      "blocking": false
-    },
-    {
-      "type": "lifx",
-      "name": "",
-      "bulb": "",
-      "h": "0",
-      "s": "0",
-      "l": "0",
-      "w": "0",
-      "t": "1500",
+      "channel": "0",
+      "start": "0",
+      "end": "0",
+      "duration": "0",
       "blocking": false
     }
   ],
