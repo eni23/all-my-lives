@@ -16,17 +16,10 @@ deb   http://apt.openlighting.org/raspbian  wheezy main
 apt-get install ola
 
 
-apt-get install vim mplayer daemontools daemontools-run git
+deb http://mirror.switch.ch/ftp/mirror/raspbian/raspbian/ wheezy main contrib non-free rpi
 
-# nodejs & npm (all nodes)
-wget http://node-arm.herokuapp.com/node_latest_armhf.deb
-sudo dpkg -i node_latest_armhf.deb
-apt-get install nodejs
-curl -L https://npmjs.com/install.sh | sh
-
-# install aml
-mkdir /etc/service/aml-pinode
-cp
-
+git clone https://github.com/eni23/all-my-lives/
+chmod a+x /opt/all-my-lives/pinode/tools/setup-raspi.sh
+ /opt/all-my-lives/pinode/tools/setup-raspi.sh
 
 ```

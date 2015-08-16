@@ -9,7 +9,7 @@ AML_LOCATION="/opt/all-my-lives"
 apt-get update
 apt-get upgrade -y
 apt-get install vim mplayer daemontools daemontools-run git -y
-update-rc.d dhcpd disable
+update-rc.d dhcpcd disable
 
 # nodejs & npm
 sudo dpkg -i $AML_LOCATION/pinode/tools/node_latest_armhf.deb

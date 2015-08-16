@@ -3,7 +3,7 @@
     {
       "type": "audio",
       "name": "",
-      "file": "bcd",
+      "file": "big_buck_bunny_720p_1mb.mp4",
       "sink": "0:0",
       "blocking": false
     },
@@ -13,7 +13,7 @@
       "bulb": "",
       "h": "0",
       "s": "0",
-      "l": "0.7940999999999999",
+      "l": "0",
       "w": "0",
       "t": "1000",
       "blocking": true
@@ -21,10 +21,10 @@
     {
       "type": "dmx",
       "name": "",
-      "channel": "0",
+      "channel": "2",
       "start": "0",
-      "end": "0",
-      "duration": "0",
+      "end": "255",
+      "duration": "10000",
       "blocking": false
     }
   ],
