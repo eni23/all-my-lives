@@ -12,14 +12,11 @@ apt-get install vim mplayer daemontools daemontools-run git -y
 update-rc.d dhcpd disable
 
 # nodejs & npm
-wget -O /tmp/nodejs.deb http://data.e23.ch/node_latest_armhf.deb
-sudo dpkg -i /tmp/nodejs.deb
-apt-get install nodejs
+sudo dpkg -i $AML_LOCATION/pinode/tools/node_latest_armhf.deb
 curl -L https://npmjs.com/install.sh | sh
 
 # install precompiled socket.io
-wget -O /tmp/socketio.tgz http://data.e23.ch/socket.io-armhf.tar.gz
-tar xfvz /tmp/socketio.tgz
+tar xfvz $AML_LOCATION/pinode/tools/socket.io-armhf.tar.gz -C /
 
 # install aml
 cd $AML_LOCATION/pinode

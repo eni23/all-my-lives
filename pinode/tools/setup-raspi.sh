@@ -8,17 +8,15 @@ AML_LOCATION="/opt/all-my-lives"
 # update system and install deps
 apt-get update
 apt-get upgrade -y
-apt-get install vim mplayer daemontools daemontools-run git -y
+apt-get install vim mplayer daemontools daemontools-run -y
 
 # nodejs & npm
-wget -O /tmp/nodejs.deb http://node-arm.herokuapp.com/node_latest_armhf.deb
-sudo dpkg -i /tmp/nodejs.deb
-apt-get install nodejs
+sudo dpkg -i $AML_LOCATION/pinode/tools/node_latest_armhf.deb
 curl -L https://npmjs.com/install.sh | sh
+
 # install socket.io globally, since it takes long time to rebuild on every deploy
 # npm install -g socket.io
-wget -O /tmp/socketio.tgz http://data.e23.ch/socket.io-armhf.tar.gz
-tar xfvz /tmp/socketio.tgz
+tar xfvz $AML_LOCATION/pinode/tools/socket.io-armhf.tar.gz
 
 # install aml
 cd $AML_LOCATION/pinode
