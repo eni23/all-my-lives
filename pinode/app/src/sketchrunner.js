@@ -50,7 +50,7 @@ module.exports = {
       if (typeof childpid != "function"){
         if (childpid > 0) {
           console.log( "kill pid: " + childpid );
-          process.kill(-childpid);
+          this.kill_proctree(childpid);
           this.child_pids.remove( childpid );
         }
       }
