@@ -4,17 +4,10 @@
       "type": "dmx",
       "name": "",
       "channel": "2",
-      "start": "255",
-      "end": "0",
+      "start": "0",
+      "end": "255",
       "duration": "2000",
-      "blocking": false
-    },
-    {
-      "type": "audio",
-      "name": "",
-      "file": "big_buck_bunny_720p_1mb.mp4",
-      "sink": "0:0",
-      "blocking": false
+      "blocking": true
     },
     {
       "type": "lifx",
@@ -24,19 +17,22 @@
       "s": "0",
       "l": "0.44",
       "w": "0.043",
-      "t": "1000",
-      "blocking": false
+      "t": "3000",
+      "blocking": true
     },
     {
-      "type": "video",
+      "type": "dmx",
       "name": "",
-      "file": "big_buck_bunny_720p_1mb.mp4",
-      "blocking": false
+      "channel": "0",
+      "start": "255",
+      "end": "0",
+      "duration": "3000",
+      "blocking": true
     },
     {
       "type": "delay",
       "name": "",
-      "duration": "0",
+      "duration": "5000",
       "blocking": false
     },
     {

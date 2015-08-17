@@ -15,37 +15,6 @@ require('array.prototype.find');
  ********************************************************************/
 
 
- var dmxrunner = function( channel, universe, start, end, duration ) {
-   this.channel = parseInt( channel );
-   this.universe = parseInt( universe );
-   this.start = parseInt( start );
-   this.end = parseInt( end );
-   var rawsteps = start - end;
-   this.steps = -rawsteps>0 ? -rawsteps : rawsteps;
-   this.actstep = 0;
-   this.multipl = -rawsteps>0 ? 1 : -1;
-   this.sleep = duration / this.steps;
-   this.blocking = false;
-
-   this.next = function() {
-     var val = this.start + ( this.multipl * this.actstep );
-     console.log("set dmx val to: "+ val);
-     if ( this.end == val ){
-       if ( this.blocking ){
-         that.next();
-       }
-       return;
-     }
-     else {
-       console.log(this);
-       var cpy = this;
-       setTimeout( cpy.next, this.sleep );
-       this.actstep++;
-     }
-   }
- }
-
-
 module.exports = {
 
   sketchdata: [{}],
@@ -54,13 +23,7 @@ module.exports = {
   next_timeout: false,
   config: {},
 
-  dmxstep: 0,
-  dmxnum: 0,
-  dmxsleep: 0,
-  dmxstart: 0,
-  dmxtimeout: false,
   dmxblocking: false,
-  dmxchannel: false,
 
   falsecallback: function(){},
 
@@ -75,6 +38,34 @@ module.exports = {
     io.emit("stop-sketch");
   },
 
+ dmxrunner: function( channel, universe, start, end, duration ) {
+     this.channel = parseInt( channel );
+     this.universe = parseInt( universe );
+     this.start = parseInt( start );
+     this.end = parseInt( end );
+     var rawsteps = start - end;
+     this.steps = -rawsteps > 0 ? -rawsteps : rawsteps;
+     this.actstep = 0;
+     this.multipl = -rawsteps > 0 ? 1 : -1;
+     this.sleep = duration / this.steps;
+     this.blocking = false;
+     console.log("dmxrunner start");
+     this.nextval = function() {
+       var val = this.start + ( this.multipl * this.actstep );
+       //console.log("set dmx val to: " + val);
+       if ( this.end == val ){
+         console.log("dmxrunner end");
+         if ( this.blocking ){
+           that.aftersleep();
+         }
+         return;
+       }
+       else {
+         setTimeout( this.nextval.bind(this), this.sleep )
+         this.actstep++;
+       }
+     }
+   },
 
   spawn_exec: function( command, callback ){
     var child = exec( command );
@@ -125,33 +116,17 @@ module.exports = {
     if ( nextitem ){
       that.processitem( nextitem );
     }
-  },
-
-
-  dmxrunner: function(){
-    console.log("set dmx to:" + that.dmxnum );
-    artnet.set(0, parseInt( that.dmxchannel ), parseInt( that.dmxnum ) );
-    if ( ( that.dmxstep - 1 ) < ( that.dmxnum - that.dmxstart ) ) {
-      console.log("dmx done");
-      if ( that.dmxblocking ) {
-        that.dmxblocking = false;
-        var nextitem = that.next();
-        if ( nextitem ){
-          that.processitem( nextitem );
-        }
-      }
-      return;
+    else {
+      that.stop();
     }
-    that.dmxtimeout = setTimeout( that.dmxrunner, that.dmxsleep );
-    that.dmxnum++;
   },
 
 
   processitem: function( item ){
 
-    if ( this.dmxblocking ){
-      return;
-    }
+    //if ( this.dmxblocking ){
+    //  return;
+    //}
 
     switch ( item.type ) {
 
@@ -188,30 +163,13 @@ module.exports = {
         break;
 
       case "dmx":
-
-
-
-        var runner = new dmxrunner( item.channel, 0, item.start, item.end, item.duration );
-        runner.blocking = item.blocking;
-        runner.next();
-
         console.log("run dmx");
-        return;
-
-        this.dmxchannel = item.channel;
-        this.dmxstep = item.end - item.start;
-        console.log(this.dmxstep);
-        this.dmxnum = item.start;
-        this.dmxstart = item.start;
-        this.dmxsleep = item.duration / this.itedmxstep ;
-        this.dmxrunner();
+        var runner = new this.dmxrunner( item.channel, 0, item.start, item.end, item.duration );
+        runner.blocking = item.blocking;
+        runner.nextval();
         if ( item.blocking ){
           console.log("dmx blocking");
-          this.dmxblocking = true;
           return;
-        }
-        else {
-          this.dmxblocking = false;
         }
         break;
 
