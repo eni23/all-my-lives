@@ -48,6 +48,7 @@ module.exports = {
     //this.spawn_exec("killall omxplayer.bin", this.falsecallback);
     for (idx in this.child_pids){
       var childpid=this.child_pids[idx];
+      console.log(childpid);
       if (typeof childpid != "function"){
         console.log( "kill pid: " + childpid );
         process.kill( childpid );

@@ -3,7 +3,7 @@
     {
       "type": "script",
       "name": "",
-      "cmd": "sleep 10",
+      "cmd": "sleep 20",
       "blocking": true
     },
     {
@@ -44,7 +44,7 @@
     {
       "type": "audio",
       "name": "",
-      "file": "moodswing.mp3",
+      "file": "big_buck_bunny_720p_1mb.mp4",
       "sink": "1:0",
       "blocking": false
     }
