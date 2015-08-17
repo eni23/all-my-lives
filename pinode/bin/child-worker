@@ -26,10 +26,10 @@ var run_command = function( command ){
     });
     process.exit(code);
   });
-  process.send( {
-    type: "pid",
-    data: [ mypid, childpid ]
-  });
+  //process.send( {
+  //  type: "pid",
+  //  data: [ mypid, childpid ]
+  //});
 }
 
 process.on('message', function(m) {

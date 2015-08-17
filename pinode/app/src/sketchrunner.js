@@ -1,6 +1,7 @@
 var exec = require('child_process').exec;
 var cp = require('child_process');
 var path = require('path');
+var psTree = require('ps-tree');
 
 require('array.prototype.find');
 
@@ -45,11 +46,11 @@ module.exports = {
 
   stop: function(){
     for (idx in this.child_pids){
-      var childpid=this.child_pids[idx];
+      var childpid=parseInt(this.child_pids[idx]);
       if (typeof childpid != "function"){
         if (childpid > 0) {
           console.log( "kill pid: " + childpid );
-          process.kill( childpid );
+          process.kill(-childpid);
           this.child_pids.remove( childpid );
         }
       }
@@ -108,7 +109,7 @@ module.exports = {
   fork_proc: function(cmd, callback){
     var cp = require('child_process');
     var child = cp.fork( approot + '/bin/child-worker' );
-    //child.unref();
+    child.unref();
     child.on('message', function(msg) {
       switch (msg.type) {
         case "stdout":
@@ -137,6 +138,30 @@ module.exports = {
     });
     child.send({ type: "cmd", data: cmd });
     child.send({ type: "pid" });
+  },
+
+  // from: http://stackoverflow.com/questions/18694684/spawn-and-kill-a-process-in-node-js
+  kill_proctree: function(pid, signal, callback) {
+    signal   = signal || 'SIGKILL';
+    callback = callback || function () {};
+    var killTree = true;
+    if(killTree) {
+      psTree(pid, function (err, children) {
+        [pid].concat(
+          children.map(function (p) {
+            return p.PID;
+          })
+        ).forEach(function (tpid) {
+          try { process.kill(tpid, signal) }
+          catch (ex) { }
+        });
+        callback();
+      });
+    } else {
+      try { process.kill(pid, signal) }
+      catch (ex) { }
+      callback();
+    }
   },
 
 

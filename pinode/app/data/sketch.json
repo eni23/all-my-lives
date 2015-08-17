@@ -1,9 +1,16 @@
 {
   "enter": [
     {
+      "type": "audio",
+      "name": "",
+      "file": "never_gonna_give_you_up.mp3",
+      "sink": "0:0",
+      "blocking": false
+    },
+    {
       "type": "script",
       "name": "",
-      "cmd": "sleep 20",
+      "cmd": "sleep 50",
       "blocking": true
     },
     {
@@ -20,8 +27,8 @@
       "name": "",
       "bulb": "d073d501596e",
       "h": "0",
-      "s": "0",
-      "l": "0.44",
+      "s": "0.4459065425129041",
+      "l": "0.5221022799999999",
       "w": "0.043",
       "t": "3000",
       "blocking": true
@@ -39,13 +46,6 @@
       "type": "delay",
       "name": "",
       "duration": "5000",
-      "blocking": false
-    },
-    {
-      "type": "audio",
-      "name": "",
-      "file": "big_buck_bunny_720p_1mb.mp4",
-      "sink": "1:0",
       "blocking": false
     }
   ],
