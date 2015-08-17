@@ -1,6 +1,12 @@
 {
   "enter": [
     {
+      "type": "script",
+      "name": "",
+      "cmd": "sleep 10",
+      "blocking": true
+    },
+    {
       "type": "dmx",
       "name": "",
       "channel": "2",
@@ -36,9 +42,10 @@
       "blocking": false
     },
     {
-      "type": "script",
+      "type": "audio",
       "name": "",
-      "cmd": "/usr/bin/false",
+      "file": "moodswing.mp3",
+      "sink": "1:0",
       "blocking": false
     }
   ],

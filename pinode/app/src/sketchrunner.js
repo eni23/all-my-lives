@@ -1,4 +1,7 @@
 var exec = require('child_process').exec;
+var cp = require('child_process');
+var path = require('path');
+
 require('array.prototype.find');
 
 /********************************************************************
@@ -14,6 +17,18 @@ require('array.prototype.find');
  *
  ********************************************************************/
 
+var approot = path.dirname(path.dirname(__dirname));
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
 
 module.exports = {
 
@@ -22,14 +37,24 @@ module.exports = {
   is_running: false,
   next_timeout: false,
   config: {},
+  child_pids: [],
 
   dmxblocking: false,
 
   falsecallback: function(){},
 
   stop: function(){
-    this.spawn_exec("killall mplayer", this.falsecallback);
-    this.spawn_exec("killall omxplayer.bin", this.falsecallback);
+    //this.spawn_exec("killall mplayer", this.falsecallback);
+    //this.spawn_exec("killall omxplayer.bin", this.falsecallback);
+    for (idx in this.child_pids){
+      var childpid=this.child_pids[idx];
+      if (typeof childpid != "function"){
+        console.log( "kill pid: " + childpid );
+        process.kill( childpid );
+        this.child_pids.remove( childpid );
+      }
+    }
+
     this.is_running = false;
     this.sketchdata = [{}];
     clearTimeout(this.next_timeout);
@@ -68,7 +93,7 @@ module.exports = {
    },
 
   spawn_exec: function( command, callback ){
-    var child = exec( command );
+    var child = cp.exec( command );
     child.stdout.on('data', function(data) {
         console.log( data );
     });
@@ -78,6 +103,40 @@ module.exports = {
     child.on('close', function(code) {
         callback( code );
     });
+  },
+
+  fork_proc: function(cmd, callback){
+    var cp = require('child_process');
+    var child = cp.fork( approot + '/bin/child-worker' );
+    child.unref();
+    child.on('message', function(msg) {
+      switch (msg.type) {
+        case "stdout":
+          console.log(msg.data);
+          break;
+        case "stderr":
+          console.log(msg.data);
+          break;
+        case "done":
+          console.log("child done");
+          for (idx in msg.pid){
+            that.child_pids.remove( msg.pid[idx] );
+          }
+          callback();
+          break;
+        case "pid":
+          for (idx in msg.data){
+            if (typeof msg.data[idx] != "function"){
+              that.child_pids.push( msg.data[idx] );
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
+    child.send({ type: "cmd", data: cmd });
+    child.send({ type: "pid" });
   },
 
 
@@ -115,9 +174,6 @@ module.exports = {
     var nextitem=that.next();
     if ( nextitem ){
       that.processitem( nextitem );
-    }
-    else {
-      that.stop();
     }
   },
 
@@ -182,16 +238,17 @@ module.exports = {
           shellcmd = "omxplayer -o " + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'" ;
         }
         else {
-          shellcmd = "mplayer -ao alsa:device=hw=" + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'";
+          //shellcmd = "mplayer -ao alsa:device=hw=" + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'";
+          shellcmd = "mplayer '" + this.config.audiopath + "/" + item.file + "'";
         }
         console.log(shellcmd);
 
         if ( item.blocking ){
           console.log("audio blocking");
-          this.spawn_exec( shellcmd, this.aftersleep );
+          this.fork_proc( shellcmd, this.aftersleep );
           return;
         }
-        this.spawn_exec( shellcmd, this.falsecallback );
+        this.fork_proc( shellcmd, this.falsecallback );
         break;
 
 
@@ -201,10 +258,10 @@ module.exports = {
         console.log( shellcmd );
         if ( item.blocking ){
           console.log("video blocking");
-          this.spawn_exec( shellcmd, this.aftersleep );
+          this.fork_proc( shellcmd, this.aftersleep );
           return;
         }
-        this.spawn_exec( shellcmd, this.falsecallback );
+        this.fork_proc( shellcmd, this.falsecallback );
         break;
 
 
@@ -218,11 +275,11 @@ module.exports = {
         console.log("run script");
         if ( item.blocking ){
           console.log("script blocking");
-          this.spawn_exec( item.cmd, this.aftersleep );
+          this.fork_proc( item.cmd, this.aftersleep );
           return;
         }
         else {
-          this.spawn_exec( item.cmd, this.falsecallback );
+          this.fork_proc( item.cmd, this.falsecallback );
         }
         break;
 
