@@ -1,6 +1,15 @@
 {
   "enter": [
     {
+      "type": "dmx",
+      "name": "",
+      "channel": "2",
+      "start": "255",
+      "end": "0",
+      "duration": "2000",
+      "blocking": false
+    },
+    {
       "type": "audio",
       "name": "",
       "file": "big_buck_bunny_720p_1mb.mp4",
@@ -10,21 +19,12 @@
     {
       "type": "lifx",
       "name": "",
-      "bulb": "",
+      "bulb": "d073d501596e",
       "h": "0",
       "s": "0",
-      "l": "0",
-      "w": "0",
+      "l": "0.44",
+      "w": "0.043",
       "t": "1000",
-      "blocking": false
-    },
-    {
-      "type": "dmx",
-      "name": "",
-      "channel": "2",
-      "start": "0",
-      "end": "255",
-      "duration": "10000",
       "blocking": false
     },
     {

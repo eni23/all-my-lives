@@ -15,6 +15,36 @@ require('array.prototype.find');
  ********************************************************************/
 
 
+ var dmxrunner = function( channel, universe, start, end, duration ) {
+   this.channel = parseInt( channel );
+   this.universe = parseInt( universe );
+   this.start = parseInt( start );
+   this.end = parseInt( end );
+   var rawsteps = start - end;
+   this.steps = -rawsteps>0 ? -rawsteps : rawsteps;
+   this.actstep = 0;
+   this.multipl = -rawsteps>0 ? 1 : -1;
+   this.sleep = duration / this.steps;
+   this.blocking = false;
+
+   this.next = function() {
+     var val = this.start + ( this.multipl * this.actstep );
+     console.log("set dmx val to: "+ val);
+     if ( this.end == val ){
+       if ( this.blocking ){
+         that.next();
+       }
+       return;
+     }
+     else {
+       console.log(this);
+       var cpy = this;
+       setTimeout( cpy.next, this.sleep );
+       this.actstep++;
+     }
+   }
+ }
+
 
 module.exports = {
 
@@ -158,13 +188,22 @@ module.exports = {
         break;
 
       case "dmx":
+
+
+
+        var runner = new dmxrunner( item.channel, 0, item.start, item.end, item.duration );
+        runner.blocking = item.blocking;
+        runner.next();
+
         console.log("run dmx");
+        return;
+
         this.dmxchannel = item.channel;
         this.dmxstep = item.end - item.start;
         console.log(this.dmxstep);
         this.dmxnum = item.start;
         this.dmxstart = item.start;
-        this.dmxsleep = item.duration / this.dmxstep ;
+        this.dmxsleep = item.duration / this.itedmxstep ;
         this.dmxrunner();
         if ( item.blocking ){
           console.log("dmx blocking");
