@@ -28,6 +28,7 @@ cp $AML_LOCATION/pinode/bin/run /etc/service/aml-pinode/run
 chmod a+x /etc/service/aml-pinode/run
 chmod -R 755 /etc/service/aml-pinode
 
+# copy demo data
 mkdir /opt/media
 chmod 755 /opt/media
 cp $AML_LOCATION/pinode/test-media/* /opt/media/

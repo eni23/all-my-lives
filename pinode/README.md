@@ -24,10 +24,12 @@ chmod a+x /opt/all-my-lives/pinode/tools/setup-raspi.sh
 
 ```
 
+== wifi ==
+apt-get purge ifplugd
 
 == bluetooth audio ==
 
-apt-get install bluez-utils bluez-alsa
+apt-get install --no-install-recommends bluez-utils bluez-alsa python-gobject
 hcitool scan
 
 vim /root/.asoundrc
@@ -40,7 +42,7 @@ pcm.bluetooth {
 vim /etc/bluetooth/audio.conf
 Enable=Source,Sink,Media,Socket
 
-# Pairing
+# Pairing (only 1 time)
 bluez-simple-agent -c NoInputNoOutput hci0 C8:84:47:01:CB:9F
 
 
@@ -75,3 +77,39 @@ crontab -e
 @reboot /opt/blackscreen.sh > /dev/null
 
 echo "avoid_warnings=1" >> /boot/config.txt
+
+------
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+  address 10.10.1.70
+  netmask 255.255.255.0
+  gateway 10.10.1.1
+  dns-nameservers 8.8.8.8
+
+-------
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+  address 10.10.1.150
+  gateway 10.10.1.1
+  netmask 255.255.255.0
+  dns-nameservers 8.8.8.8
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet static
+  address 10.10.1.50
+  netmask 255.255.255.0
+  gateway 10.10.1.1
+  wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+------

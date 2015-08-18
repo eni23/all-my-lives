@@ -21,13 +21,13 @@
       "name": "extern-00",
       "id": "1:0",
       "player": "mplayer",
-      "dev": "1.0"
+      "dev": "hw=1.0"
     },
     {
       "name": "extern-01",
       "id": "1:1",
       "player": "mplayer",
-      "dev": "1.1"
+      "dev": "hw=1.1"
     }
   ],
   "lifxbulbs": [
