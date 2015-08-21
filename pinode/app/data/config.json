@@ -1,6 +1,6 @@
 {
-  "nodename": "sieben",
-  "nodeip": "10.10.1.70",
+  "nodename": "e23",
+  "nodeip": "10.10.1.42",
   "videopath": "/opt/media",
   "audiopath": "/opt/media",
   "artnethost": "10.10.1.5",
@@ -56,31 +56,20 @@
       "id": "d073d500516a"
     },
     {
-      "name": "fail01",
+      "name": "wartezimmer1-01",
+      "id": "d073d500310a"
+    },
+    {
+      "name": "wartezimmer2-01",
       "id": "d073d5008011"
     },
     {
-      "name": "fail02",
+      "name": "wartezimmer2-02",
       "id": "d073d50181d6"
     },
     {
-      "name": "007",
-      "id": "d073d5007597"
-    },
-    {
-      "name": "Decke",
-      "id": "d073d501596e"
-    },
-    {
-      "name": "Pflanze",
-      "id": "d073d5018be5"
-    },
-    {
-      "name": "Boden",
-      "id": "d073d5015703"
+      "name": "wohnzimmer",
+      "id": "d073d5003285"
     }
-
-
-
   ]
 }

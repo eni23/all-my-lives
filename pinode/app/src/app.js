@@ -19,8 +19,14 @@ var options = {
 artnet = require('artnet')(options);
 lifx = require('lifx');
 lx   = lifx.init();
+lx.requestStatus();
 sketchrunner = require('./sketchrunner');
 
+// this helps the raspi to keep his arp-table up-to-date
+setInterval(function(){
+  //console.log("requesting status of all bulbs");
+  lx.requestStatus();
+}, 15000 );
 
 
 var routes = require('./route.index');
