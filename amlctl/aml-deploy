@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+HOSTLIST="pinode-hosts.list"
+EXCLUDE="
+--exclude=config.json
+--exclude=sketch.json
+--exclude=.git
+--exclude=sensorbox/build
+--exclude=node_modules/express
+--exclude=node_modules/socket.io
+--exclude=spectrum-61ad86c
+--exclude=node_modules/body-parser
+--exclude=node_modules/cookie-parser
+--exclude=node_modules/debug
+--exclude=node_modules/cookie-parser
+--exclude=node_modules/ejs
+--exclude=node_modules/serve-favicon
+--exclude=node_modules/ps-tree
+--exclude=node_modules/morgan
+"
+
+
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+
+
+
+for host in $(cat $HOSTLIST); do
+
+  ssh root@$host 'svc -d /etc/service/aml-pinode; killall node; sleep 1;'
+  rsync -avz $EXCLUDE $ROOT/ root@$host:/opt/all-my-lives;
+  ssh root@$host 'svc -u /etc/service/aml-pinode'
+
+done
