@@ -15,7 +15,7 @@ router.get('/list', function(req, res, next) {
   res.send(JSON.stringify(lx.bulbs, null, 2));
 });
 router.get('/list/gw', function(req, res, next) {
-  //res.contentType("text/plain");
+  res.contentType("text/plain");
   res.send(JSON.stringify(lx.gateways, null, 2));
 });
 

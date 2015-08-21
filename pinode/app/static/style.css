@@ -106,17 +106,27 @@ input.item-desc:focus {
   font-weight: bold;
   font-size: 1.2em;
 }
+
 .lamp{
   padding: 6px;
+}
+.lampcname {
+  color: rgb(157, 157, 157);
 }
 .liitemgw-item:nth-of-type(even){
   background-color: #f9f9f9;
 }
 
-.liitemgw:last-child{
-  border-bottom: 1px solid  #e6e6e6;
+.liitemgw:first-child{
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
+.liitemgw:last-child{
+  border-bottom: 1px solid  #e6e6e6;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
 
 .liitemgw-title {
   font-weight: bold;
@@ -124,9 +134,8 @@ input.item-desc:focus {
   border: none;
 }
 
-
 .lamp-items {
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .lamp-detail {
@@ -135,3 +144,9 @@ input.item-desc:focus {
   padding: 12px;
   display: none;
 }
+.bulb-lx-status {
+  color: rgb(170, 1, 1);
+}
+.bulb-lx-status.active {
+   color: rgb(19, 170, 1);
+ }
