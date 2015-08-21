@@ -1,6 +1,6 @@
 {
-  "nodename": "aml-001",
-  "nodeip": "10.10.1.10",
+  "nodename": "sieben",
+  "nodeip": "10.10.1.70",
   "videopath": "/opt/media",
   "audiopath": "/opt/media",
   "artnethost": "10.10.1.5",
@@ -36,16 +36,51 @@
       "value": "0"
     },
     {
-      "name": "lamp-01",
-      "id": "d073d501596e"
+      "name": "viktor-01",
+      "id": "d073d5016555"
     },
     {
-      "name": "lamp-02",
+      "name": "viktor-02",
       "id": "d073d5007e55"
     },
     {
-      "name": "false bulb",
-      "id": "dfgdwera"
+      "name": "viktor-03",
+      "id": "d073d500457a"
+    },
+    {
+      "name": "tafel-01",
+      "id": "d073d50051e5"
+    },
+    {
+      "name": "wald-01",
+      "id": "d073d500516a"
+    },
+    {
+      "name": "fail01",
+      "id": "d073d5008011"
+    },
+    {
+      "name": "fail02",
+      "id": "d073d50181d6"
+    },
+    {
+      "name": "007",
+      "id": "d073d5007597"
+    },
+    {
+      "name": "brodcast",
+      "id": "d073d501596e"
+    },
+    {
+      "name": "broadcast02",
+      "id": "d073d5018be5"
+    },
+    {
+      "name": "broadcast03",
+      "id": "d073d5015703"
     }
+
+
+
   ]
 }

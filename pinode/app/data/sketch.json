@@ -1,6 +1,17 @@
 {
   "enter": [
     {
+      "type": "lifx",
+      "name": "",
+      "bulb": "",
+      "h": "0",
+      "s": "0",
+      "l": "0.31",
+      "w": "0.017",
+      "t": "2500",
+      "blocking": true
+    },
+    {
       "type": "audio",
       "name": "",
       "file": "never_gonna_give_you_up.mp3",
@@ -17,20 +28,9 @@
       "type": "dmx",
       "name": "",
       "channel": "2",
-      "start": "0",
-      "end": "255",
+      "start": "255",
+      "end": "0",
       "duration": "2000",
-      "blocking": true
-    },
-    {
-      "type": "lifx",
-      "name": "",
-      "bulb": "d073d501596e",
-      "h": "0",
-      "s": "0.4459065425129041",
-      "l": "0.5221022799999999",
-      "w": "0.043",
-      "t": "3000",
       "blocking": true
     },
     {

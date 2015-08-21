@@ -7,12 +7,16 @@ var fs = require('fs');
 //console.log(lx,artnet)
 
 router.get('/', function(req, res, next) {
-  res.send('lifx');
+  res.sendFile(  path.dirname( path.dirname( require.main.filename ) ) + "/app/static/lifx.html" );
 });
 
 router.get('/list', function(req, res, next) {
-  res.send(lx.bulbs);
-
+  res.contentType("text/plain");
+  res.send(JSON.stringify(lx.bulbs, null, 2));
+});
+router.get('/list/gw', function(req, res, next) {
+  //res.contentType("text/plain");
+  res.send(JSON.stringify(lx.gateways, null, 2));
 });
 
 router.get('/on', function(req, res, next) {

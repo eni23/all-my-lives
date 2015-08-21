@@ -93,3 +93,45 @@ input.item-desc:focus {
 .script-cmd {
   min-width: 300px;
 }
+
+
+
+
+.liitemgw {
+  margin: 0;
+  margin-bottom:0;
+  border: 1px solid  #e6e6e6;
+  border-bottom: none;
+  padding: 6px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.lamp{
+  padding: 6px;
+}
+.liitemgw-item:nth-of-type(even){
+  background-color: #f9f9f9;
+}
+
+.liitemgw:last-child{
+  border-bottom: 1px solid  #e6e6e6;
+}
+
+
+.liitemgw-title {
+  font-weight: bold;
+  padding: 6px;
+  border: none;
+}
+
+
+.lamp-items {
+  margin-top: 10px;
+}
+
+.lamp-detail {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 12px;
+  display: none;
+}

@@ -78,6 +78,7 @@ module.exports = {
      console.log("dmxrunner start");
      this.nextval = function() {
        var val = this.start + ( this.multipl * this.actstep );
+       artnet.set(0, parseInt( this.channel ), parseInt(val));
        //console.log("set dmx val to: " + val);
        if ( this.end == val ){
          console.log("dmxrunner end");
