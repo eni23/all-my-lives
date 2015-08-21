@@ -5,7 +5,6 @@ $(document).ready(function(){
 
 
   init = function(){
-
     $.ajax({
       type: "GET",
       url: "/config/get",
@@ -17,19 +16,16 @@ $(document).ready(function(){
         loadlamps();
       }
     });
-
     socket.on('start-sketch', function(){
       $(".btn-stopsketch").show();
       $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
       $(".header-status").attr("title","Sketch is running");
     });
-
     socket.on('stop-sketch', function(){
       $(".btn-stopsketch").hide();
       $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
       $(".header-status").attr("title","Sketch not running");
     });
-
   }
 
 
@@ -45,8 +41,6 @@ $(document).ready(function(){
       success : function(data){
 
         bulblist=data;
-        console.log(data);
-
         $.ajax({
           type: "GET",
           dataType: "json",
@@ -105,10 +99,11 @@ $(document).ready(function(){
                 target.show();
               }
             });
-           }
-         });
-        }
-      });
+
+          }
+        });
+      }
+    });
 
 
     $(".btn-reload").click(function(){

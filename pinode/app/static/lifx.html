@@ -4,22 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="">
-
-    <title>aml-pinode</title>
-
+    <title>aml-pinode lifxctl</title>
     <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/lib/bootstrap-slider.min.css" rel="stylesheet">
     <link href="/lib/bootstrap-popover-x/bootstrap-popover-x.css" rel="stylesheet" >
     <link href="/lib/spectrum-61ad86c/spectrum.css" rel="stylesheet">
-
     <link href="/style.css" rel="stylesheet">
-
-
   </head>
-
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -39,30 +31,21 @@
             <li><a class="header-nodeip">0.0.0.0</a></li>
             <li class="active"><a class="menu-item" href="#">lifxctl</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
-
     <div class="container">
       <button class="btn btn-primary btn-reload" type="button" data-toggle="modal" data-target="#files">
-        refresh <!--<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>!-->
+        <span class="glyphicon glyphicon-refresh"></span> reload
       </button>
-      <div class="lamp-items">
-      </div>
+      <div class="lamp-items"></div>
     </div>
-
-
     <script src="/socket.io/socket.io.js"></script>
     <script src="/lib/jquery-1.11.3.min.js"></script>
-    <script src="/lib/jquery.color.js"></script>
     <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <script src="/lib/sortable-1.2.1.min.js"></script>
     <script src="/lib/spectrum-61ad86c/spectrum.js"></script>
     <script src="/lib/ejs.min.js"></script>
     <script src="/lifxctl.js"></script>
-
-
-    <!-- templates for ejs !-->
     <script id="item-tpl-lifx" type="text/template">
       <div class="liitemgw-item liitemgw">
         <div class="row lamp lamp-title">
@@ -107,8 +90,5 @@
         </div>
       </div>
     </script>
-
-
-
   </body>
 </html>
