@@ -110,6 +110,14 @@ $(document).ready(function(){
       loadlamps();
     });
 
+    $(".btn-lamps-on").click(function(){
+      socket.emit("lifx-on");
+    });
+
+    $(".btn-lamps-off").click(function(){
+      socket.emit("lifx-off");
+    });
+
   };
 
 

@@ -92,11 +92,15 @@ io.on('connection', function(socket){
   });
 
   socket.on('lifx-on', function(msg){
-    lx.lightsOn();
+    for (idx in lx.gateways){
+      lx.lightsOn(lx.gateways[idx].bulbAddress);
+    }
   });
 
   socket.on('lifx-off', function(msg){
-    lx.lightsOff();
+    for (idx in lx.gateways){
+      lx.lightsOff(lx.gateways[idx].bulbAddress);
+    }
   });
 
   socket.on('set-dmx', function(msg){
