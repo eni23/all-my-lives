@@ -1,140 +1,126 @@
 var config={};
 var socket = io();
+var lx_bulbs = {};
+var tpl="";
 
 $(document).ready(function(){
+  init();
+});
 
 
-  init = function(){
-    $.ajax({
-      type: "GET",
-      url: "/config/get",
-      success : function(data){
-        config=data;
-        console.log(config);
-        $(".header-nodename").html(data.nodename);
-        $(".header-nodeip").html(data.nodeip);
-        loadlamps();
+init = function(){
+  tpl=$("#item-tpl-lifx").html();
+  socket.emit("lifx-bulbs");
+  socket.emit("config");
+}
+
+
+set_lifx_color = function(color, bulb){
+  socket.emit('set-lifx',{
+    "bulb": bulb,
+    "h":color.h,
+    "s":color.s,
+    "l":color.l,
+    "w":color.w
+  });
+};
+
+
+socket.on("config",function(msg){
+  $(".header-nodename").html(msg.nodename);
+  $(".header-nodeip").html(msg.nodeip);
+  config=msg;
+  socket.emit("lifx-gw");
+});
+
+socket.on('start-sketch', function(){
+  $(".btn-stopsketch").show();
+  $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
+  $(".header-status").attr("title","Sketch is running");
+});
+
+socket.on('stop-sketch', function(){
+  $(".btn-stopsketch").hide();
+  $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
+  $(".header-status").attr("title","Sketch not running");
+});
+
+socket.on('lifx-bulbs', function(msg){
+  lx_bulbs = msg;
+});
+
+socket.on('lifx-gw', function(msg){
+  var target=$(".lamp-items");
+  target.html("");
+  for (idx in msg){
+    var item = {};
+    item.item=msg[idx];
+    bulbconfig = config.lifxbulbs.find( function(e) { return e.id==item.item.bulbAddress } );
+    if (bulbconfig){
+      item.item.name=bulbconfig.name;
+    }
+    for (idx in lx_bulbs){
+      if (idx==item.item.bulbAddress){
+        item.item.css="active";
       }
-    });
-    socket.on('start-sketch', function(){
-      $(".btn-stopsketch").show();
-      $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
-      $(".header-status").attr("title","Sketch is running");
-    });
-    socket.on('stop-sketch', function(){
-      $(".btn-stopsketch").hide();
-      $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
-      $(".header-status").attr("title","Sketch not running");
-    });
+    }
+    target.append( ejs.render( tpl, item ) );
   }
 
+  $(".spectrum-color").spectrum({
+    flat: true,
+    showInput: false,
+    showAlpha: false,
+    move: function(c) {
+      var color = c.toHsl();
+      color.w = $('input.range-w').val();
+      $('input.range-h').val(color.h);
+      $('input.range-s').val(color.s);
+      $('input.range-l').val(color.l);
+      var bulb=$(this).attr("bulb");
+      set_lifx_color(color, bulb);
+    }
+  });
 
-  loadlamps = function(){
+  $(".bar-color").on("input", function(e){
+    var item_t = $(this).parent().parent().parent().parent();
+    var bulb = item_t.find(".lampid").html()
+    var color={};
+    color.h = item_t.find('input.range-h').val(),
+    color.s = item_t.find('input.range-s').val(),
+    color.l = item_t.find('input.range-l').val(),
+    color.w = item_t.find('input.range-w').val();
+    $("#spectrum-color").spectrum("set", { h:color.h, s:color.s, l:color.l });
+    set_lifx_color(color,bulb);
+  });
 
-    var target=$(".lamp-items");
-    var tpl=$("#item-tpl-lifx").html();
-    bulblist={};
-    $.ajax({
-      type: "GET",
-      url: "/lifx/list",
-      dataType: "json",
-      success : function(data){
-
-        bulblist=data;
-        $.ajax({
-          type: "GET",
-          dataType: "json",
-          url: "/lifx/list/gw",
-          success : function(data){
-
-            target.html("");
-            for (idx in data){
-              var item = {};
-              item.item=data[idx];
-              bulbconfig = config.lifxbulbs.find( function(e) { return e.id==item.item.bulbAddress } );
-              if (bulbconfig){
-                item.item.name=bulbconfig.name;
-              }
-              for (idx in bulblist){
-                if (idx==item.item.bulbAddress){
-                  item.item.css="active";
-                }
-              }
-              target.append( ejs.render( tpl, item ) );
-            }
-
-            $(".spectrum-color").spectrum({
-              flat: true,
-              showInput: false,
-              showAlpha: false,
-              move: function(c) {
-                var color = c.toHsl();
-                color.w = $('input.range-w').val();
-                $('input.range-h').val(color.h);
-                $('input.range-s').val(color.s);
-                $('input.range-l').val(color.l);
-                var bulb=$(this).attr("bulb");
-                set_lifx_color(color, bulb);
-              }
-            });
-
-            $(".bar-color").on("input", function(e){
-              var item_t = $(this).parent().parent().parent().parent();
-              var bulb = item_t.find(".lampid").html()
-              var color={};
-              color.h = item_t.find('input.range-h').val(),
-              color.s = item_t.find('input.range-s').val(),
-              color.l = item_t.find('input.range-l').val(),
-              color.w = item_t.find('input.range-w').val();
-              $("#spectrum-color").spectrum("set", { h:color.h, s:color.s, l:color.l });
-              set_lifx_color(color,bulb);
-            });
-
-            $(".lamp-title").click(function(){
-              var target = $(this).parent().find(".lamp-detail");
-              if (target.is(":visible")){
-                target.hide();
-              }
-              else {
-                target.show();
-              }
-            });
-
-          }
-        });
-      }
-    });
-
-
-    $(".btn-reload").click(function(){
-      loadlamps();
-    });
-
-    $(".btn-lamps-on").click(function(){
-      socket.emit("lifx-on");
-    });
-
-    $(".btn-lamps-off").click(function(){
-      socket.emit("lifx-off");
-    });
-
-  };
-
-
-  set_lifx_color = function(color, bulb){
-    socket.emit('set-lifx',{
-      "bulb": bulb,
-      "h":color.h,
-      "s":color.s,
-      "l":color.l,
-      "w":color.w
-    });
-  };
-
-
-  init();
-
+  $(".lamp-title").click(function(){
+    var target = $(this).parent().find(".lamp-detail");
+    if (target.is(":visible")){
+      target.hide();
+    }
+    else {
+      target.show();
+    }
+  });
 });
+
+
+$(".btn-reload").click(function(){
+  init();
+});
+
+
+$(".btn-lamps-on").click(function(){
+  socket.emit("lifx-on");
+});
+
+
+$(".btn-lamps-off").click(function(){
+  socket.emit("lifx-off");
+});
+
+
 
 if (!Array.prototype.find) {
   Array.prototype.find = function(predicate) {
