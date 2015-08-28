@@ -38,20 +38,24 @@ init = function(){
 
 };
 
+
 socket.on("config",function(msg){
   $(".header-nodename").html(msg.nodename);
   $(".header-nodeip").html(msg.nodeip);
 });
+
 
 socket.on('start-sketch', function(){
   $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
   $(".header-status").attr("title","Sketch is running");
 });
 
+
 socket.on('stop-sketch', function(){
   $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
   $(".header-status").attr("title","Sketch not running");
 });
+
 
 socket.on("nodelist",function(msg){
 
@@ -90,8 +94,7 @@ socket.on("nodelist",function(msg){
 
     thisnode.socket.emit("config");
     render_node(thisnode,$(".nodes"));
-
     i++;
-    
-  }
+  };
+
 });
