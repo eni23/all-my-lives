@@ -43,7 +43,10 @@ $(document).ready(function(){
   });
 
   socket.on("nodelist",function(msg){
+
+    $(".nodes").html("");
     var i=0;
+
     for (node of msg.nodes){
       var thisnode = nodes[i] = {};
 
@@ -53,6 +56,7 @@ $(document).ready(function(){
       thisnode.port = node.port;
       thisnode.socket = io.connect('http://' + node.ip + ':' + node.port, {'force new connection': true});
       thisnode.nodename = "...";
+
       thisnode.socket.on("config", (function(config) {
         nodes[this.id].config = config;
         $("#node-"+this.id).find(".node-ctrl").show();
