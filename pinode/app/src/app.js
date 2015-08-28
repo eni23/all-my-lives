@@ -103,6 +103,14 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('lifx-bulbs', function(msg){
+    io.emit('lifx-bulbs', lx.bulbs );
+  });
+
+  socket.on('lifx-gw', function(msg){
+    io.emit('lifx-gw', lx.gateways );
+  });
+
   socket.on('set-dmx', function(msg){
     artnet.set(0, parseInt( msg.channel ), parseInt( msg.value ));
   });
