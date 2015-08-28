@@ -56,17 +56,19 @@ var get_config = function(){
 io.on('connection', function(socket){
 
   socket.on('run-enter-sketch', function(msg){
-    sketchrunner.config=get_config();
-    var sketch = get_sketch();
-    sketchrunner.stop();
-    sketchrunner.start(sketch.enter);
+    if ( sketchrunner.is_running == false ){
+      var sketch = get_sketch();
+      sketchrunner.config = get_config();
+      sketchrunner.start( sketch.enter );
+    }
   });
 
   socket.on('run-exit-sketch', function(msg){
-    sketchrunner.config=get_config();
-    var sketch = get_sketch();
-    sketchrunner.stop();
-    sketchrunner.start(sketch.exit);
+    if ( sketchrunner.is_running == false ){
+      var sketch = get_sketch();
+      sketchrunner.config = get_config();
+      sketchrunner.start( sketch.exit );
+    }
   });
 
   socket.on('stop-sketch', function(msg){
