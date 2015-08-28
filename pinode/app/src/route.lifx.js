@@ -7,7 +7,7 @@ var fs = require('fs');
 //console.log(lx,artnet)
 
 router.get('/', function(req, res, next) {
-  res.sendFile(  path.dirname( path.dirname( require.main.filename ) ) + "/app/static/lifx.html" );
+  res.sendFile(  path.dirname( path.dirname( require.main.filename ) ) + "/app/static/lifxctl.html" );
 });
 
 router.get('/list', function(req, res, next) {
