@@ -16,32 +16,16 @@ render_node = function(data, target) {
 
 
 init = function(){
-
-  $(document).on( "click", ".btn-enter", function(){
-    var id = $(this).parent().parent().parent().attr("nodeid");
-    nodes[id].socket.emit("run-enter-sketch");
-  });
-
-  $(document).on( "click", ".btn-exit", function(){
-    var id = $(this).parent().parent().parent().attr("nodeid");
-    nodes[id].socket.emit("run-exit-sketch");
-  });
-
-  $(document).on( "click", ".btn-stop", function(){
-    var id = $(this).parent().parent().parent().attr("nodeid");
-    nodes[id].socket.emit("stop-sketch");
-  });
-
   nodetpl = $("#item-tpl-pinode").html();
   socket.emit("config");
   socket.emit("nodelist");
-
 };
 
 
-socket.on("config",function(msg){
-  $(".header-nodename").html(msg.nodename);
-  $(".header-nodeip").html(msg.nodeip);
+socket.on("config",function(cfg){
+  config = cfg;
+  $(".header-nodename").html(config.nodename);
+  $(".header-nodeip").html(config.nodeip);
 });
 
 
@@ -97,4 +81,22 @@ socket.on("nodelist",function(msg){
     i++;
   };
 
+});
+
+
+$(document).on( "click", ".btn-enter", function(){
+  var id = $(this).parent().parent().parent().attr("nodeid");
+  nodes[id].socket.emit("run-enter-sketch");
+});
+
+
+$(document).on( "click", ".btn-exit", function(){
+  var id = $(this).parent().parent().parent().attr("nodeid");
+  nodes[id].socket.emit("run-exit-sketch");
+});
+
+
+$(document).on( "click", ".btn-stop", function(){
+  var id = $(this).parent().parent().parent().attr("nodeid");
+  nodes[id].socket.emit("stop-sketch");
 });
