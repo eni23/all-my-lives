@@ -9,6 +9,9 @@ body {
   color:rgb(10, 180, 52);
   font-size: 80%
 }
+.header-nodeip, .header-nodeip:hover {
+  color: rgb(96, 96, 96) ! important;
+}
 
 .top-nodeinfo {
   color: white !important;

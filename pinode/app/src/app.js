@@ -16,6 +16,7 @@ var options = {
     host: config.artnethost
 }
 
+enabled = true;
 artnet = require('artnet')(options);
 lifx = require('lifx');
 lx   = lifx.init();
@@ -47,16 +48,50 @@ var get_sketch = function(){
   var raw_sketch = fs.readFileSync(sketchfile);
   return JSON.parse(raw_sketch);
 }
+
+var put_sketch = function(data){
+  var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
+  var json = JSON.stringify(data, null, 2);
+  fs.writeFileSync(sketchfile,json,'utf8');
+}
+
 var get_config = function(){
   var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
   var raw_config = fs.readFileSync(conffile);
   return JSON.parse(raw_config);
 }
 
+var get_files = function(){
+  var data={};
+  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+  var content = fs.readFileSync(conffile);
+  var config=JSON.parse(content);
+  data.video = fs.readdirSync(config.videopath);
+  data.audio = fs.readdirSync(config.audiopath);
+  return data;
+}
+
+
+// socket.io-"api"
 io.on('connection', function(socket){
 
+  socket.on('config', function(msg){
+    socket.emit('config',get_config());
+  });
+
+  socket.on('status', function(msg){
+    socket.emit('status',{
+      enabled: enabled,
+      running: sketchrunner.is_running
+    });
+  });
+
+  socket.on('sketch', function(msg){
+    socket.emit('sketch',get_sketch());
+  });
+
   socket.on('run-enter-sketch', function(msg){
-    if ( sketchrunner.is_running == false ){
+    if ( sketchrunner.is_running == false && enabled == true ){
       var sketch = get_sketch();
       sketchrunner.config = get_config();
       sketchrunner.start( sketch.enter );
@@ -64,15 +99,27 @@ io.on('connection', function(socket){
   });
 
   socket.on('run-exit-sketch', function(msg){
-    if ( sketchrunner.is_running == false ){
+    if ( sketchrunner.is_running == false && enabled == true ){
       var sketch = get_sketch();
       sketchrunner.config = get_config();
       sketchrunner.start( sketch.exit );
     }
   });
 
+  socket.on('trigger-enable', function(msg){
+    enabled=true;
+  });
+
+  socket.on('trigger-disable', function(msg){
+    enabled=false;
+  });
+
   socket.on('stop-sketch', function(msg){
     sketchrunner.stop();
+  });
+
+  socket.on('update-sketch', function(req){
+    put_sketch(req);
   });
 
   socket.on('set-lifx', function(msg){
@@ -106,29 +153,51 @@ io.on('connection', function(socket){
   });
 
   socket.on('lifx-bulbs', function(msg){
-    io.emit('lifx-bulbs', lx.bulbs );
+    socket.emit('lifx-bulbs', lx.bulbs );
   });
 
   socket.on('lifx-gw', function(msg){
-    io.emit('lifx-gw', lx.gateways );
+    socket.emit('lifx-gw', lx.gateways );
   });
 
   socket.on('set-dmx', function(msg){
+    console.log("set dmx");
     artnet.set(0, parseInt( msg.channel ), parseInt( msg.value ));
   });
 
-  socket.on('config', function(msg){
-    io.emit('config',get_config());
+
+  socket.on('files', function(msg){
+    socket.emit('files',get_files());
   });
 
-  socket.on('sketch', function(msg){
-    io.emit('sketch',get_sketch());
+  socket.on('sketch-test-single', function(req){
+    var item = req[0];
+    item.blocking = false;
+    var sketch =  [ item ];
+    sketchrunner.config=get_config();
+    sketchrunner.stop();
+    sketchrunner.start(sketch);
+    console.log("test-single");
+  });
+
+  socket.on('sketch-test-enter', function(req){
+    var sketch = get_sketch();
+    sketchrunner.config=get_config();
+    sketchrunner.stop();
+    sketchrunner.start(sketch.enter);
+  });
+
+  socket.on('sketch-test-exit', function(req){
+    var sketch = get_sketch();
+    sketchrunner.config=get_config();
+    sketchrunner.stop();
+    sketchrunner.start(sketch.exit);
   });
 
   socket.on('nodelist', function(msg){
     var ctlconf = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/amlctl.json"
     var raw_ctlconf = fs.readFileSync(ctlconf);
-    io.emit('nodelist',JSON.parse(raw_ctlconf));
+    socket.emit('nodelist',JSON.parse(raw_ctlconf));
   });
 
 });
