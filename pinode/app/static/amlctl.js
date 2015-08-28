@@ -65,7 +65,7 @@ $(document).ready(function(){
       }).bind(nodeident));
 
       thisnode.socket.on("connect_error", (function(err) {
-        $("#node-"+this.id).find(".nodename").html(this.ip).addClass("fail");
+        $("#node-"+this.id).find(".nodename").html(this.ip+" is offline").addClass("fail");
         $("#node-"+this.id).find(".node-status").removeClass("undefined").addClass("fail");
       }).bind(nodeident));
 
