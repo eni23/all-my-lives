@@ -69,7 +69,7 @@ io.on('connection', function(socket){
     sketchrunner.start(sketch.exit);
   });
 
-  socket.on('stop', function(msg){
+  socket.on('stop-sketch', function(msg){
     sketchrunner.stop();
   });
 
@@ -109,6 +109,12 @@ io.on('connection', function(socket){
 
   socket.on('sketch', function(msg){
     io.emit('sketch',get_sketch());
+  });
+
+  socket.on('nodelist', function(msg){
+    var ctlconf = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/amlctl.json"
+    var raw_ctlconf = fs.readFileSync(ctlconf);
+    io.emit('nodelist',JSON.parse(raw_ctlconf));
   });
 
 });

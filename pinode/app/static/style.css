@@ -134,7 +134,7 @@ input.item-desc:focus {
   border: none;
 }
 
-.lamp-items {
+.lamp-items, .nodes {
   margin-top: 30px;
 }
 
@@ -150,3 +150,29 @@ input.item-desc:focus {
 .bulb-lx-status.active {
    color: rgb(19, 170, 1);
  }
+
+
+.node-status, .node-status.undefined {
+  color: rgb(187, 187, 187);
+}
+.node-status.ok {
+  color: rgb(170, 1, 1);
+}
+.node-status.active {
+   color: rgb(19, 170, 1);
+}
+.node-status.fail {
+  color: rgb(45, 6, 237);
+}
+
+
+.nodename.fail {
+  color: rgb(187, 187, 187);
+}
+.itm-node {
+  margin-top: 5px;
+}
+
+.node-ctrl {
+  display: none;
+}
