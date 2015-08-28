@@ -20,6 +20,34 @@ router.get('/', function(req, res, next) {
   res.send('trigger');
 });
 
+router.get('/enter', function(req, res, next) {
+  if ( sketchrunner.is_running == false ){
+    var sketch = get_sketch();
+    sketchrunner.config = get_config();
+    sketchrunner.start( sketch.enter );
+    res.send('ok');
+  }
+  else {
+    res.send('sketch is allready running');
+  }
+});
+
+router.get('/exit', function(req, res, next) {
+  if ( sketchrunner.is_running == false ){
+    var sketch = get_sketch();
+    sketchrunner.config = get_config();
+    sketchrunner.start( sketch.exit );
+    res.send('ok');
+  }
+  else {
+    res.send('sketch is allready running');
+  }
+});
+
+router.get('/stop', function(req, res, next) {
+  sketchrunner.stop();
+  res.send('trigger');
+});
 
 router.get('/:pir', function(req, res, next) {
   if (!enabled){
