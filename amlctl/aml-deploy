@@ -27,8 +27,8 @@ ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 
 for host in $(cat $HOSTLIST); do
 
-  ssh root@$host 'svc -d /etc/service/aml-pinode; killall node; sleep 1;'
-  rsync -avz $EXCLUDE $ROOT/ root@$host:/opt/all-my-lives;
-  ssh root@$host 'svc -u /etc/service/aml-pinode'
-
+  echo " root@$host 'svc -d /etc/service/aml-pinode; killall node; sleep 1;'"
+  echo " rsync -avz ".$EXCLUDE." $ROOT/ root@$host:/opt/all-my-lives;"
+  echo " ssh root@$host 'svc -u /etc/service/aml-pinode'"
+  echo "---"
 done

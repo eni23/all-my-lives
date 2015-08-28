@@ -264,7 +264,7 @@ module.exports = {
           shellcmd = "omxplayer -o " + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'" ;
         }
         else {
-          shellcmd = "mplayer -ao alsa:device=" + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'";
+          shellcmd = "mplayer -quiet -ao alsa:device=" + audiodev.dev + " '" + this.config.audiopath + "/" + item.file + "'";
           //shellcmd = "mplayer '" + this.config.audiopath + "/" + item.file + "'";
         }
         console.log(shellcmd);
