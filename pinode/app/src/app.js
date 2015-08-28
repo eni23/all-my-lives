@@ -42,6 +42,79 @@ io = socket_io();
 app.io = io;
 
 
+var get_sketch = function(){
+  var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"
+  var raw_sketch = fs.readFileSync(sketchfile);
+  return JSON.parse(raw_sketch);
+}
+var get_config = function(){
+  var conffile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/config.json"
+  var raw_config = fs.readFileSync(conffile);
+  return JSON.parse(raw_config);
+}
+
+io.on('connection', function(socket){
+
+  socket.on('run-enter-sketch', function(msg){
+    sketchrunner.config=get_config();
+    var sketch = get_sketch();
+    sketchrunner.stop();
+    sketchrunner.start(sketch.enter);
+  });
+
+  socket.on('run-exit-sketch', function(msg){
+    sketchrunner.config=get_config();
+    var sketch = get_sketch();
+    sketchrunner.stop();
+    sketchrunner.start(sketch.exit);
+  });
+
+  socket.on('stop', function(msg){
+    sketchrunner.stop();
+  });
+
+  socket.on('set-lifx', function(msg){
+    var hue = parseInt(msg.h * (0xffff / 360)),
+  	    sat = parseInt(msg.s * 0xffff),
+	      lum = parseInt(msg.l * 0xffff),
+	      white = parseInt(msg.w * 0xffff);
+    if (!msg.bulb){
+      var config = get_config();
+      for (bulb of config.lifxbulbs){
+        if (bulb.id){
+          lx.lightsColour(hue, sat, lum, white, 0, bulb.id);
+        }
+      }
+    }
+    else {
+      lx.lightsColour(hue, sat, lum, white, 0, msg.bulb);
+    }
+  });
+
+  socket.on('lifx-on', function(msg){
+    lx.lightsOn();
+  });
+
+  socket.on('lifx-off', function(msg){
+    lx.lightsOff();
+  });
+
+  socket.on('set-dmx', function(msg){
+    artnet.set(0, parseInt( msg.channel ), parseInt( msg.value ));
+  });
+
+  socket.on('config', function(msg){
+    io.emit('config',get_config());
+  });
+
+  socket.on('sketch', function(msg){
+    io.emit('sketch',get_sketch());
+  });
+
+});
+
+
+
 // view engine setup
 app.set('views', path.join(path.dirname(__dirname), 'tpl'));
 app.set('view engine', 'ejs');

@@ -114,17 +114,14 @@ $(document).ready(function(){
 
 
   set_lifx_color = function(color, bulb){
-    $.ajax('/lifx/set', {
-      data: {
-        "lamp": bulb,
-        "h":color.h,
-        "s":color.s,
-        "l":color.l,
-        "w":color.w,
-        "t":0
-      }
+    socket.emit('set-lifx',{
+      "bulb": bulb,
+      "h":color.h,
+      "s":color.s,
+      "l":color.l,
+      "w":color.w
     });
-  }
+  };
 
 
   init();

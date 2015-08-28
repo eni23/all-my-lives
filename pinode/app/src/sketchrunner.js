@@ -61,7 +61,7 @@ module.exports = {
     clearTimeout(this.next_timeout);
     clearTimeout(this.dmxtimeout);
     this.dmxblocking = false;
-    io.emit("stop-sketch");
+    io.emit("stop-sketch",this.config);
   },
 
  dmxrunner: function( channel, universe, start, end, duration ) {
@@ -172,7 +172,7 @@ module.exports = {
     this.sketchidx = 0;
     this.is_running = true;
     this.processitem( this.next() );
-    io.emit("start-sketch");
+    io.emit("start-sketch",this.config);
   },
 
 
@@ -185,7 +185,7 @@ module.exports = {
     else {
       console.log("sketch done");
       this.is_running = false;
-      io.emit("stop-sketch");
+      io.emit("stop-sketch",this.config);
       return false;
     }
   },

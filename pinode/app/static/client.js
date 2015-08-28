@@ -502,16 +502,13 @@ $(document).ready(function(){
 
 
   set_lifx_color = function(color){
-    var lamp=lifx_colorsel_elem.find(".lifx-bulb").val();
-    $.ajax('/lifx/set', {
-      data: {
-        "lamp": lamp,
-        "h":color.h,
-        "s":color.s,
-        "l":color.l,
-        "w":color.w,
-        "t":0
-      }
+    var bulb=lifx_colorsel_elem.find(".lifx-bulb").val();
+    socket.emit('set-lifx',{
+      "bulb": bulb,
+      "h":color.h,
+      "s":color.s,
+      "l":color.l,
+      "w":color.w
     });
   }
 
