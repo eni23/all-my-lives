@@ -1,11 +1,9 @@
-var config = {};
 var files = {};
 var tpl = {};
 var sketch_status = {};
 var lifx_colorsel_elem = false;
 var dmx_valsel_elem = false;
 var disable_autosave = false;
-var socket = io();
 
 $(document).ready(function(){
   init();
@@ -49,18 +47,6 @@ socket.on("files",function(resp){
 socket.on('sketch', function(sketch){
   render_sketch(sketch.enter, $(".drag-ul-enter"));
   render_sketch(sketch.exit, $(".drag-ul-exit"));
-});
-
-socket.on('start-sketch', function(){
-  $(".btn-stopsketch").show();
-  $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
-  $(".header-status").attr("title","Sketch is running");
-});
-
-socket.on('stop-sketch', function(){
-  $(".btn-stopsketch").hide();
-  $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
-  $(".header-status").attr("title","Sketch not running");
 });
 
 socket.on("status",function(resp){
@@ -153,7 +139,7 @@ $(".btn-stopsketch").click(function(){
   socket.emit("stop-sketch");
 });
 $(".btn-downloadsketch").click(function(){
-  location.href="/sketch/download"
+  location.href="/api/v1/sketch/download"
 });
 
 $(".test-enter").click(function(){

@@ -32,6 +32,12 @@ router.get('/sketch', function(req, res, next) {
   res.json(build_answer(get_sketch(),true,true));
 });
 
+router.get('/sketch/download', function(req, res, next) {
+  res.setHeader('Content-disposition', 'attachment; filename=sketch.json');
+  res.setHeader('Content-type', 'text/json');
+  res.send(JSON.stringify(get_sketch(),0,2));
+});
+
 router.get('/status', function(req, res, next) {
   res.json( build_answer({
     enabled: enabled,

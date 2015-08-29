@@ -1,9 +1,5 @@
-var config={};
-var socket = io();
 var nodes = []
 var nodetpl = "";
-
-
 
 $(document).ready(function(){
   init();

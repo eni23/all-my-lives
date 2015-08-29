@@ -1,5 +1,3 @@
-var config={};
-var socket = io();
 var lx_bulbs = {};
 var tpl="";
 
