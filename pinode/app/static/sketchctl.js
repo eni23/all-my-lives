@@ -1,11 +1,11 @@
 var config = {};
 var files = {};
 var tpl = {};
+var sketch_status = {};
 var lifx_colorsel_elem = false;
 var dmx_valsel_elem = false;
 var disable_autosave = false;
 var socket = io();
-var status = {};
 
 $(document).ready(function(){
   init();
@@ -63,25 +63,39 @@ socket.on('stop-sketch', function(){
   $(".header-status").attr("title","Sketch not running");
 });
 
-socket.on("status",function(data){
-  status = data;
-  if (status.enabled==true){
-    $(".btn-onoff").addClass("btn-success");
-    $(".btn-onoff").removeClass("btn-danger");
-    $(".btn-onoff").text("Enabled");
+socket.on("status",function(resp){
+  sketch_status=resp;
+  if (sketch_status.enabled==true){
+    $(".btn-onoff").addClass("btn-success").removeClass("btn-danger");
+    $(".btn-onoff-icon").removeClass("ion-close-circled").addClass("ion-checkmark-circled");
+    $(".btn-onoff-text").text("Enabled");
   }
-  if (status.enabled==false){
-    $(".btn-onoff").addClass("btn-danger");
-    $(".btn-onoff").removeClass("btn-success");
-    $(".btn-onoff").text("Disabled");
+  if (sketch_status.enabled==false){
+    $(".btn-onoff").addClass("btn-danger").removeClass("btn-success");
+    $(".btn-onoff-text").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
+    $(".btn-onoff-text").text("Disabled");
   }
-  if (status.running){
+  if (sketch_status.running){
     $(".btn-stopsketch").show();
     $(".btn-notrunning").hide();
     $(".header-status").css({color:'rgb(161, 15, 63)'});
   }
 });
 
+$(".btn-onoff").click(function(){
+  if (sketch_status.enabled==true){
+    sketch_status.enabled = false;
+    $(".btn-onoff").addClass("btn-danger").removeClass("btn-success");
+    $(".btn-onoff-icon").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
+    $(".btn-onoff-text").text("Disabled");
+  }
+  if (sketch_status.enabled==false){
+    sketch_status.enabled = true;
+    $(".btn-onoff").addClass("btn-success").removeClass("btn-danger");
+    $(".btn-onoff-text").removeClass("ion-close-circled").addClass("ion-checkmark-circled");
+    $(".btn-onoff-text").text("Enabled");
+  }
+});
 
 $(document).on( "click", ".item-delete", function(){
   var elem=$(this).parent().parent().parent();
@@ -134,20 +148,6 @@ $(".new-item-exit").click(function(){
   autosave();
 })
 
-$(".btn-onoff").click(function(){
-  if (status.enabled==true){
-    socket.emit("trigger-disable");
-    $(".btn-onoff").addClass("btn-danger");
-    $(".btn-onoff").removeClass("btn-success");
-    $(".btn-onoff").text("Disabled");
-  }
-  if (status.enabled==false){
-    socket.emit("trigger-enable");
-    $(".btn-onoff").addClass("btn-success");
-    $(".btn-onoff").removeClass("btn-danger");
-    $(".btn-onoff").text("Enabled");
-  }
-});
 
 $(".btn-stopsketch").click(function(){
   socket.emit("stop-sketch");

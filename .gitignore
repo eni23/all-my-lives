@@ -6,3 +6,4 @@ node_modules
 pinode/node_modules/*
 !pinode/node_modules/lifx
 pinode/npm-debug.log
+pinode/app/static/lib/ionicons-2.0.1/cheatsheet.html

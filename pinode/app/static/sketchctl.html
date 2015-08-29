@@ -6,21 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
-
-    <title>aml-pinode</title>
-
+    <title>aml-pinode - sketchctl</title>
     <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/lib/bootstrap-slider.min.css" rel="stylesheet">
     <link href="/lib/bootstrap-popover-x/bootstrap-popover-x.css" rel="stylesheet" >
     <link href="/lib/spectrum-61ad86c/spectrum.css" rel="stylesheet">
-
+    <link href="/lib/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
-
-
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -48,14 +43,19 @@
 
     <div class="container">
 
-      <button class="btn btn-success btn-onoff" type="button">Enabled</button>
-
-      <button class="btn btn-danger btn-stopsketch" type="button" data-toggle="modal" data-target="#files">
-        Stop running Sketch <!--<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>!-->
+      <button class="btn btn-success btn-onoff" type="button">
+        <i class="btn-onoff-icon icon ion-checkmark-circled"></i>
+        <span class="btn-onoff-text">Enabled</span>
       </button>
 
-      <button class="btn btn-primary btn-downloadsketch" type="button" data-toggle="modal" data-target="#files">
-        Download Sketchfile <!--<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>!-->
+      <button class="btn btn-danger btn-stopsketch" type="button">
+        <i class="icon ion-android-hand"></i>
+        Stop running Sketch
+      </button>
+
+      <button class="btn btn-primary btn-downloadsketch">
+        <i class="icon ion-android-download"></i>
+        Download Sketchfile
       </button>
 
 
@@ -209,13 +209,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
 
           </div>
@@ -276,13 +276,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
         </h4>
@@ -325,13 +325,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
         </h4>
@@ -379,13 +379,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
         </h4>
@@ -421,13 +421,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
         </h4>
@@ -447,13 +447,13 @@
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
             <button type="button" class="btn btn-danger btn-xs item-delete" title="Delete Item">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <i class="icon ion-trash-b"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-test-single" title="Test single Item">
-              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              <i class="icon ion-play"></i>
             </button>
             <button type="button" class="btn btn-primary btn-xs item-sort-icon" title="move up or down">
-              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
         </h4>

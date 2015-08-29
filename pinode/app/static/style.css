@@ -24,7 +24,13 @@ body {
 
 .list-group {
 }
+.icon {
+  font-size:110%;
+}
 
+.item-menu > button {
+ width: 25px; 
+}
 .lifx-inline-form {
   margin-top: 10px;
 }
