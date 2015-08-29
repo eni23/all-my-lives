@@ -1,5 +1,8 @@
 var socket = io();
 var config={};
+var color_active = 'rgb(10, 180, 52)';
+var color_on = 'rgb(161, 15, 63)';
+
 
 $(document).ready(function(){
   common_init();
@@ -8,8 +11,18 @@ $(document).ready(function(){
 
 common_init = function(){
   socket.emit("config");
+  socket.emit("status");
 };
 
+socket.on("status",function(resp){
+  console.log(resp);
+  if (resp.running==true){
+    $(".header-status").animate({color:color_on},200);
+  }
+  else {
+    $(".header-status").animate({color:color_active},200);
+  }
+});
 
 socket.on("config",function(cfg){
   config = cfg;
@@ -19,12 +32,14 @@ socket.on("config",function(cfg){
 
 
 socket.on('start-sketch', function(){
-  $(".header-status").animate({color:'rgb(161, 15, 63)'}, 500 );
+  $(".btn-stopsketch").show();
+  $(".header-status").animate({color:color_on}, 500 );
   $(".header-status").attr("title","Sketch is running");
 });
 
 
 socket.on('stop-sketch', function(){
-  $(".header-status").animate({color:'rgb(10, 180, 52)'}, 500 );
+  $(".btn-stopsketch").hide();
+  $(".header-status").animate({color:color_active}, 500 );
   $(".header-status").attr("title","Sketch not running");
 });

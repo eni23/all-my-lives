@@ -4,19 +4,19 @@
       "type": "lifx",
       "name": "",
       "bulb": "d073d501596e",
-      "h": "166.76",
-      "s": "1",
-      "l": "0.5",
+      "h": "167",
+      "s": "0",
+      "l": "0.47",
       "w": "0.038",
-      "t": "3000",
+      "t": "30000",
       "blocking": true
     },
     {
       "type": "audio",
       "name": "",
       "file": "never_gonna_give_you_up.mp3",
-      "sink": "0:0",
-      "blocking": false
+      "sink": "1:0",
+      "blocking": true
     },
     {
       "type": "script",

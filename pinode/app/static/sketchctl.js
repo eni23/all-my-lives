@@ -34,12 +34,6 @@ init = function(){
 
 };
 
-socket.on('config', function(cfg){
-  config = cfg;
-  $(".header-nodename").html(config.nodename);
-  $(".header-nodeip").html(config.nodeip);
-});
-
 socket.on("files",function(resp){
   files = resp;
 });
