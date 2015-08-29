@@ -1,7 +1,11 @@
 var exec = require('child_process').exec;
 
+var mypid=process.pid;
+var childpid=false;
+
 var run_command = function( command ){
   var child = exec( command );
+  childpid = child.pid;
   child.stdout.on('data', function(data) {
     process.send( {
       type: "stdout",
@@ -17,14 +21,26 @@ var run_command = function( command ){
   child.on('close', function(code) {
     process.send( {
       type: "done",
-      exitcode: code
+      exitcode: code,
+      pid: [ mypid, childpid ]
     });
-    console.log("child done");
+    process.exit(code);
   });
-  child.unref();
+  //process.send( {
+  //  type: "pid",
+  //  data: [ mypid, childpid ]
+  //});
 }
 
 process.on('message', function(m) {
-  run_command( m.cmd );
-  console.log("child runs: " + m.cmd);
+  if ( m.type == "cmd" ){
+    console.log("child runs: "+m.data);
+    run_command( m.data );
+  }
+  else if ( m.type == "pid" ){
+    process.send( {
+      type: "pid",
+      data: [ mypid, childpid ]
+    });
+  }
 });

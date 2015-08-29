@@ -109,7 +109,7 @@ module.exports = {
 
   fork_proc: function(cmd, callback){
     var cp = require('child_process');
-    var child = cp.fork( approot + '/bin/child-worker' );
+    var child = cp.fork( approot + '/app/src/child-worker.js' );
     child.unref();
     child.on('message', function(msg) {
       switch (msg.type) {

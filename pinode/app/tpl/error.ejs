@@ -1,3 +1,53 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <title>pinode - error</title>
+    <link href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-slider.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-popover-x/bootstrap-popover-x.css" rel="stylesheet" >
+    <link href="/lib/spectrum-61ad86c/spectrum.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">
+            <span class="glyphicon glyphicon-record header-status"></span>
+            <span class="header-nodename">Nodename</span>
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="menu-item" href="/">sketchctl</a></li>
+            <li><a class="menu-item" href="/amlctl">amlctl</a></li>
+            <li><a class="menu-item" href="/lifxctl">lifxctl</a></li>
+            <li><a class="header-nodeip">0.0.0.0</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+      <pre><%= error.stack %></pre>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/jquery-1.11.3.min.js"></script>
+    <script src="/lib/jquery.color.js"></script>
+    <script src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="/lib/sortable-1.2.1.min.js"></script>
+    <script src="/lib/spectrum-61ad86c/spectrum.js"></script>
+    <script src="/lib/ejs.min.js"></script>
+  </body>
+</html>

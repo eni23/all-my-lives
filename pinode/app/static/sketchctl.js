@@ -150,18 +150,18 @@ $(".btn-onoff").click(function(){
 });
 
 $(".btn-stopsketch").click(function(){
-  socket.emit("stop-sketch",data);
+  socket.emit("stop-sketch");
 });
 $(".btn-downloadsketch").click(function(){
   location.href="/sketch/download"
 });
 
 $(".test-enter").click(function(){
-  socket.emit("sketch-test-enter",data);
+  socket.emit("sketch-test-enter");
 });
 
 $(".test-exit").click(function(){
-  socket.emit("sketch-test-exit",data);
+  socket.emit("sketch-test-exit");
 });
 
 $(".btn-save").click(function(){
