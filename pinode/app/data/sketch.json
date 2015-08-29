@@ -4,42 +4,11 @@
       "type": "lifx",
       "name": "",
       "bulb": "d073d501596e",
-      "h": "167",
+      "h": "0",
       "s": "0",
-      "l": "0.47",
+      "l": "1",
       "w": "0.038",
-      "t": "30000",
-      "blocking": true
-    },
-    {
-      "type": "audio",
-      "name": "",
-      "file": "never_gonna_give_you_up.mp3",
-      "sink": "1:0",
-      "blocking": true
-    },
-    {
-      "type": "script",
-      "name": "",
-      "cmd": "sleep 50",
-      "blocking": true
-    },
-    {
-      "type": "dmx",
-      "name": "",
-      "channel": "2",
-      "start": "255",
-      "end": "0",
-      "duration": "2000",
-      "blocking": true
-    },
-    {
-      "type": "dmx",
-      "name": "",
-      "channel": "0",
-      "start": "255",
-      "end": "0",
-      "duration": "3000",
+      "t": "10000",
       "blocking": true
     },
     {
@@ -47,7 +16,52 @@
       "name": "",
       "duration": "5000",
       "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "10000",
+      "blocking": true
     }
   ],
-  "exit": []
+  "exit": [
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "10",
+      "blocking": true
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
+      "h": "296.4700000000001",
+      "s": "1",
+      "l": "0.4963",
+      "w": "0",
+      "t": "10000",
+      "blocking": true
+    },
+    {
+      "type": "lifx",
+      "name": "",
+      "bulb": "d073d501596e",
+      "h": "0",
+      "s": "0",
+      "l": "0",
+      "w": "0",
+      "t": "2000",
+      "blocking": true
+    }
+  ]
 }

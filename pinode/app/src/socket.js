@@ -1,6 +1,35 @@
 var path = require('path');
 var fs = require('fs');
 
+
+var lifxconvert = function( raw_status ){
+  var obj = {};
+  var _convert = function( value, r1, r2 ) {
+    return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+  }
+  if ( raw_status.power > 0 ){
+    obj.on = true;
+  }
+  else {
+    obj.on = false;
+  }
+  obj.h = parseInt( _convert( raw_status.hue, [0, 65535], [0, 360] ) );
+  obj.s = parseFloat( _convert( raw_status.saturation, [0, 65535], [0, 1] ) );
+  obj.l = parseFloat( _convert( raw_status.brightness, [0, 65535], [0, 1] ) );
+  obj.w = parseFloat( _convert( raw_status.kelvin, [0, 8999], [0, 0.168] ) );
+  //obj.raw = raw_status;
+  return obj;
+}
+
+
+// lifxctl live value ajustments from bulb data, sendt as socket-broadcast
+lx.on("bulbstate", function(data) {
+  var bulbstatus = lifxconvert(data.state);
+  bulbstatus.id = data.addr.toString('hex');
+  io.emit("lifx-bulbstatus",bulbstatus);
+});
+
+
 io.on('connection', function(socket){
 
   socket.on('config', function(msg){
@@ -55,6 +84,7 @@ io.on('connection', function(socket){
   	    sat = parseInt(msg.s * 0xffff),
 	      lum = parseInt(msg.l * 0xffff),
 	      white = parseInt(msg.w * 0xffff);
+
     if (!msg.bulb){
       var config = get_config();
       for (bulb of config.lifxbulbs){
@@ -69,15 +99,27 @@ io.on('connection', function(socket){
   });
 
   socket.on('lifx-on', function(msg){
+    lx.lightsOn(msg.bulbid);
+  });
+
+  socket.on('lifx-all-on', function(msg){
     for (idx in lx.gateways){
       lx.lightsOn(lx.gateways[idx].bulbAddress);
     }
   });
 
   socket.on('lifx-off', function(msg){
+    lx.lightsOff(msg.bulbid);
+  });
+
+  socket.on('lifx-all-off', function(msg){
     for (idx in lx.gateways){
       lx.lightsOff(lx.gateways[idx].bulbAddress);
     }
+  });
+
+  socket.on('lifx-request-status', function(msg){
+    lx.requestStatus();
   });
 
   socket.on('lifx-bulbs', function(msg){
@@ -100,7 +142,7 @@ io.on('connection', function(socket){
 
   socket.on('sketch-test-single', function(req){
     var item = req[0];
-    item.blocking = false;
+    item.blocking = true;
     var sketch =  [ item ];
     sketchrunner.config=get_config();
     sketchrunner.stop();

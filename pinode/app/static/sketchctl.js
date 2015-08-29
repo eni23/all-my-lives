@@ -52,29 +52,35 @@ socket.on("status",function(resp){
   }
   if (sketch_status.enabled==false){
     $(".btn-onoff").addClass("btn-danger").removeClass("btn-success");
-    $(".btn-onoff-text").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
+    $(".btn-onoff-icon").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
     $(".btn-onoff-text").text("Disabled");
   }
   if (sketch_status.running){
     $(".btn-stopsketch").show();
     $(".btn-notrunning").hide();
-    $(".header-status").css({color:'rgb(161, 15, 63)'});
+    //$(".header-status").animate({color:color_on});
   }
 });
 
 $(".btn-onoff").click(function(){
   if (sketch_status.enabled==true){
+    socket.emit("trigger-disable");
+    /*
     sketch_status.enabled = false;
     $(".btn-onoff").addClass("btn-danger").removeClass("btn-success");
     $(".btn-onoff-icon").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
     $(".btn-onoff-text").text("Disabled");
+    */
   }
   if (sketch_status.enabled==false){
-    sketch_status.enabled = true;
+    socket.emit("trigger-enable");
+    /*
     $(".btn-onoff").addClass("btn-success").removeClass("btn-danger");
     $(".btn-onoff-text").removeClass("ion-close-circled").addClass("ion-checkmark-circled");
     $(".btn-onoff-text").text("Enabled");
+    */
   }
+  socket.emit("status");
 });
 
 $(document).on( "click", ".item-delete", function(){

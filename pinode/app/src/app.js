@@ -32,6 +32,9 @@ var route_api_v1 = require('./api.v1');
 var app = express();
 app.io = io;
 
+range_convert = function( old_value, old_min, old_max, new_min, new_max ){
+  return ( (old_value - old_min) / (old_max - old_min) ) * (new_max - new_min) + new_min;
+}
 
 get_sketch = function(){
   var sketchfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/sketch.json"

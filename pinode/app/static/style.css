@@ -27,9 +27,17 @@ body {
 .icon {
   font-size:110%;
 }
+.icon-bulb {
+  font-size:115%;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+.bulb-power-status.active {
+  /*color: rgb(255, 230, 0);*/
+}
 
 .item-menu > button {
- width: 25px; 
+ width: 25px;
 }
 .lifx-inline-form {
   margin-top: 10px;

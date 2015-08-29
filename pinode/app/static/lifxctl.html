@@ -38,9 +38,6 @@
       </div>
     </nav>
     <div class="container">
-      <button class="btn btn-primary btn-reload" type="button">
-        <i class="icon ion-refresh"></i> reload
-      </button>
       <button class="btn btn-success btn-lamps-on" type="button">
         <i class="icon ion-lightbulb"></i> all Lamps ON
       </button>
@@ -58,10 +55,11 @@
     <script src="/pinode-common.js"></script>
     <script src="/lifxctl.js"></script>
     <script id="item-tpl-lifx" type="text/template">
-      <div class="liitemgw-item liitemgw">
+      <div class="liitemgw-item liitemgw" id="lamp_<%= item.bulbAddress %>">
         <div class="row lamp lamp-title">
           <div class="col-md-1 icon">
-            <span class="glyphicon glyphicon-record bulb-lx-status <%= item.css %>"></span>
+            <i class="icon icon-bulb ion-lightbulb bulb-power-status <%= item.powercss %>"></i>
+            <i class="icon icon-bulb ion-wifi bulb-lx-status <%= item.css %>"></i>
           </div>
           <div class="col-md-2 lampid"><%= item.bulbAddress %></div>
           <div class="col-md-2 lampip"><%= item.ip %></div>
@@ -77,19 +75,19 @@
           <div class="row">
             <div class="col-md-1">Saturation</div>
             <div class="col-md-11">
-              <input class="bar bar-color range-s" type="range" value="0" min="0" max="1" step="0.01"/>
+              <input class="bar bar-color range-s" type="range" value="0" min="0" max="1" step="0.001"/>
             </div>
           </div>
           <div class="row">
             <div class="col-md-1">Lightness</div>
             <div class="col-md-11">
-              <input class="bar bar-color range-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.01" />
+              <input class="bar bar-color range-l" type="range" value="0" type="range" value="0" min="0" max="1" step="0.001" />
             </div>
           </div>
           <div class="row item-inline-form-bottom">
             <div class="col-md-1">White</div>
             <div class="col-md-11">
-              <input class="bar bar-color range-w" type="range" value="0" type="range" value="0" min="0" max="0.1" step="0.001" />
+              <input class="bar bar-color range-w" type="range" value="0" type="range" value="0" min="0" max="0.168" step="0.0001" />
             </div>
           </div>
           <div class="row">
