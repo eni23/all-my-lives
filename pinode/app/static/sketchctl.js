@@ -209,9 +209,9 @@ $(".bar-dmx").on("input", function(e){
 });
 
 $(document).on("click",".sketchitem", function(e){
-    if( $(e.target).is('input') || $(e.target).is('button') ){
+    if( $(e.target).is('input') || $(e.target).is('button') || $(e.target).is('option') || $(e.target).is('.item-detail') ){
       e.preventDefault();
-      return;
+      return false;
     }
     console.log("foo");
     var target = $(this).find(".item-detail");

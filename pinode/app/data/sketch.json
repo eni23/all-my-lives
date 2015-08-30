@@ -9,7 +9,7 @@
     {
       "type": "audio",
       "name": "threee",
-      "file": "big_buck_bunny_720p_1mb.mp4",
+      "file": "never_gonna_give_you_up.mp3",
       "sink": "0:0",
       "blocking": false
     },
@@ -17,12 +17,6 @@
       "type": "video",
       "name": "a movie",
       "file": "big_buck_bunny_720p_1mb.mp4",
-      "blocking": false
-    },
-    {
-      "type": "script",
-      "name": "dxfb",
-      "cmd": "/usr/bin/false",
       "blocking": false
     },
     {
@@ -34,6 +28,12 @@
       "l": "0.47137185000000004",
       "w": "0",
       "t": "0",
+      "blocking": false
+    },
+    {
+      "type": "script",
+      "name": "dxfb",
+      "cmd": "/usr/bin/false",
       "blocking": false
     },
     {
