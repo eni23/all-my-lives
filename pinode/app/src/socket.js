@@ -110,7 +110,11 @@ io.on('connection', function(socket){
 
   socket.on('lifx-all-on', function(msg){
     for (idx in lx.gateways){
+      var bulbstatus = lifxconvert(lx.gateways[idx].state);
+      bulbstatus.on = true;
+      bulbstatus.id = msg.bulbid;
       lx.lightsOn(lx.gateways[idx].bulbAddress);
+      io.emit("lifx-bulbstatus",bulbstatus);
     }
   });
 
