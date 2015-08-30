@@ -100,18 +100,25 @@ body {
   min-width: 300px;
 }
 .sketchitem {
-  min-width: 35px;
+  min-height: 35px;
 }
+
+
 .sketchitem > .item-detail {
   margin-top: 15px;
+  font-size: 12px!important;
+  font-weight: normal!important;
   display: none;
 }
 .item-item-name {
   float: left;
   width: 60px;
   opacity: 0.7;
+  cursor: pointer;
 }
-
+ .item-icon {
+  cursor: pointer;
+}
 input.item-desc {
   border:none;
   color: #000;
@@ -140,6 +147,9 @@ input.item-desc:focus {
 
 .liitemgw-item:nth-of-type(even), .sketchitem-item:nth-of-type(even){
   background-color: #f9f9f9;
+}
+.liitemgw-item:nth-of-type(odd), .sketchitem-item:nth-of-type(odd){
+  background-color: #fff;
 }
 
 .liitemgw:first-child, .sketchitem:first-child{

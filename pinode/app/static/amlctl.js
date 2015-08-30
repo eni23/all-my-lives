@@ -23,7 +23,8 @@ socket.on("nodelist",function(msg){
   $(".nodes").html("");
   var i=0;
 
-  for (node of msg.nodes){
+  for (idx in msg.nodes){
+    var node=msg.nodes[idx];
     var thisnode = nodes[i] = {};
 
     var nodeident =  { id: i, ip:node.ip, port:node.port };

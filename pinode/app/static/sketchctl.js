@@ -208,6 +208,22 @@ $(".bar-dmx").on("input", function(e){
   });
 });
 
+$(document).on("click",".sketchitem", function(e){
+    if( $(e.target).is('input') || $(e.target).is('button') ){
+      e.preventDefault();
+      return;
+    }
+    console.log("foo");
+    var target = $(this).find(".item-detail");
+    if (target.is(":visible")){
+      target.hide();
+    }
+    else {
+      target.show();
+      //$(".spectrum-color").spectrum("reflow");
+    }
+});
+
 autosave = function(){
   var enter = sketch_to_json( $(".drag-ul-enter") );
   var exit = sketch_to_json( $(".drag-ul-exit") );
@@ -259,7 +275,8 @@ new_item = function( e, target ){
 
 render_sketch = function( data , target ){
 
-  for (item of data) {
+  for (idx in data) {
+    var item = data[idx];
     switch (item.type) {
 
       case "lifx":

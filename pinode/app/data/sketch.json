@@ -2,28 +2,8 @@
   "enter": [
     {
       "type": "script",
-      "name": "dxfb",
+      "name": "fooo bar",
       "cmd": "/usr/bin/false",
-      "blocking": false
-    },
-    {
-      "type": "lifx",
-      "name": "test test test",
-      "bulb": "d073d501596e",
-      "h": "0",
-      "s": "0",
-      "l": "0",
-      "w": "0",
-      "t": "0",
-      "blocking": false
-    },
-    {
-      "type": "dmx",
-      "name": "sadc",
-      "channel": "0",
-      "start": "0",
-      "end": "0",
-      "duration": "0",
       "blocking": false
     },
     {
@@ -40,13 +20,45 @@
       "blocking": false
     },
     {
+      "type": "script",
+      "name": "dxfb",
+      "cmd": "/usr/bin/false",
+      "blocking": false
+    },
+    {
+      "type": "lifx",
+      "name": "test test test",
+      "bulb": "d073d501596e",
+      "h": "50.290000000000006",
+      "s": "0.37258938988401613",
+      "l": "0.47137185000000004",
+      "w": "0",
+      "t": "0",
+      "blocking": false
+    },
+    {
       "type": "delay",
       "name": "another movie",
+      "duration": "0",
+      "blocking": false
+    },
+    {
+      "type": "dmx",
+      "name": "sadc",
+      "channel": "0",
+      "start": "0",
+      "end": "0",
       "duration": "0",
       "blocking": false
     }
   ],
   "exit": [
+    {
+      "type": "delay",
+      "name": "baz",
+      "duration": "0",
+      "blocking": false
+    },
     {
       "type": "lifx",
       "name": "fooo",
@@ -62,12 +74,6 @@
       "type": "video",
       "name": "bar",
       "file": "big_buck_bunny_720p_1mb.mp4",
-      "blocking": false
-    },
-    {
-      "type": "delay",
-      "name": "baz",
-      "duration": "0",
       "blocking": false
     }
   ]
