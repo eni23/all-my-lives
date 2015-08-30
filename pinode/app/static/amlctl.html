@@ -51,14 +51,25 @@
     <script id="item-tpl-pinode" type="text/template">
       <div class="liitemgw-item liitemgw" id="node-<%= item.id %>" nodeid="<%= item.id %>">
         <div class="row lamp lamp-title">
-          <div class="col-md-1 icon itm-node">
+          <div class="col-md-1 icon">
             <span class="glyphicon glyphicon-record node-status <%= item.css %>"></span>
           </div>
-          <div class="col-md-2 itm-node nodename"><%= item.nodename %></div>
-          <div class="col-md-5 node-ctrl">
-            <button class="btn btn-primary btn-enter" type="button">Enter</button>
-            <button class="btn btn-primary btn-exit" type="button">Exit</button>
-            <button class="btn btn-danger btn-stop" type="button">Stop</button>
+          <div class="col-md-4 nodename">
+            <%= item.nodename %>
+          </div>
+          <div class="col-md-6 node-ctrl">
+            <button class="btn btn-primary btn-enter" type="button">
+              <i class="icon ion-play"></i>
+              Enter
+            </button>
+            <button class="btn btn-primary btn-exit" type="button">
+              <i class="icon ion-play"></i>
+              Exit
+            </button>
+            <button class="btn btn-danger btn-stop" type="button">
+              <i class="icon ion-stop"></i>
+              Stop
+            </button>
           </div>
         </div>
       </div>

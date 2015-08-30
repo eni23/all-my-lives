@@ -195,3 +195,19 @@ input.item-desc:focus {
 .node-ctrl {
   display: none;
 }
+
+.itm-node-inline {
+  float: left;
+  display: inline-block;
+}
+.itm-node-inline.node-status {
+  margin-right: 15px;
+  margin-top: 5px;
+}
+.itm-node-inline.nodename {
+  margin-top: 3px;
+  margin-right: 15px;
+}
+.itm-node-inline-parent {
+  min-width: 40%;
+}
