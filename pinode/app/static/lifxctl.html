@@ -56,14 +56,21 @@
     <script src="/lifxctl.js"></script>
     <script id="item-tpl-lifx" type="text/template">
       <div class="liitemgw-item liitemgw" id="lamp_<%= item.bulbAddress %>">
-        <div class="row lamp lamp-title">
-          <div class="col-md-1 icon">
+        <div class="item-top lamp lamp-title">
+          <div class="lx-icons">
             <i class="icon icon-bulb ion-lightbulb bulb-power-status <%= item.powercss %>"></i>
             <i class="icon icon-bulb ion-wifi bulb-lx-status <%= item.css %>"></i>
           </div>
-          <div class="col-md-2 lampid"><%= item.bulbAddress %></div>
-          <div class="col-md-2 lampip"><%= item.ip %></div>
-          <div class="col-md-5 lampcname"><%= item.name %></div>
+          <div class="lx-lampid lampid">
+            <%= item.bulbAddress %>
+          </div>
+          <div class="lx-lampip lampip hidden-xs">
+            <%= item.ip %>
+          </div>
+          <div class="lx-name lampcname hidden-xs">
+            <%= item.name %>
+          </div>
+          <div class="cls"></div>
         </div>
         <div class="lamp-detail">
           <div class="row">
@@ -97,6 +104,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </script>
   </body>

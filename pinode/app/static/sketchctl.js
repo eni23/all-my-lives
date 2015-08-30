@@ -124,13 +124,13 @@ $(document).on( "click", ".item-test-single", function(){
 
 $(".new-item-enter").click(function(){
   new_item(this, $(".drag-ul-enter"));
-  animate_item($(".drag-ul-enter>li:last"));
+  animate_item($(".drag-ul-enter>div:last"));
   autosave();
 })
 
 $(".new-item-exit").click(function(){
   new_item(this, $(".drag-ul-exit"));
-  animate_item($(".drag-ul-exit>li:last"));
+  animate_item($(".drag-ul-exit>div:last"));
   autosave();
 })
 
@@ -302,12 +302,12 @@ sketch_to_json = function( source ) {
 
   sketch = [];
 
-  if (source.children("li").length==0){
+  if (source.children("div").length==0){
     var list=source;
   }
   else {
-    source.children("li")
-    var list=source.children("li")
+    source.children("div")
+    var list=source.children("div")
   }
 
   list.each(function(){

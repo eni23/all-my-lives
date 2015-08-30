@@ -129,7 +129,7 @@ socket.on('lifx-gw', function(msg){
   // toggle single lamp status
   $(".bulb-power-status").click(function(e){
     e.preventDefault();
-    var target_bulb = $(this).parent().parent().find(".lampid").html();
+    var target_bulb = $(this).parent().parent().find(".lampid").text().trim();
     if ($(this).hasClass("active")){
       socket.emit("lifx-off",{ bulbid: target_bulb });
       $(this).removeClass("active");

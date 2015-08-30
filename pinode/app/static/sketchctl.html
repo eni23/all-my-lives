@@ -88,8 +88,8 @@
               <button class="btn btn-primary test-enter" type="button">Test</button>
             </div>
             <div class="dragarea-enter">
-              <ul class="list-group drag-ul-enter">
-              </ul>
+              <div class="list-group drag-ul-enter">
+              </div>
             </div>
           </div>
 
@@ -112,8 +112,8 @@
               <button class="btn btn-primary test-exit" type="button">Test</button>
             </div>
             <div class="dragarea-exit">
-              <ul class="list-group drag-ul-exit">
-              </ul>
+              <div class="list-group drag-ul-exit">
+              </div>
             </div>
           </div>
 
@@ -203,8 +203,9 @@
 
     <!-- templates for ejs !-->
     <script id="item-tpl-lifx" type="text/template">
-      <li class="list-group-item item-lifx">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-lifx">
+        <div class="item-top">
+          <i class="icon icon-item ion-lightbulb"></i>
           LIFX
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -219,7 +220,8 @@
             </button>
 
           </div>
-        </h4>
+        </div>
+          <div class="item-detail">
           <form class="form-inline item-inline-form-bottom">
             <div class="form-group">
               <label>Lamp</label>
@@ -266,12 +268,14 @@
               blocking
             </label>
         </form>
-      </li>
+      </div>
+      </div>
     </script>
 
     <script id="item-tpl-dmx" type="text/template">
-      <li class="list-group-item item-dmx">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-dmx">
+        <div class="item-top">
+          <i class="icon icon-item ion-levels"></i>
           DMX
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -285,7 +289,8 @@
               <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
-        </h4>
+        </div>
+        <div class="item-detail">
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>Channel</label>
@@ -315,12 +320,14 @@
             blocking
           </label>
         </form>
-      </li>
+      </div>
+      </div>
     </script>
 
     <script id="item-tpl-audio" type="text/template">
-      <li class="list-group-item item-audio">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-audio">
+        <div class="item-top">
+          <i class="icon icon-item ion-volume-high"></i>
           Audio
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -334,7 +341,8 @@
               <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
-        </h4>
+        </div>
+        <div class="item-detail">
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>File</label>
@@ -369,12 +377,14 @@
             blocking
           </label>
         </form>
-      </li>
+        </div>
+      </div>
     </script>
 
     <script id="item-tpl-video" type="text/template">
-      <li class="list-group-item item-video">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-video">
+        <div class="item-top">
+          <i class="icon icon-item ion-android-film"></i>
           Video
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -388,7 +398,8 @@
               <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
-        </h4>
+        </div>
+        <div class="item-detail">
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>File</label>
@@ -411,12 +422,14 @@
             blocking
           </label>
         </form>
-      </li>
+      </div>
+      </div>
     </script>
 
     <script id="item-tpl-delay" type="text/template">
-      <li class="list-group-item item-delay">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-delay">
+        <div class="item-top">
+          <i class="icon icon-item ion-clock"></i>
           Delay
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -430,19 +443,22 @@
               <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
-        </h4>
+        </div>
+        <div class="item-detail">
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>Duration (ms)</label>
             <input type="number" class="form-control delay-duration input-sm" value="<%= duration %>">
           </div>
         </form>
-      </li>
+      </div>
+      </div>
     </script>
 
     <script id="item-tpl-script" type="text/template">
-      <li class="list-group-item item-script">
-        <h4 class="list-group-item-heading">
+      <div class="sketchitem sketchitem-item item-script">
+        <div class="item-top">
+          <i class="icon icon-item ion-gear-a"></i>
           Script
           <input type="text" class="item-desc" value="<%= name %>">
           <div class="item-menu">
@@ -456,7 +472,8 @@
               <i class="icon ion-drag" title="move up or down"></i>
             </button>
           </div>
-        </h4>
+        </div>
+        <div class="item-detail">
         <form class="form-inline item-inline-form-bottom">
           <div class="form-group">
             <label>Path or Command</label>
@@ -471,7 +488,8 @@
             blocking
           </label>
         </form>
-      </li>
+      </div>
+      </div>
     </script>
 
 

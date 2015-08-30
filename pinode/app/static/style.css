@@ -67,6 +67,7 @@ body {
 input.item-desc {
   border:none;
   color: gray;
+  background: transparent;
 }
 input.item-desc:focus {
   border:none;
@@ -111,10 +112,13 @@ input.item-desc:focus {
   min-width: 300px;
 }
 
+.sketchitem > .item-detail {
+  margin-top: 15px;
+  display: none;
+}
 
 
-
-.liitemgw {
+.liitemgw, .sketchitem{
   margin: 0;
   margin-bottom:0;
   border: 1px solid  #e6e6e6;
@@ -124,31 +128,61 @@ input.item-desc:focus {
   font-size: 1.2em;
 }
 
-.lamp{
-  padding: 6px;
-}
-.lampcname {
-  color: rgb(157, 157, 157);
-}
-.liitemgw-item:nth-of-type(even){
+
+.liitemgw-item:nth-of-type(even), .sketchitem-item:nth-of-type(even){
   background-color: #f9f9f9;
 }
 
-.liitemgw:first-child{
+.liitemgw:first-child, .sketchitem:first-child{
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
 
-.liitemgw:last-child{
+.liitemgw:last-child, .sketchitem:last-child {
   border-bottom: 1px solid  #e6e6e6;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
+.sketchitem-item{
+  padding: 11px;
+}
+
+.dragarea-enter, .dragarea-exit {
+  margin-top: 25px;
+}
+.icon-item {
+  display: block;
+  float: left;
+  width: 25px;
+  opacity: 0.1;
+}
+
+.lamp-title > div {
+  float: left;
+  height: auto;
+}
+
+.lamp{
+  padding: 6px;
+  min-height: 35px;
+}
+.lampcname {
+  color: rgb(157, 157, 157);
+}
+.lx-name,.lx-lampip,.lx-lampid {
+  margin-left: 15px;
+}
+.lx-lampip,.lx-lampid {
+margin-right: 10px;
+}
 .liitemgw-title {
   font-weight: bold;
   padding: 6px;
   border: none;
+}
+.cls {
+  clear: both;
 }
 
 .lamp-items, .nodes {

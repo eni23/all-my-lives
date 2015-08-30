@@ -119,6 +119,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('lifx-off', function(msg){
+    lx.lightsOff(msg.bulbid);
     var bulbstatus = lifxconvert(lx.bulbs[msg.bulbid].state);
     bulbstatus.id = msg.bulbid;
     bulbstatus.on = false;
