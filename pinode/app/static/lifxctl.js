@@ -12,7 +12,6 @@ init = function(){
   socket.emit("lifx-bulbs");
   socket.emit("config");
   setInterval( (function(){
-    console.log("tick");
     socket.emit("lifx-request-status");
   }), 5000);
 }
