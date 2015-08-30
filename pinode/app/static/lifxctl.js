@@ -12,6 +12,7 @@ init = function(){
   socket.emit("lifx-bulbs");
   socket.emit("config");
   setInterval( (function(){
+    console.log("tick");
     socket.emit("lifx-request-status");
   }), 5000);
 }
@@ -25,7 +26,7 @@ set_lifx_color = function(color, bulb){
     "h":color.h,
     "s":color.s,
     "l":color.l,
-    "w":color.w
+    "w":color.w,
   });
 };
 
@@ -63,69 +64,24 @@ socket.on('lifx-bulbs', function(msg){
 socket.on("lifx-bulbstatus", function(status){
   var target = $("#lamp_"+status.id);
   target.find('.bulb-lx-status').addClass("active");
-
-
-  if (!localtable[status.id]){
-    localtable[status.id] = status;
-  }
-
-  // ckeck against localtable for a smooth ui
-  var status_wrong = false;
-  for (idx in localtable[status.id]){
-    if (idx == "id" || idx == "w" || idx == "a" || idx == "bulb" ){
-      continue;
-    }
-    var localvar = localtable[status.id][idx];
-    if  ( idx == "h" && parseInt(localvar)>0 && status[idx] != parseInt(localvar-1)){
-      if (localvar == status[idx]) continue;
-      status_wrong = { s:"hh",index:idx, me:localvar, bulb:status[idx]  };
-    }
-    else if ( localvar != status[idx] && ( idx != "h" || idx != "on" || idx != "s" ) ) {
-      if (idx=="h"){
-        continue;
-      }
-      if ( ( Math.round( localvar * 300 ) / 300 ) != ( Math.round( status[idx] * 300 ) / 300 ) ){
-        if (idx=="h"){
-          localvar=parseInt(localvar);
-        }
-        status_wrong = { index:idx, me:localvar, bulb:status[idx]  };
-      }
-    }
-    else if ( localvar != status[idx] && ( idx == "s") ) {
-      if ( ( Math.round( localvar * 50 ) / 50 ) != ( Math.round( status[idx] * 50 ) / 50 ) ){
-        status_wrong = { index:idx, me:localvar, bulb:status[idx]  };
-      }
-    }
-    else if ( localvar != status[idx] && ( idx == "on") ) {
-      status_wrong = { index:idx, me:localvar, bulb:status[idx]  };
-    }
-  }
-  if (status_wrong){
-    localtable[status.id].bulb = status.id;
-    socket.emit('set-lifx',localtable[status.id]);
-    //status_wrong.msg = "bulb is wrong";
-    //console.log(status_wrong);
-    return;
-  }
   target.find('input.range-h').val(status.h);
   target.find('input.range-s').val(status.s);
   target.find('input.range-l').val(status.l);
   target.find(".spectrum-color").spectrum("set", { h:status.h, s:status.s, l:status.l });
   localtable[status.id] = status;
 
-  if (status.on){
+  if (status.on==true){
     var iconcolor = color_lighton;
     if (status.s > 0.32 && status.l > 0.20){
       iconcolor = hsl_css(status);
     }
-    target.find('.bulb-power-status').animate({ color:iconcolor }, 350 );
+    target.find('.bulb-power-status').animate({ color:iconcolor }, 50 );
     target.find('.bulb-power-status').addClass("active");
   }
-  else {
-    target.find('.bulb-power-status').animate({ color:color_lightoff }, 350 );
+  else if (status.on==false) {
+    target.find('.bulb-power-status').animate({ color:color_lightoff }, 50 );
     target.find('.bulb-power-status').removeClass("active");
   }
-
 });
 
 socket.on('lifx-gw', function(msg){
@@ -196,6 +152,7 @@ socket.on('lifx-gw', function(msg){
       $(this).animate({ color:color_lighton }, 450 );
       localtable[target_bulb].on = true;
     }
+    //socket.emit("lifx-request-status");
     return false;
   })
 

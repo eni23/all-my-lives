@@ -89,17 +89,23 @@ io.on('connection', function(socket){
       var config = get_config();
       for (bulb of config.lifxbulbs){
         if (bulb.id){
+          io.emit("lifx-bulbstatus",{ id:bulb.id, h:msg.h, s:msg.s, l:msg.l});
           lx.lightsColour(hue, sat, lum, white, 0, bulb.id);
         }
       }
     }
     else {
+      io.emit("lifx-bulbstatus",{ id:msg.bulb, h:msg.h, s:msg.s, l:msg.l});
       lx.lightsColour(hue, sat, lum, white, 0, msg.bulb);
     }
   });
 
   socket.on('lifx-on', function(msg){
+    var bulbstatus = lifxconvert(lx.bulbs[msg.bulbid].state);
+    bulbstatus.id = msg.bulbid;
+    bulbstatus.on = true;
     lx.lightsOn(msg.bulbid);
+    io.emit("lifx-bulbstatus",bulbstatus);
   });
 
   socket.on('lifx-all-on', function(msg){
@@ -109,7 +115,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('lifx-off', function(msg){
+    var bulbstatus = lifxconvert(lx.bulbs[msg.bulbid].state);
+    bulbstatus.id = msg.bulbid;
+    bulbstatus.on = false;
     lx.lightsOff(msg.bulbid);
+    io.emit("lifx-bulbstatus",bulbstatus);
   });
 
   socket.on('lifx-all-off', function(msg){
