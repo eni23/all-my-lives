@@ -17,9 +17,6 @@ init = function(){
 }
 
 set_lifx_color = function(color, bulb){
-  var saveon = localtable[bulb].on;
-  localtable[bulb] = color;
-  localtable[bulb].on = saveon;
   set_bulb_iconcolor(color,bulb);
   socket.emit('set-lifx',{
     "bulb": bulb,
@@ -47,7 +44,6 @@ set_bulb_iconcolor = function(color,bulbid){
     var r = (color.l>0.05) ? parseInt( 255 * l ) : 0;
     var g = (color.l>0.05) ? parseInt( 235 * l ) : 0;
     var rgb = 'rgb('+r+','+g+',0)';
-    console.log(rgb);
     target.css({ color:rgb } );
   }
 };
@@ -68,9 +64,15 @@ socket.on("lifx-bulbstatus", function(status){
   target.find('input.range-s').val(status.s);
   target.find('input.range-l').val(status.l);
   target.find(".spectrum-color").spectrum("set", { h:status.h, s:status.s, l:status.l });
-  localtable[status.id] = status;
 
-  if (status.on==true){
+  if (typeof localtable[status.id]!='undefined'){
+    if (localtable[status.id] != status.on){
+      localtable[status.id] = undefined;
+      return;
+    }
+  }
+
+  if (status.on==true || target.find(".bulb-power-status").hasClass("active") ){
     if (status.s > 0.05 && status.l > 0.05){
       var iconcolor = hsl_css(status);
     }
@@ -82,32 +84,15 @@ socket.on("lifx-bulbstatus", function(status){
       var g = (color.l>0.05) ? parseInt( 235 * l ) : 0;
       var iconcolor = 'rgb('+r+','+g+',0)';
     }
-    target.find('.bulb-power-status').animate({ color:iconcolor }, 50 );
     target.find('.bulb-power-status').addClass("active");
+    target.find('.bulb-power-status').css({ color:iconcolor });
   }
   else if (status.on==false) {
-    target.find('.bulb-power-status').animate({ color:color_lightoff }, 50 );
     target.find('.bulb-power-status').removeClass("active");
+    target.find('.bulb-power-status').css({ color:color_lightoff });
   }
+
 });
-$(".bulb-power-status").click(function(e){
-  e.preventDefault();
-  var target_bulb = $(this).parent().parent().find(".lampid").html();
-  if ($(this).hasClass("active")){
-    socket.emit("lifx-off",{ bulbid: target_bulb });
-    $(this).removeClass("active");
-    $(this).animate({ color:color_lightoff }, 450 );
-    localtable[target_bulb].on = false;
-  }
-  else {
-    socket.emit("lifx-on",{ bulbid: target_bulb });
-    $(this).addClass("active");
-    $(this).animate({ color:color_lighton }, 450 );
-    localtable[target_bulb].on = true;
-  }
-  //socket.emit("lifx-request-status");
-  return false;
-})
 
 socket.on('lifx-gw', function(msg){
 
@@ -129,6 +114,25 @@ socket.on('lifx-gw', function(msg){
     }
     target.append( ejs.render( tpl, item ) );
   }
+  $(".bulb-power-status").click(function(e){
+    e.preventDefault();
+    var target_bulb = $(this).parent().parent().find(".lampid").html();
+    if ($(this).hasClass("active")){
+      socket.emit("lifx-off",{ bulbid: target_bulb });
+      $(this).removeClass("active");
+      //$(this).animate({ color:color_lightoff }, 450 );
+      localtable[target_bulb] = false;
+    }
+    else {
+      socket.emit("lifx-on",{ bulbid: target_bulb });
+      $(this).addClass("active");
+      //$(this).animate({ color:color_lighton }, 450 );
+      localtable[target_bulb] = true;
+    }
+    //socket.emit("lifx-request-status");
+    return false;
+  });
+
   socket.emit("lifx-request-status");
 
   $(".spectrum-color").spectrum({
