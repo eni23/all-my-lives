@@ -166,7 +166,8 @@ socket.on('lifx-gw', function(msg){
   // live change color
   $(".bar-color").on("input", function(e){
     var item_t = $(this).parent().parent().parent().parent();
-    var bulb = item_t.find(".lampid").html()
+    var bulb = item_t.attr("id").split("_")[1];
+    console.log(bulb);
     var color={};
     color.h = ( item_t.find('input.range-h').val() ),
     color.s = parseFloat( item_t.find('input.range-s').val() ),

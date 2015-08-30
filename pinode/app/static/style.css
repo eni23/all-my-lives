@@ -63,18 +63,6 @@ body {
   font-weight: bold;
 }
 
-
-input.item-desc {
-  border:none;
-  color: gray;
-  background: transparent;
-}
-input.item-desc:focus {
-  border:none;
-  outline: 0;
-}
-
-
 .inline-small {
   width:50px;
 }
@@ -111,11 +99,32 @@ input.item-desc:focus {
 .script-cmd {
   min-width: 300px;
 }
-
+.sketchitem {
+  min-width: 35px;
+}
 .sketchitem > .item-detail {
   margin-top: 15px;
   display: none;
 }
+.item-item-name {
+  float: left;
+  width: 60px;
+  opacity: 0.7;
+}
+
+input.item-desc {
+  border:none;
+  color: #000;
+  background: transparent;
+  width: 60%;
+}
+
+input.item-desc:focus {
+  border:none;
+  outline: 0;
+}
+
+
 
 
 .liitemgw, .sketchitem{
@@ -174,7 +183,7 @@ input.item-desc:focus {
   margin-left: 15px;
 }
 .lx-lampip,.lx-lampid {
-margin-right: 10px;
+  margin-right: 10px;
 }
 .liitemgw-title {
   font-weight: bold;
