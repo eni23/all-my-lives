@@ -27,6 +27,12 @@
   ],
   "exit": [
     {
+      "type": "video",
+      "name": "bar",
+      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
+      "blocking": false
+    },
+    {
       "type": "delay",
       "name": "baz",
       "duration": "0",
@@ -41,12 +47,6 @@
       "l": "0",
       "w": "0",
       "t": "0",
-      "blocking": false
-    },
-    {
-      "type": "video",
-      "name": "bar",
-      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
       "blocking": false
     }
   ]

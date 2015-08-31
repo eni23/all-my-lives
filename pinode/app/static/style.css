@@ -256,6 +256,12 @@ input.item-desc:focus {
 .itm-node {
   margin-top: 5px;
 }
+.col-md-1.icon {
+  margin-top: 8px;
+}
+.col-md-4.nodename {
+  margin-top: 5px;
+}
 
 .node-ctrl {
   display: none;
@@ -270,9 +276,10 @@ input.item-desc:focus {
   margin-top: 5px;
 }
 .itm-node-inline.nodename {
-  margin-top: 3px;
+  margin-top: 8px;
   margin-right: 15px;
 }
+
 .itm-node-inline-parent {
   min-width: 40%;
 }
