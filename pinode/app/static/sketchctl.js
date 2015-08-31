@@ -71,8 +71,11 @@ socket.on("sketch-pos",function(data){
   var actual_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + data.index + " )");
   var previous_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + (data.index - 1) + " )");
   //actual_item.css( { background:'rgb(169, 233, 169)' } );
-  actual_item.css( { background:'rgb(203, 242, 203)' } );
-  previous_item.css({background:'transparent'});
+  actual_item.addClass("active");
+  previous_item.removeClass("active");
+
+  //css( { backgroundColor:'rgb(203, 242, 203)' } );
+  //previous_item.css({backgroundColor:'inherit'});
 
 });
 
@@ -81,7 +84,8 @@ socket.on('stop-sketch', function(data){
     is_running.single = false;
     return;
   }
-  $(".drag-ul-enter .sketchitem, .data-ul-exit > .sketchitem").css({background:'transparent'});
+  $(".drag-ul-enter .sketchitem, .data-ul-exit > .sketchitem").removeClass("active");
+  //$(".drag-ul-enter .sketchitem, .data-ul-exit > .sketchitem").css({backgroundColor:'inherit'});
 });
 
 
@@ -134,7 +138,7 @@ $(document).on( "click", ".item-test-single", function(){
   var data=sketch_to_json(elem);
   socket.emit("sketch-test-single",data);
   is_running.single = true;
-  $(this).parent().parent().parent().css( { background:'rgb(203, 242, 203)' } );
+  $(this).parent().parent().parent().addClass("active");
 });
 
 $(".new-item-enter").click(function(){

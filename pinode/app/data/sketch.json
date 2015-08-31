@@ -8,6 +8,12 @@
     },
     {
       "type": "delay",
+      "name": "",
+      "duration": "600",
+      "blocking": false
+    },
+    {
+      "type": "delay",
       "name": "2",
       "duration": "2000",
       "blocking": false

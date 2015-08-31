@@ -283,3 +283,8 @@ input.item-desc:focus {
 .itm-node-inline-parent {
   min-width: 40%;
 }
+
+
+.sketchitem.active {
+background: rgb(203, 242, 203);
+}
