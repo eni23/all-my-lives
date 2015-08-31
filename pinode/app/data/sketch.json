@@ -3,7 +3,7 @@
     {
       "type": "delay",
       "name": "1",
-      "duration": "2000",
+      "duration": "800",
       "blocking": false
     },
     {
@@ -15,7 +15,7 @@
     {
       "type": "delay",
       "name": "3",
-      "duration": "2000",
+      "duration": "500",
       "blocking": false
     },
     {

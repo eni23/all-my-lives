@@ -4,7 +4,7 @@ var sketch_status = {};
 var lifx_colorsel_elem = false;
 var dmx_valsel_elem = false;
 var disable_autosave = false;
-var is_running = { enter:false, exit: false };
+var is_running = { enter:false, exit: false, single:false };
 
 $(document).ready(function(){
   init();
@@ -65,16 +65,22 @@ socket.on("status",function(resp){
 
 // gets called when sketch changes to next item
 socket.on("sketch-pos",function(data){
+  if (data.run_identifier == "single"){
+    return;
+  }
   var actual_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + data.index + " )");
   var previous_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + (data.index - 1) + " )");
   //actual_item.css( { background:'rgb(169, 233, 169)' } );
   actual_item.css( { background:'rgb(203, 242, 203)' } );
-
-
   previous_item.css({background:'transparent'});
+
 });
 
-socket.on('stop-sketch', function(){
+socket.on('stop-sketch', function(data){
+  if (is_running.single == true){
+    is_running.single = false;
+    return;
+  }
   $(".drag-ul-enter .sketchitem, .data-ul-exit > .sketchitem").css({background:'transparent'});
 });
 
@@ -83,20 +89,9 @@ socket.on('stop-sketch', function(){
 $(".btn-onoff").click(function(){
   if (sketch_status.enabled==true){
     socket.emit("trigger-disable");
-    /*
-    sketch_status.enabled = false;
-    $(".btn-onoff").addClass("btn-danger").removeClass("btn-success");
-    $(".btn-onoff-icon").removeClass("ion-checkmark-circled").addClass("ion-close-circled");
-    $(".btn-onoff-text").text("Disabled");
-    */
   }
   if (sketch_status.enabled==false){
     socket.emit("trigger-enable");
-    /*
-    $(".btn-onoff").addClass("btn-success").removeClass("btn-danger");
-    $(".btn-onoff-text").removeClass("ion-close-circled").addClass("ion-checkmark-circled");
-    $(".btn-onoff-text").text("Enabled");
-    */
   }
   socket.emit("status");
 });
@@ -135,9 +130,11 @@ $(document).on( "click", ".lifx-colorsel", function(){
 });
 
 $(document).on( "click", ".item-test-single", function(){
-  var elem=$(this).parent().parent().parent();
+  var elem=$(this).parent().parent().parent().parent();
   var data=sketch_to_json(elem);
   socket.emit("sketch-test-single",data);
+  is_running.single = true;
+  $(this).parent().parent().parent().css( { background:'rgb(203, 242, 203)' } );
 });
 
 $(".new-item-enter").click(function(){

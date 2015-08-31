@@ -159,11 +159,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('sketch-test-single', function(req){
+    sketchrunner.stop();
     var item = req[0];
     item.blocking = true;
     var sketch =  [ item ];
     sketchrunner.config=get_config();
-    sketchrunner.stop();
+    sketchrunner.run_identifier = "single";
     sketchrunner.start(sketch);
     console.log("test-single");
   });
