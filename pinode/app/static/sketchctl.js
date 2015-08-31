@@ -4,6 +4,7 @@ var sketch_status = {};
 var lifx_colorsel_elem = false;
 var dmx_valsel_elem = false;
 var disable_autosave = false;
+var is_running = { enter:false, exit: false };
 
 $(document).ready(function(){
   init();
@@ -61,6 +62,23 @@ socket.on("status",function(resp){
     //$(".header-status").animate({color:color_on});
   }
 });
+
+// gets called when sketch changes to next item
+socket.on("sketch-pos",function(data){
+  var actual_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + data.index + " )");
+  var previous_item = $(".drag-ul-" + data.run_identifier + " .sketchitem:eq( " + (data.index - 1) + " )");
+  //actual_item.css( { background:'rgb(169, 233, 169)' } );
+  actual_item.css( { background:'rgb(203, 242, 203)' } );
+
+
+  previous_item.css({background:'transparent'});
+});
+
+socket.on('stop-sketch', function(){
+  $(".drag-ul-enter .sketchitem, .data-ul-exit > .sketchitem").css({background:'transparent'});
+});
+
+
 
 $(".btn-onoff").click(function(){
   if (sketch_status.enabled==true){
@@ -208,13 +226,17 @@ $(".bar-dmx").on("input", function(e){
   });
 });
 
-$(document).on("click",".sketchitem", function(e){
-    if( $(e.target).is('input') || $(e.target).is('button') || $(e.target).is('option') || $(e.target).is('.item-detail') ){
+$(document).on("click",".sketchitem > .item-top", function(e){
+
+    if( $(e.target).is('input') || $(e.target).is('button') || $(e.target).is('option') ){
       e.preventDefault();
       return false;
     }
-    console.log("foo");
-    var target = $(this).find(".item-detail");
+
+
+    //console.log("foo");
+
+    var target = $(this).parent().find(".item-detail");
     if (target.is(":visible")){
       target.hide();
     }

@@ -51,6 +51,7 @@ io.on('connection', function(socket){
     if ( sketchrunner.is_running == false && enabled == true ){
       var sketch = get_sketch();
       sketchrunner.config = get_config();
+      sketchrunner.run_identifier = 'exit';
       sketchrunner.start( sketch.enter );
     }
   });
@@ -59,6 +60,7 @@ io.on('connection', function(socket){
     if ( sketchrunner.is_running == false && enabled == true ){
       var sketch = get_sketch();
       sketchrunner.config = get_config();
+      sketchrunner.run_identifier = 'exit';
       sketchrunner.start( sketch.exit );
     }
   });
@@ -169,6 +171,7 @@ io.on('connection', function(socket){
   socket.on('sketch-test-enter', function(req){
     var sketch = get_sketch();
     sketchrunner.config=get_config();
+    sketchrunner.run_identifier = 'enter';
     sketchrunner.stop();
     sketchrunner.start(sketch.enter);
   });
@@ -176,6 +179,7 @@ io.on('connection', function(socket){
   socket.on('sketch-test-exit', function(req){
     var sketch = get_sketch();
     sketchrunner.config=get_config();
+    sketchrunner.run_identifier = 'exit';
     sketchrunner.stop();
     sketchrunner.start(sketch.exit);
   });

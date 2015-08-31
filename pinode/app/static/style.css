@@ -93,18 +93,30 @@ body {
 .sel-inline {
   display: inline;
 }
+
 .sel-lifix-fix {
   margin-top: 9px !important;
 }
+
 .script-cmd {
   min-width: 300px;
 }
+
 .sketchitem {
   min-height: 35px;
 }
 
+.sketchitem-item{
+
+}
+
+.sketchitem > .item-top {
+  padding: 11px;
+  cursor: pointer;
+}
 
 .sketchitem > .item-detail {
+  padding: 11px;
   margin-top: 15px;
   font-size: 12px!important;
   font-weight: normal!important;
@@ -123,7 +135,7 @@ input.item-desc {
   border:none;
   color: #000;
   background: transparent;
-  width: 60%;
+  width: 45%;
 }
 
 input.item-desc:focus {
@@ -139,9 +151,11 @@ input.item-desc:focus {
   margin-bottom:0;
   border: 1px solid  #e6e6e6;
   border-bottom: none;
-  padding: 6px;
   font-weight: bold;
   font-size: 1.2em;
+}
+.liitemgw {
+  padding: 6px;
 }
 
 
@@ -163,9 +177,7 @@ input.item-desc:focus {
   border-bottom-left-radius: 5px;
 }
 
-.sketchitem-item{
-  padding: 11px;
-}
+
 
 .dragarea-enter, .dragarea-exit {
   margin-top: 25px;

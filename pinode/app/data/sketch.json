@@ -1,55 +1,28 @@
 {
   "enter": [
     {
-      "type": "script",
-      "name": "fooo bar",
-      "cmd": "/usr/bin/false",
-      "blocking": false
-    },
-    {
-      "type": "audio",
-      "name": "threee",
-      "file": "never_gonna_give_you_up.mp3",
-      "sink": "0:0",
-      "blocking": false
-    },
-    {
-      "type": "video",
-      "name": "a movie",
-      "file": "big_buck_bunny_720p_1mb.mp4",
-      "blocking": false
-    },
-    {
-      "type": "lifx",
-      "name": "test test test",
-      "bulb": "d073d501596e",
-      "h": "50.290000000000006",
-      "s": "0.37258938988401613",
-      "l": "0.47137185000000004",
-      "w": "0",
-      "t": "0",
-      "blocking": false
-    },
-    {
-      "type": "script",
-      "name": "dxfb",
-      "cmd": "/usr/bin/false",
+      "type": "delay",
+      "name": "1",
+      "duration": "2000",
       "blocking": false
     },
     {
       "type": "delay",
-      "name": "another movie",
-      "duration": "0",
+      "name": "2",
+      "duration": "2000",
       "blocking": false
     },
     {
-      "type": "dmx",
-      "name": "sadc",
-      "channel": "0",
-      "start": "0",
-      "end": "0",
-      "duration": "0",
+      "type": "delay",
+      "name": "3",
+      "duration": "2000",
       "blocking": false
+    },
+    {
+      "type": "script",
+      "name": "4",
+      "cmd": "sleep 5",
+      "blocking": true
     }
   ],
   "exit": [
@@ -73,7 +46,7 @@
     {
       "type": "video",
       "name": "bar",
-      "file": "big_buck_bunny_720p_1mb.mp4",
+      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
       "blocking": false
     }
   ]

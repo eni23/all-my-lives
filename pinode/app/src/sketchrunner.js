@@ -39,6 +39,7 @@ module.exports = {
   next_timeout: false,
   config: {},
   child_pids: [],
+  run_identifier: false,
 
   dmxblocking: false,
 
@@ -209,6 +210,11 @@ module.exports = {
     //if ( this.dmxblocking ){
     //  return;
     //}
+
+    io.emit("sketch-pos",{
+      run_identifier: this.run_identifier,
+      index: (this.sketchidx-1)
+    });
 
     switch ( item.type ) {
 
