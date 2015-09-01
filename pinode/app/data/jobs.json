@@ -1,0 +1,18 @@
+{
+  "jobs":[
+    {
+      "enabled": true,
+      "check_running": true,
+      "name": "a test command",
+      "interval": 5000,
+      "command": "echo foo"
+    },
+    {
+      "enabled": false,
+      "check_running": false,
+      "name": "a test command",
+      "interval": 10000,
+      "command": "echo bar"
+    }
+  ]
+}

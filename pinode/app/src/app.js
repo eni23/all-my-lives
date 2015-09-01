@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
 var socket_io = require('socket.io');
-
+var exec = require('child_process').exec;
+var cp = require('child_process');
 
 
 enabled = true;
@@ -61,8 +62,48 @@ init_artnet = function(){
   artnet = require('artnet')(options);
 };
 
+get_jobs = function(){
+  var cronfile = path.dirname( path.dirname( require.main.filename ) ) + "/app/data/jobs.json"
+  var raw_cron = fs.readFileSync(cronfile);
+  return JSON.parse(raw_cron);
+};
+
 config = get_config();
 init_artnet();
+
+
+spawn_exec =  function( command, callback ){
+  var child = cp.exec( command );
+  child.stdout.on('data', function(data) {
+    console.log( data );
+  });
+  child.stderr.on('data', function(data) {
+    console.log( data );
+  });
+  child.on('close', function(code) {
+    callback( code );
+  });
+};
+
+var jobs_list = get_jobs();
+for (job of jobs_list.jobs){
+  if (job.enabled){
+    setInterval((function(){
+      if (this.check_running){
+        if (!sketchrunner.is_running){
+          spawn_exec(this.command,function(){});
+        }
+      }
+      else {
+        spawn_exec(this.command,function(){});
+      }
+    }).bind(job),job.interval);
+
+    console.log("adding job '"+job.command+"', every "+job.interval);
+  }
+}
+
+
 
 get_files = function(){
   var data={};
