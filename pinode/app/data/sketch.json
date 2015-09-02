@@ -1,22 +1,9 @@
 {
   "enter": [
     {
-      "type": "audio",
-      "name": "never gonna give you up",
-      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
-      "sink": "0:0",
-      "blocking": false
-    },
-    {
-      "type": "delay",
-      "name": "wait 5 secounds",
-      "duration": "800",
-      "blocking": false
-    },
-    {
       "type": "script",
       "name": "format c:",
-      "cmd": "sleep 5",
+      "cmd": "sleep 90",
       "blocking": true
     },
     {
@@ -24,41 +11,35 @@
       "name": "bright yellow",
       "bulb": "d073d501596e",
       "h": "0",
-      "s": "0.5019188897999854",
-      "l": "0.512729965",
+      "s": "1",
+      "l": "0.47424999999999995",
       "w": "0",
       "t": "0",
       "blocking": true
     },
     {
-      "type": "video",
-      "name": "2 girls 1 cup",
-      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
-      "blocking": false
-    },
-    {
       "type": "delay",
       "name": "wait 4 secounds",
-      "duration": "0",
+      "duration": "5000",
       "blocking": false
     },
     {
       "type": "lifx",
       "name": "dim all lights down",
-      "bulb": "",
+      "bulb": "d073d501596e",
       "h": "0",
       "s": "0",
       "l": "0",
-      "w": "0",
-      "t": "0",
-      "blocking": false
+      "w": "0.004",
+      "t": "600",
+      "blocking": true
     }
   ],
   "exit": [
     {
       "type": "video",
       "name": "bar",
-      "file": "Alligatoah - Schlaftabletten, Rotwein 4",
+      "file": "big_buck_bunny_720p_1mb.mp4",
       "blocking": false
     },
     {

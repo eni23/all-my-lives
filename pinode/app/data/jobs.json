@@ -1,18 +1,18 @@
 {
   "jobs":[
     {
-      "enabled": true,
+      "enabled": false,
       "check_running": true,
       "name": "a test command",
       "interval": 5000,
-      "command": "echo foo"
+      "command": "mplayer -quiet -ao alsa:device=0.1 '/opt/file.mp3'"
     },
     {
       "enabled": false,
       "check_running": false,
       "name": "a test command",
       "interval": 10000,
-      "command": "echo bar"
+      "command": "omxplayer -o local '/opt/file.mp3'"
     }
   ]
 }

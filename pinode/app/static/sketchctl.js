@@ -134,7 +134,7 @@ $(document).on( "click", ".lifx-colorsel", function(){
 });
 
 $(document).on( "click", ".item-test-single", function(){
-  var elem=$(this).parent().parent().parent().parent();
+  var elem=$(this).parent().parent().parent();
   var data=sketch_to_json(elem);
   socket.emit("sketch-test-single",data);
   is_running.single = true;
@@ -342,13 +342,15 @@ sketch_to_json = function( source ) {
 
   sketch = [];
 
-  if (source.children("div").length==0){
+  if (source.children("div.sketchitem").length==0){
+    console.log("list");
     var list=source;
   }
   else {
-    source.children("div")
+    source.children("div.sketchitem")
     var list=source.children("div")
   }
+
 
   list.each(function(){
     elem = $(this);

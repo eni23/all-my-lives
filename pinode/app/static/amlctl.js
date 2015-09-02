@@ -54,8 +54,19 @@ socket.on("nodelist",function(msg){
       $("#node-"+this.id).find(".node-status").removeClass("active").addClass("ok");
     }).bind(nodeident));
 
+    thisnode.socket.on('status',(function(status) {
+      if (status.running){
+        $("#node-"+this.id).find(".node-status").removeClass("ok").addClass("active");
+      }
+      else {
+        $("#node-"+this.id).find(".node-status").removeClass("active").addClass("ok");
+      }
+    }).bind(nodeident));
+
     thisnode.socket.emit("config");
     render_node(thisnode,$(".nodes"));
+    thisnode.socket.emit("status");
+
     i++;
   };
 
